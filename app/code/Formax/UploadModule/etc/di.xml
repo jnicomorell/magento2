@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- File -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="uploadmodule_file_listing_data_source" xsi:type="string">Formax\UploadModule\Model\ResourceModel\File\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\UploadModule\Model\ResourceModel\File\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_uploadmodule_file</argument>
+            <argument name="eventPrefix" xsi:type="string">uploadmodule_file_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">file_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\UploadModule\Model\ResourceModel\File</argument>
+        </arguments>
+    </type>
+
+    <!-- Types -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="uploadmodule_type_listing_data_source" xsi:type="string">Formax\UploadModule\Model\ResourceModel\Type\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\UploadModule\Model\ResourceModel\Type\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_uploadmodule_type</argument>
+            <argument name="eventPrefix" xsi:type="string">uploadmodule_type_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">type_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\UploadModule\Model\ResourceModel\Type</argument>
+        </arguments>
+    </type>
+
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Formax_Campaigns::campaigns" translate="title" title="Campaigns" module="Formax_CoreApiCoopeuch" sortOrder="600" parent="Formax_CoopeuchMenu::main_menu" resource="Formax_Campaigns::campaigns"/>
+        <add id="Formax_Campaigns::type" title="Manage Types" module="Formax_Campaigns" sortOrder="10" action="campaigns/type/index" resource="Formax_Campaigns::types" parent="Formax_Campaigns::campaigns"/>
+        <add id="Formax_Campaigns::campaign" translate="title" title="Manage Campaigns" module="Formax_Campaigns" sortOrder="20" parent="Formax_Campaigns::campaigns" action="campaigns/campaign/index" resource="Formax_Campaigns::campaign"/>
+        <add id="Formax_Campaigns::credit_card" translate="title" title="Credit Card Campaigns" module="Formax_Campaigns" sortOrder="20" parent="Formax_Campaigns::campaigns" action="campaigns/creditcard/index" resource="Formax_Campaigns::credit_card_campaigns"/>
+    </menu>
+</config>

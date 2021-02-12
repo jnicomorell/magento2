@@ -1,0 +1,95 @@
+<?php
+/**
+ * @var \Formax\ContactForm\Block\Solicitud $block
+ */
+?>
+
+<?php
+$customer = $block->getFormData();
+$baseMedia = $block->getBaseMediaDir();
+
+switch ($customer['formato-id']) {
+    case 'consultas_001':
+        $subject = 'Consulta';
+        break;
+    case 'sugerencias_001':
+        $subject = 'Sugerencia';
+        break;
+    case 'felicitaciones_001':
+        $subject = 'Felicitación';
+        break;
+    case 'reclamos_001':
+        $subject = 'Reclamo';
+        break;
+    default:
+        $subject = '';
+}
+?>
+
+<h1 class="simulator-title">Formulario de contacto</h1>
+
+<div class="simulator-container">
+
+    <div class="voucher-content">
+        <image class="Print-image" src="<?php echo $this->getViewFileUrl('Formax_SimulatorCreditCard::images/logo-rojo.svg'); ?>"/>
+        <div class="alerta-exito">
+            <div class="content">
+                <p class="title">Tu mensaje ha sido enviado</p>
+                <p class="description">Un ejecutivo se contactará contigo en un plazo máximo de 48 horas hábiles para ayudarte.</p>
+            </div>
+        </div>
+        <div class="voucher-wrapper">
+            <p class="voucher-title">Comprobante de solicitud</p>
+            <div class="simulator-voucher">
+                <div class="simulator-result">
+                    <table>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col"><?= $customer['name'] ?></th>
+                        </tr>
+                        <tr>
+                            <td>Rut</td>
+                            <td><?= $customer['rut'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono</td>
+                            <td><?= $customer['phone'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><?= $customer['email'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Asunto del mensaje</td>
+                            <td><?= $subject ?></td>
+                        </tr>
+                        <tr>
+                            <td>Mensaje</td>
+                            <td><?= $customer['comment'] ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="letra-pequena">
+        </div>
+        <div class="links">
+            <div class="return">
+            </div>
+            <div class="actions">
+                <div class="item" onclick="window.print();return false;">
+                    <img src="<?= $baseMedia . 'comprobante/imprimir.svg' ?>" alt="Imprimir"/>
+                    <span>Imprimir</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="<?= $block->getUrl() ?>" class="semiBold link">&#60; Volver a Coopeuch</a>
+
+<style>
+.fixed {
+    position: inherit !important;
+}
+</style>

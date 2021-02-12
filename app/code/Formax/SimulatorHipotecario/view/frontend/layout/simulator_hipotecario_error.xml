@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Simulador Mype" design_abstraction="custom">
+    <body>
+        <referenceContainer name="content">
+            <container name="custom.container" htmlTag="div" htmlClass="container">
+                <block class="Formax\SimulatorHipotecario\Block\SimulatorHipotecario" name="simulator.error" template="simulator_error.phtml"/>
+            </container>
+        </referenceContainer>
+        
+        <referenceBlock name="header.panel" remove="true"/>
+        <referenceBlock name="navigation.sections" remove="true"/>
+        <referenceContainer name="xpec-header-search" remove="true"/>
+        <referenceContainer name="footer" remove="true"/>
+        <referenceBlock name="footer-block-afterall" remove="true"/>
+        
+        <referenceContainer name="xpec-header-logo" htmlClass="xpec-header-logo simulator-logo"/>
+        <referenceContainer name="page.wrapper"  htmlClass="page-wrapper b-plomo simulator-page simulator-error-page"/>
+    </body>
+</page>

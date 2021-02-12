@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>        
+        <referenceContainer name="content">
+            <block class="Formax\News\Block\News" name="coo.news.content" template="Formax_News::article.phtml" />
+            <block class="Formax\SocialShare\Block\Widget\Buttons" name="formax.socialshare.buttons" template="Formax_SocialShare::widget/buttons.phtml" />
+            <block class="Magento\Cms\Block\Block" name="coo.news.tags">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">news_tags</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Cms\Block\Block" name="coo.related.news">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">related_news</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

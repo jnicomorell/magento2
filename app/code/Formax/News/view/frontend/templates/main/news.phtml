@@ -1,0 +1,44 @@
+<?php
+$mainNews = $block->getMainNewsConfig();
+$enabled  = (array_key_exists('status', $mainNews) && $mainNews['status'] == 1) ? true : false;
+?>
+
+<?php if ($enabled) : ?>
+    <?php
+    $firstNews  = $mainNews['id_first_article'];
+    $secondNews = $mainNews['id_second_article'];
+    $thirdNews  = $mainNews['id_third_article'];
+    $newsIds    = array($firstNews, $secondNews, $thirdNews);
+    $array      = $block->getNewsConfiguration($newsIds);
+    ?>
+
+    <h2 class="block-title-h2 main-news"><?= $mainNews['title'] ?></h2>
+
+    <div class="carousel-main-news">
+        <div class="main-news-box">
+            <?php foreach ($array as $item) : ?>
+                <?php $textContent = (strlen($item['short_content']) > 0) ? $item['short_content'] : $item['content'] ?>
+                <a href="/cooperativa/noticia/articulo?article=<?= $item['id'] ?>" class="news-url">
+                    <div class="main-news-container">
+                        <div class="main-item">
+                            <img src="<?= $item['image_url'] ?>" alt="<?= $item['title'] ?>">
+                            <div class="news-content">
+                                <h3><?= $item['title'] ?></h3>
+                                <p><?= $textContent ?></p>
+                                <span>Seguir leyendo &#62;</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "carousel-main-news": {}
+    }
+}
+</script>

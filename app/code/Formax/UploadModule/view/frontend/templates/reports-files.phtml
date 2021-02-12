@@ -1,0 +1,103 @@
+<?php
+/**
+ * BLOCK Formax\UploadModule\Block\FilesView
+ */
+?>
+<?php
+$_type = $block->getData("type");
+
+$_yearsCollection = $block->getYearsCollection($_type);
+$_year=$block->getYear();
+?>
+
+<div id="app" >
+    <div class="row files-page">
+        <h3 class="left">{{year}}</h3>
+        <div id="years-form" class="sucursales-form years-form">
+            <span class="semiBold">Año de publicaci&#243;n</span>
+            <div class="field">
+                <div class="control">
+                    <div class="coop-dropdown" v-on:click="dropdown()">
+                        <div class="dropbtn form-input"><span class="main-prefix" data-value="<?=$_year??''?>">{{year}}</span> <span class="coop-icon-down"></span></div>
+                        <div id="dropdown-list" class="dropdown-content">
+                            <?php foreach ($_yearsCollection as $year): ?>
+                                <div class="drop-item" data-value="<?=$year->getyear() ?>" v-on:click="loadFiles('<?= $year->getyear() ?>')" ><?=$year->getyear() ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <input id="year" name="year" class="inputValue" style="display:none;" value="<?=$_year??''?>"/>
+                </div>
+            </div>
+        </div>
+        <h4 class="">{{year}}</h4>
+    </div>
+
+    <div class="files-container row">
+        <div class="content-flex-12 mobile-no-flex">
+            <div v-for="(item, index) in files"  class="file-wrapper col-3">
+                <div class="image-wrapper b-plomo">
+                    <img v-bind:src="item.image"/>
+                </div>
+                <h3 class="file-title regular">{{item.title}}</h3>
+                <span class="content-flex download-text"  ><img src="<?php echo $this->getViewFileUrl('Formax_UploadModule::images/download.svg'); ?>"/><a class="semiBold" v-bind:href="item.link_url" target="_blank">Descargar</a></span>
+            </div>
+        </div>
+    </div >
+    
+
+   
+</div>
+
+
+<script>
+require(["jquery", "vue"], function($, Vue) {
+
+    // Creamos nuestra instancia de Vues
+    var app = new Vue({
+        el: '#app',
+        data: {
+            year: ' <?= $_year ?>',
+            fileType: ' <?= $_type ?>',
+            files: []
+        },methods: {
+            dropdown: function () {
+                $(".coop-dropdown").addClass("show");
+            },
+            loadFiles(yearSelected){
+                this.year=yearSelected;
+                $.ajax({
+                    url: '<?= $block->getUrl('archivos/informes/index') ?>',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: {
+                        year: yearSelected,
+                        fileType: app.fileType
+                    },
+                    beforeSend: function() {
+                        $(".coop-dropdown.show").removeClass("show");
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        try {
+                            if (response == false || response == '') {
+                                $('#modal-error').show();
+                            } else {
+                                app.files=response.files;
+                            }
+                        }catch(e){}
+                    },
+                    error: function() {
+                    },
+                    complete: function() {
+                        $(".coop-dropdown.show").removeClass("show");
+                    }
+                });
+            }
+        }
+    });
+
+    app.loadFiles(app.year);
+
+});
+</script>
+

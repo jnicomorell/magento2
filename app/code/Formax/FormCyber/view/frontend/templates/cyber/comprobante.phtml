@@ -1,0 +1,73 @@
+<?php
+/**
+ * @var \Formax\Formularios\Block\Hipotecario\Comprobante $block
+ */
+?>
+<?php
+$dataForm  = $block->getFormData();
+$baseMedia = $block->getBaseMediaDir();
+$buttonLLink = $block->getButtonLink();
+?>
+
+<h1 class="simulator-title">Solicitud de crédito Días Coopeuch</h1>
+
+<div class="simulator-container">
+    <ol class="tabs" style="counter-reset: item 1;">
+        <li ><span class="tab-title">Solicitud</span><span class="border border-left"></span></li>
+        <li class="active"><span class="step">Paso 1/2</span><span class="tab-title">Comprobante</span><span class="border border-right"></span></li>
+        <li class="step-wrapper"><span class="step">Paso 2/2</span><span class="border border-right"></span></li>
+    </ol>
+
+    <div class="voucher-content">
+        <image class="Print-image" src="<?php echo $this->getViewFileUrl('Formax_SimulatorCreditCard::images/logo-rojo.svg'); ?>"/>
+        <div class="alerta-exito">
+            <div class="content">
+                <p class="title">Te contactaremos en breve</p>
+            </div>
+        </div>
+        <div class="voucher-wrapper">
+            <p class="voucher-title">Comprobante de solicitud</p>
+            <div class="simulator-voucher">
+                <div class="simulator-result">
+                    <table>
+                        <tr>
+                            <th scope="col">Nombres</th>
+                            <th scope="col"><?= $dataForm['name'] ?></th>
+                        </tr>
+                       
+                        <tr>
+                            <td>Rut</td>
+                            <td><?= $dataForm['rut'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono</td>
+                            <td><?= $dataForm['phone'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><?= $dataForm['email'] ?></td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="links container-submit">
+            <div class="return">
+                <button id="return-button" class="button-coopeuch" type="button" onclick="location.href='<?= $block->getBaseUrl().$buttonLLink ?>'">Volver a Coopeuch</button>
+            </div>
+            <div class="actions">
+                <div class="item" onclick="window.print();return false;">
+                    <img src="<?= $baseMedia . 'comprobante/imprimir.svg' ?>" alt="Imprimir"/>
+                    <span>Imprimir</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="letra-pequena hipoteca">
+    <p>crédito de consumo que da cuenta esta hoja, requiere que el consumidor contratante disponga de un patrimonio y/o ingresos futuros suficientes para pagar su costo total y el valor cuota mensual, durante todo el período del crédito. Esta es sólo una simulación NO vinculante y el otorgamiento del crédito está sujeto a aprobación comercial previa, de acuerdo a las políticas de créditos vigentes al momento de la solicitud. El deudor podrá prepagar este crédito. Hay que considerar que en estos casos el socio deberá pagar una comisión sobre el capital que se prepaga asociada a esta operación, equivalente a 30 días de intereses calculado. Simulación válida sólo durante el día de su emisión, expirando en 24 horas. Los valores expresados en la presente simulación son referenciales y podrían variar al momento del curse. Para efectos de la simulación se incluyó el Seguro de Desgravamen, pero este seguro no es de carácter obligatorio. La tasa utilizada en la simulación corresponde a socios sin crédito vigente al momento de la solicitud.</p>
+</div>
+
+<a href="<?= $block->getBaseUrl() ?>" class="semiBold link">&#60; Volver a Coopeuch</a>

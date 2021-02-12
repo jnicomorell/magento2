@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Formax_UploadGeneral::uploadgeneral" translate="title" title="Upload General" module="Formax_CoreApiCoopeuch" sortOrder="600" parent="Formax_CoopeuchMenu::main_menu" resource="Formax_UploadGeneral::uploadgeneral"/>
+        <add id="Formax_UploadGeneral::file" translate="title" title="File" module="Formax_UploadGeneral" sortOrder="20" parent="Formax_UploadGeneral::uploadgeneral" action="uploadgeneral/file/index" resource="Formax_UploadGeneral::file"/>
+    </menu>
+</config>

@@ -1,0 +1,74 @@
+<?php
+/**
+ * BLOCK Formax\Campaigns\Block\CampaignsView
+ */
+?>
+<?php
+$_type = $block->getData("type");
+?>
+
+<div id="app" >
+
+    <div class="files-container row">
+        <div class="content-flex-12 mobile-no-flex">
+            <div v-for="(item, index) in files"  class="file-wrapper col-3">
+                <div class="image-wrapper b-plomo">
+                    <img v-bind:src="item.image"/>
+                </div>
+                <h3 class="file-title regular">{{item.title}}</h3>
+                <span class="content-flex download-text"  ><img src="<?php echo $this->getViewCampaignUrl('Formax_Campaigns::images/download.svg'); ?>"/><a class="semiBold" v-bind:href="item.link_url" target="_blank">Descargar</a></span>
+            </div>
+        </div>
+    </div >
+    
+</div>
+
+
+<script>
+require(["jquery", "vue"], function($, Vue) {
+
+    // Creamos nuestra instancia de Vues
+    var app = new Vue({
+        el: '#app',
+        data: {
+            fileType: ' <?= $_type ?>',
+            files: []
+        },methods: {
+            dropdown: function () {
+                $(".coop-dropdown").addClass("show");
+            },
+            loadCampaigns(yearSelected){
+                this.year=yearSelected;
+                $.ajax({
+                    url: '<?= $block->getUrl('archivos/informes/index') ?>',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: {
+                        fileType: app.fileType
+                    },
+                    beforeSend: function() {
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        try {
+                            if (response == false || response == '') {
+                                $('#modal-error').show();
+                            } else {
+                                app.files=response.files;
+                            }
+                        }catch(e){}
+                    },
+                    error: function() {
+                    },
+                    complete: function() {
+                    }
+                });
+            }
+        }
+    });
+
+    app.loadCampaigns(app.year);
+
+});
+</script>
+

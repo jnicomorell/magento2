@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var Formax\News\Block\News $block
+ */
+?>
+<?php
+
+$articleId=$block->getArticleId();
+$article=$block->getArticle($articleId);
+
+$dateIcon = $this->getViewFileUrl('Formax_News::images/news-date.png');
+$home = $block->getStoreName();
+
+?>
+<div class="news-layout">
+    <div class="news-wrapper">
+        <span class="content-flex date"><img src="<?=$dateIcon ?>"/><span class="date-text h6">
+            <?= $block->getformatMoth($article->getCreatedAt()).' '.$block->getformatDay($article->getCreatedAt()).' del '.$block->getformatYear($article->getCreatedAt()).', '.$block->getformatTime($article->getCreatedAt()) ?>
+        </span></span>
+        <h3 class="h1 semiBold news-title"><?=$article->getTitle() ?></h3>
+        <?php $img = $block->getArticleImage($article->getImage()) ?>
+        <img class="news-image" src="<?= $img ?>" alt="<?= $article->getTitle() ?>" title="<?= $article->getTitle() ?>"/>
+        <div class="news-continer">
+        <?php 
+            echo $block->filterOutputHtml($article->getContent()); 
+        ?>
+        </div>
+    </div>          
+
+</div>
+
+

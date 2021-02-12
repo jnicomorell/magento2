@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Categories -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="news_category_listing_data_source" xsi:type="string">Formax\News\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\News\Model\ResourceModel\Category\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_news_category</argument>
+            <argument name="eventPrefix" xsi:type="string">news_category_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">category_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\News\Model\ResourceModel\Category</argument>
+        </arguments>
+    </type>
+
+    <!-- Article -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="news_article_listing_data_source" xsi:type="string">Formax\News\Model\ResourceModel\Article\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\News\Model\ResourceModel\Article\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_news_article</argument>
+            <argument name="eventPrefix" xsi:type="string">news_article_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">article_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\News\Model\ResourceModel\Article</argument>
+        </arguments>
+    </type>
+
+    <!-- Home News -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="news_homenews_listing_data_source" xsi:type="string">Formax\News\Model\ResourceModel\Homenews\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\News\Model\ResourceModel\Homenews\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_news_homenews</argument>
+            <argument name="eventPrefix" xsi:type="string">news_homenews_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">homenews_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\News\Model\ResourceModel\Homenews</argument>
+        </arguments>
+    </type>
+
+    <!-- News front -->
+    <type name="Formax\News\Block\News"> 
+        <arguments>
+            <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+        </arguments>
+    </type>
+</config>

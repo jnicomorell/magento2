@@ -1,0 +1,137 @@
+<?php
+/**
+ * $block Formax\SimulatorConsumo\Block\Comprobante
+ */
+?>
+<?php
+$dataForm  = $block->getFormData();
+$baseMedia = $block->getBaseMediaDir();
+?>
+<h1 class="simulator-title">Solicitud de Crédito de Consumo</h1>
+
+<div class="simulator-container">
+
+    <div class="voucher-content">
+        <image class="Print-image" src="<?php echo $this->getViewFileUrl('Formax_SimulatorConsumo::images/logo-rojo.svg'); ?>"/>
+        <div class="alerta-exito">
+            <div class="content">
+                <p class="title">Te contactaremos en breve</p>
+            </div>
+        </div>
+        <div class="voucher-wrapper">
+            <p class="voucher-title">Comprobante de solicitud</p>
+            <div class="simulator-voucher">
+                <div class="simulator-result">
+                    <table class="summary">
+                        <tr>
+                            <td>Monto Solicitado <small>(en pesos)</small></td>
+                            <td>N° de cuotas</td>
+                        </tr>
+                        <tr class="big">
+                            <td><?=$dataForm['monto']?></td>
+                            <td><?=$dataForm['cuotas']?></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>Fecha de solicitud</td>
+                            <td><?=$dataForm['fecha']?></td>
+                        </tr>
+                        <tr>
+                            <td>Valor cuota
+                                <div class="coo-tooltip">
+                                    <div class="tooltip-content">
+                                        <p>Es el valor de cada uno de los pagos mensuales, con todos los gastos asociados al crédito.</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><?=$dataForm['valor-cuota']?></td>
+                        </tr>
+                        <tr>
+                            <td>Tasa de interés mensual</td>
+                            <td><?=$dataForm['tasa-mensual']?></td>
+                        </tr>
+                        <tr>
+                            <td>Tasa de interés anual</td>
+                            <td><?=$dataForm['tasa-anual']?></td>
+                        </tr>
+                        <tr>
+                            <td>Seguro de desgravamen</td>
+                            <td><?=$dataForm['desgravamen']?></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bold">Costo total del crédito</span> <span class="hide-mo">(en pesos)</span>
+                                <div class="coo-tooltip">
+                                    <div class="tooltip-content">
+                                        <p>Es el monto total a pagar del préstamo, con todos los gastos y comisiones asociados.</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="bold"><?=$dataForm['costo-total']?></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bold">CAE</span> <span class="hide-mo">(Carga anual equivalente)</span></td>
+                            <td class="bold"><?=$dataForm['cae']?></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>Gastos notariales</td>
+                            <td><?=$dataForm['notaria']?></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bold">Monto bruto del crédito</span> <span class="hide-mo">(en pesos)</span></td>
+                            <td class="bold"><?=$dataForm['monto-bruto']?></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bold">Garantías asociadas</span></td>
+                            <td class="bold"><?=$dataForm['garantias']?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sello-coopeuch">
+                    <img src="<?= $baseMedia . 'comprobante/sello-coopeuch.png' ?>" alt="Sello Coopeuch"/>
+                </div>
+            </div>
+        </div>
+        <div class="letra-pequena">
+            <p>(1) Para efectos de la simulación se incluyó el Seguro de Desgravamen, pero este seguro no es de carácter obligatorio</p>
+            <p>(2) La simulación de crédito de consumo que da cuenta esta hoja, requiere que el consumidor contratante disponga de un patrimonio 
+                y/o ingresos futuros suficientes para pagar su costo total y el valor cuota mensual, durante todo el período del crédito. Esta es sólo una 
+                simulación NO vinculante y el otorgamiento del crédito está sujeto a aprobación comercial previa, de acuerdo a las políticas de créditos vigentes 
+                al momento de la solicitud. El deudor podrá prepagar este crédito. Hay que considerar que en estos casos el socio deberá pagar una comisión 
+                sobre el capital que se prepaga asociada a esta operación, equivalente a 30 días de intereses calculado. Simulación válida sólo durante el día 
+                de su emisión, expirando en 24 horas. Los valores expresados en la presente simulación son referenciales y podrían variar al momento del curse.</p>
+                <div id="read" class="continuar-leyendo">Seguir leyendo</div>
+        </div>
+        <div class="links">
+            <div class="return"></div>
+            <div class="actions">
+                <div class="item"  onclick="window.print();return false;">
+                    <img src="<?= $baseMedia . 'comprobante/imprimir.svg' ?>" alt="Imprimir"/>
+                    <span>Imprimir</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="<?= $block->getUrl() ?>" class="semiBold link">&#60; Volver a Coopeuch</a>
+
+<script>
+ require(["jquery"], function($){
+    $(document).ready(function(){
+        $("#read").click(function(){
+            $(this).text(function(i, text){
+                return text === "Seguir leyendo" ? "Leer menos" : "Seguir leyendo";
+            });
+            $(".letra-pequena").toggleClass('open');
+        });
+        $("#return-button").click(function(){
+            $('#return-button').addClass('disabled');
+            $('#return-button').prop('disabled', true);
+            $("#simulator-consumo").submit();
+        });
+    });
+ });
+</script>

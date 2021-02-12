@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Formax_CoopeuchMenu::main_menu" title="Coopeuch" translate="title" sortOrder="130">
+                
+                    <resource id="Formax_Campaigns::campaigns" title="Campaigns" translate="title" sortOrder="12">
+                        <resource id="Formax_Campaigns::campaign_create" title="Create" translate="title" sortOrder="50" />
+                        <resource id="Formax_Campaigns::campaign_read" title="Read" translate="title" sortOrder="60" />
+                        <resource id="Formax_Campaigns::campaign_update" title="Update" translate="title" sortOrder="70" />
+                        <resource id="Formax_Campaigns::campaign_delete" title="Delete" translate="title" sortOrder="80" />
+                    </resource>
+
+                    <resource id="Formax_Campaigns::types" title="Types" translate="title" sortOrder="13">
+                        <resource id="Formax_Campaigns::type_create" title="Create" translate="title" sortOrder="50" />
+                        <resource id="Formax_Campaigns::type_read" title="Read" translate="title" sortOrder="60" />
+                        <resource id="Formax_Campaigns::type_update" title="Update" translate="title" sortOrder="70" />
+                        <resource id="Formax_Campaigns::type_delete" title="Delete" translate="title" sortOrder="80" />
+                    </resource>
+
+                    <resource id="Formax_Campaigns::credit_card_campaigns" title="Credit Card Campaigns" translate="title" sortOrder="12">
+                        <resource id="Formax_Campaigns::credit_card_campaign_create" title="Create" translate="title" sortOrder="50" />
+                        <resource id="Formax_Campaigns::credit_card_campaign_read" title="Read" translate="title" sortOrder="60" />
+                        <resource id="Formax_Campaigns::credit_card_campaign_update" title="Update" translate="title" sortOrder="70" />
+                        <resource id="Formax_Campaigns::credit_card_campaign_delete" title="Delete" translate="title" sortOrder="80" />
+                    </resource>
+
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

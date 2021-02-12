@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Campaigns Campaign Table -->
+    <table name="formax_campaigns_campaign" resource="default" engine="innodb" comment="Upload Moduloe Campaign Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" default="1" comment="Store Id"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Status: Enabled is 1 and Disabled is 2"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Customer Name"/>
+        <column xsi:type="varchar" name="rut" length="15" nullable="false" comment="Rut"/>
+        <column xsi:type="varchar" name="amount" length="255" nullable="false" comment="Amount"/>
+        <column xsi:type="int" name="sort_order" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Order"/>
+        <column xsi:type="int" name="type_id" padding="11" unsigned="true" nullable="false" comment="Type ID"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FORMAX_CAMPAINGS_CAMPAIGN_STORE_ID_STORE_STORE_ID" table="formax_campaigns_campaign"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="FORMAX_CAMPAINGS_CAMPAIGN_ID_STORE_ID">
+            <column name="id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="FORMAX_CAMPAINGS_CAMPAIGN_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="FORMAX_CAMPAINGS_CAMPAIGN_TITLE" indexType="fulltext">
+            <column name="title"/>
+        </index>
+    </table>
+
+    <table name="formax_campaigns_type" resource="default" engine="innodb" comment="Upload Moduloe Type Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="Type ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" default="2" comment="Store Id"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Type Name"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Type Status: Enabled is 1 and Disabled is 2"/>
+        <column xsi:type="smallint" name="sort_order" padding="5" unsigned="true" nullable="false" identity="false" comment="Sort Order"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Type Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Type Modification Time"/>
+        <column xsi:type="varchar" name="icon" length="255" nullable="false" default="0" comment="Campaign Icon"/>
+        <column xsi:type="varchar" name="image" length="255" nullable="false" default="0" comment="Campaign Image"/>
+        <column xsi:type="smallint" name="button_status" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Button Status: Enabled is 1 and Disabled is 2"/>
+        <column xsi:type="varchar" name="button_text" length="255" nullable="false" default="0" comment="Button Text"/>
+        <column xsi:type="varchar" name="button_link" length="255" nullable="false" default="0" comment="Button Link"/>
+        <column xsi:type="varchar" name="id_campaign" length="255" nullable="false" comment="ID Campaign"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FORMAX_CAMPAINGS_TYPE_ID_STORE_STORE_ID" table="formax_UPLOAD_MODULE_TYPE"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="FORMAX_CAMPAINGS_TYPE_ID_STORE_ID">
+            <column name="id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="FORMAX_CAMPAINGS_TYPE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="FORMAX_CAMPAINGS_TYPE_NAME" indexType="fulltext">
+            <column name="name"/>
+        </index>
+    </table>
+
+    <!-- Campaigns Credit Campaign Campaign Table -->
+    <table name="formax_campaigns_credit_card" resource="default" engine="innodb" comment="Upload Moduloe Campaign Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" default="1" comment="Store Id"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Status: Enabled is 1 and Disabled is 2"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Customer Name"/>
+        <column xsi:type="varchar" name="rut" length="15" nullable="false" comment="Rut"/>
+        <column xsi:type="varchar" name="amount" length="255" nullable="false" comment="Amount"/>
+        <column xsi:type="int" name="sort_order" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Order"/>
+        <column xsi:type="int" name="type_id" padding="11" unsigned="true" nullable="false" comment="Type ID"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FORMAX_CAMPAIGNS_CREDIT_CARD_STORE_ID_STORE_STORE_ID" table="formax_campaigns_credit_card"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FORMAX_CAMPAIGNS_CREDIT_CARD_TYPE_ID_CAMPAIGNS_TYPE_ID" table="formax_campaigns_credit_card"
+                    column="type_id" referenceTable="formax_campaigns_type" referenceColumn="id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="FORMAX_CAMPAINGS_CREDIT_CARD_ID_STORE_ID">
+            <column name="id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="FORMAX_CAMPAIGNS_CREDIT_CARD_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="FORMAX_CAMPAIGNS_CREDIT_CARD_TITLE" indexType="fulltext">
+            <column name="title"/>
+        </index>
+        <index referenceId="FORMAX_CAMPAIGNS_CREDIT_CARD_RUT" indexType="fulltext">
+            <column name="rut"/>
+        </index>
+    </table>
+
+</schema>

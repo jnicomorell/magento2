@@ -1,0 +1,90 @@
+//
+//  Common (styles-m.css)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .contact-form {
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .control {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .dropbtn.phone {
+            width: 70px;
+        }
+
+        .subject-dropdown {
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+
+    .form-textarea {
+        border-radius: 5px;
+        font-family: 'Poppins', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+        width: 100%;
+        border-color: #c1c1c1;
+        resize: none;
+    }
+
+    .cf-textarea {
+        height: 220px;
+    }
+
+    .contact-form-wrapper {
+        padding: 29px 75px 24px;
+    }
+
+    .form-alert {
+        margin: 50px 15px;
+    }
+}
+
+//
+//  Mobile (styles-m.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .contact-form {
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+    }
+
+    .cf-textarea {
+        height: 120px;
+    }
+
+    .contact-form-wrapper {
+        padding: 28px 20px 20px;
+    }
+}
+
+//
+//  Desktop (style-l.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .grid-two-columns {
+        display: grid;
+        --gap: 32px;
+        grid-column-gap: var(--gap);
+        grid-template-columns:  ~"calc(50% - var(--gap)/2) calc(50% - var(--gap)/2)";
+    }
+}

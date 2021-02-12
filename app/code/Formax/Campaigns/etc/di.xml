@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Campaign -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="campaigns_campaign_listing_data_source" xsi:type="string">Formax\Campaigns\Model\ResourceModel\Campaign\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\Campaigns\Model\ResourceModel\Campaign\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_campaigns_campaign</argument>
+            <argument name="eventPrefix" xsi:type="string">campaigns_campaign_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">campaign_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\Campaigns\Model\ResourceModel\Campaign</argument>
+        </arguments>
+    </type>
+
+    <!-- Types -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="campaigns_type_listing_data_source" xsi:type="string">Formax\Campaigns\Model\ResourceModel\Type\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\Campaigns\Model\ResourceModel\Type\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_campaigns_type</argument>
+            <argument name="eventPrefix" xsi:type="string">campaigns_type_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">type_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\Campaigns\Model\ResourceModel\Type</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\ImportExport\Model\Import\SampleFileProvider">
+        <arguments>
+            <argument name="samples" xsi:type="array">
+                <item name="campaigns" xsi:type="string">Formax_Campaigns</item>
+                <item name="creditcard" xsi:type="string">Formax_Campaigns</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Credit Card Campaign -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="campaigns_creditcard_listing_data_source" xsi:type="string">Formax\Campaigns\Model\ResourceModel\CreditCard\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Formax\Campaigns\Model\ResourceModel\CreditCard\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_campaigns_credit_card</argument>
+            <argument name="eventPrefix" xsi:type="string">campaigns_creditcard_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">creditcard_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\Campaigns\Model\ResourceModel\CreditCard</argument>
+        </arguments>
+    </type>
+
+</config>

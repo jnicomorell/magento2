@@ -1,0 +1,232 @@
+/**
+Benefits Carousel Styles
+**/
+
+.coop-benefits-carousel {
+    position: relative;
+    padding: 20px 0;
+
+    .block-title {
+        margin: 0;
+        
+        > h2 {
+            margin: 0;
+            text-align: center;
+            font-size: 24px;
+            line-height: 35px;
+            font-family: 'Poppins', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+            color: #333;
+        }
+    }
+
+    .action {
+        &.benefits-action {
+            color: #F42534;
+            background: none;
+            border: 0;
+            padding-left: 0;
+            padding-right: 0;
+            font-family: 'Poppins SemiBold', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+            float: right;
+            width: 100%;
+
+            &::after {
+                content: '\e608';
+                font-family: 'luma-icons';
+                vertical-align: middle;
+                font-size: 11px;
+                margin: 0 2px;
+            }
+
+        }
+
+    }
+
+    .carousel-box {
+        padding: 20px 0;
+        display: inline-block;
+        width: 100%;
+        
+        .coop-carousel-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            float: left;
+
+            & ~ .action {
+                &.benefits-action {
+                    width: 50%;
+                }
+
+            }
+            
+            .benefits-options {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                z-index: 1;
+
+                .ribbon-box {
+                    padding: 4px 20px 8px;
+                    background: #000;
+                    color: #fff;
+                    border-radius: 100px;
+                    text-align: center;
+                    display: inline-block;
+                    vertical-align: middle;
+
+                    span {
+                        font-size: 12px;
+                        line-height:18px;
+                        font-weight: 500;
+                        font-family: 'Poppins Medium', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+
+                        strong {
+                            font-family: 'Poppins Bold', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+                            font-size: 17px;
+                        }
+
+                    }
+
+                }
+
+                .icon-box {
+                    padding: 10px;
+                    background: #000;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 100%;
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: 1;
+                    margin-right: 6px;
+
+                    a {
+                        line-height: 1;
+                        display: inline-block;
+                        width: 32px;
+                        height: 32px;
+                    }
+
+                    .img {
+                        &.icon {
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            .benefits-image {
+                font-size: 0;
+
+                .img {
+                    width: 100%;
+                    object-fit: cover;
+                    height: 204px;
+                }
+            }
+
+            .benefits-texts {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 23px;
+
+                .carousel-img-title {
+                    h4 {
+                        margin: 0 0 8px;
+                        font-size: 32px;
+                        font-family: 'Poppins Bold', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+                        line-height: 1;
+
+                        &, & .title-link {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    }
+
+                }
+
+                .carousel-img-desc {
+                    p {
+                        font-size: 14px;
+                        line-height: 14px;
+                        margin:0;
+
+                        &, & .desc-link {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                    }
+
+                }
+
+            }
+
+            &:not(:nth-of-type(1)) {
+                .benefits-texts {
+                    .carousel-img-title {
+                        display: none;
+                    }
+
+                }
+
+            }
+
+            &:nth-of-type(1) {
+                margin-right: 22px;
+                width: ~"calc(50% - 22px)";
+
+                .benefits-image {
+                    .img {
+                        height: 470px;
+                    }
+                }
+            }
+
+            &:nth-of-type(2) {
+                width: 50%;
+            }
+
+            &:nth-of-type(3),
+            &:nth-of-type(4),
+            &:nth-of-type(5) {
+                margin-right: 22px;
+                width: ~"calc(16.666% - 15px)";
+
+                .benefits-texts {
+                    padding: 10px;
+
+                    .carousel-img-desc {
+                        p {
+                            line-height: 21px;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            &:nth-of-type(5) {
+                margin-right: 0;
+            }
+
+        }
+    
+    }
+
+}
+
+/** Media Screen **/
+
+@import "responsive";

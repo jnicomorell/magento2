@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Formax_News::news" title="News" module="Formax_News" sortOrder="1000" parent="Formax_CoopeuchMenu::main_menu" resource="Formax_News::news"/>
+        <add id="Formax_News::categories" title="Manage Categories" module="Formax_News" sortOrder="10" action="news/category/index" resource="Formax_News::categories" parent="Formax_News::news"/>
+        <add id="Formax_News::articles" title="Manage Articles" module="Formax_News" sortOrder="20" action="news/article/index" resource="Formax_News::articles" parent="Formax_News::news"/>
+        <add id="Formax_News::homenews" title="Home News" module="Formax_News" sortOrder="30" action="news/homenews/index" resource="Formax_News::homenews" parent="Formax_News::news"/>
+    </menu>
+</config>

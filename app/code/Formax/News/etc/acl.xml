@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Formax_CoopeuchMenu::main_menu" title="Coopeuch" translate="title" sortOrder="130">
+
+                    <resource id="Formax_News::articles" title="Articles" translate="title" sortOrder="12">
+                        <resource id="Formax_News::article_create" title="Create" translate="title" sortOrder="50" />
+                        <resource id="Formax_News::article_read" title="Read" translate="title" sortOrder="60" />
+                        <resource id="Formax_News::article_update" title="Update" translate="title" sortOrder="70" />
+                        <resource id="Formax_News::article_delete" title="Delete" translate="title" sortOrder="80" />
+                    </resource>
+
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

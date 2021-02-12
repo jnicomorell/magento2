@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @var \Formax\PaymentButton\Block\Content\AlertWidget $block
+ */
+?>
+<?php
+$isActive = $block->isActive();
+$alertType = $block->getAlertType();
+$initialDate = $block->getInitialDate();
+$endingDate = $block->getEndingDate();
+$title = $block->getTitle();
+$alertContent = $block->getAlertContent();
+$enableExternalUrl = $block->getEnableExternalUrl();
+$externalUrl = $block->getExternalUrl();
+$externalUrlLabel = $block->getExternalUrlLabel();
+$alertCookie = $block->checkAlertCookie();
+?>
+
+<?php if ($isActive && !empty($alertCookie)) : ?>
+    <div id="alertWidget" class="alertWidget-box alertWidget-box-<?= $alertType['class']; ?>">
+        <div class="page-main">
+            <div class="box-alert-component">
+                <?php if (!empty($alertType['icon'])) : ?>
+                    <div class="icon">
+                        <img src="<?= $alertType['icon']; ?>">
+                    </div>
+                <?php endif; ?>
+                <div class="box-alert">
+                    <h4 class="title semiBold"><?= $title; ?></h4>
+                    <div class="box-content">
+                        <span class="alertContent"><?= $alertContent; ?></span>
+                        <?php if ($enableExternalUrl) : ?>
+                            <a href="<?= $externalUrl; ?>" class="semiBold" target="_BLANK"><?= $externalUrlLabel; ?></a>
+                        <?php endif; ?>
+                    </div>
+                    <button class="btn-close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        require([
+            'jquery',
+            'domReady!'
+        ], function($) {
+
+            $('.btn-close').on('click', function() {
+                $.ajax({
+                    url: '<?= $alertCookie['closeUrl'] ?>',
+                    context: document.body,
+                    statusCode: {
+                        200: function() {
+                            $('#alertWidget').hide();
+                        }
+                    }
+                }).done(function() {
+                    console.log('Done');
+                });
+
+            });
+        });
+    </script>
+<?php endif; ?>

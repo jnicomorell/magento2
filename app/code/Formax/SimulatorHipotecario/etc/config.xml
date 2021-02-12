@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <simulatorhipotecario_form_configuration>
+            <general>
+                <title>Crédito Hipotecario - Solicitud</title>
+                <text_download>Por favor ingresa tus datos para que uno de nuestros ejecutivos pueda contactarte.</text_download>
+                <legal_terms>Terminos legales:</legal_terms>
+            </general>
+            <proof_success>
+                <button_text>Volver</button_text>
+                <button_link>simulator/hipotecario/comprobante</button_link>
+            </proof_success>
+        </simulatorhipotecario_form_configuration>
+    </default>
+</config>

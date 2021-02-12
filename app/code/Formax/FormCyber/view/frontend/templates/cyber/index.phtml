@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @var \Formax\FormCyber\Block\Cyber $block
+ */
+?>
+
+
+<!-- El modal Formulario -->
+<div id="modal-solicitud" class="modal form-solicitud">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header"> 
+            <img class="cerrar mobile closeModal" src='<?= $this->getViewFileUrl('images/close-mobile.svg'); ?>' alt="Cerrar">
+            <img class="cerrar desktop closeModal" src='<?= $this->getViewFileUrl('images/close-desktop.svg'); ?>' alt="Cerrar">
+
+            <h2>Formulario de solicitud</h2>
+            <p>Ingresa tus datos y todos los campos son obligatorios.</p>
+        </div>
+        <form class="form cyberform" id="cyberform" action="/simulator/diascoopeuch/comprobante" method="POST">
+            <div class="modal-body">
+                <div class="control">
+                    <label for="rut">Rut</label>
+                    <input type="text" name="rut" id="mf-rut" class="form-input mf-field" value="" />
+                </div>
+                <div class="control">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" id="mf-name" class="form-input mf-field name" maxlength="50">
+                </div>
+                <div class="control">
+                    <label for="phone">Teléfono</label>
+                    <div class="phone-group">
+                        <div class="coop-dropdown">
+                            <div class="dropbtn form-input phonebtn"><span id="mf-code" class="main-prefix" data-value="9">9</span> <span class="coop-icon-down"></span></div>
+                            <div id="dropdown-list" class="dropdown-content">
+                                <div class="drop-item" data-value="9">9</div>
+                                <div class="drop-item" data-value="6">6</div>
+                                <div class="drop-item" data-value="7">7</div>
+                                <div class="drop-item" data-value="8">8</div>
+                                <div class="drop-item" data-value="2">2</div>
+                                <div class="drop-item" data-value="32">32</div>
+                                <div class="drop-item" data-value="33">33</div>
+                                <div class="drop-item" data-value="34">34</div>
+                                <div class="drop-item" data-value="35">35</div>
+                                <div class="drop-item" data-value="41">41</div>
+                                <div class="drop-item" data-value="42">42</div>
+                                <div class="drop-item" data-value="43">43</div>
+                                <div class="drop-item" data-value="45">45</div>
+                                <div class="drop-item" data-value="51">51</div>
+                                <div class="drop-item" data-value="52">52</div>
+                                <div class="drop-item" data-value="53">53</div>
+                                <div class="drop-item" data-value="55">55</div>
+                                <div class="drop-item" data-value="57">57</div>
+                                <div class="drop-item" data-value="58">58</div>
+                                <div class="drop-item" data-value="61">61</div>
+                                <div class="drop-item" data-value="63">63</div>
+                                <div class="drop-item" data-value="64">64</div>
+                                <div class="drop-item" data-value="65">65</div>
+                                <div class="drop-item" data-value="67">67</div>
+                                <div class="drop-item" data-value="71">71</div>
+                                <div class="drop-item" data-value="72">72</div>
+                                <div class="drop-item" data-value="73">73</div>
+                                <div class="drop-item" data-value="75">75</div>
+                            </div>
+                        </div>
+                        <input id="prefix" name="code" style="display:none;" value="9" />
+                        <input type="tel" name="phone" class="form-input phone mf-field digit phone" maxlength="8">
+                    </div>
+                </div>
+                <div class="control">
+                    <label for="email">Email</label>
+                    <input type="email" id="mf-email" name="email" class="mf-field form-input email" maxlength="50">
+                </div>
+                <input type="hidden" name="comment">
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="button-coopeuch send-form" value="Solicitar">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+    "*": {
+        "form-cyber": {}
+    }
+}
+</script>

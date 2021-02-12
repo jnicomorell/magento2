@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Simulador Consumo" design_abstraction="custom">
+    <body>
+    
+        <referenceContainer name="content">
+            <block class="Formax\News\Block\NewsPortal" name="coo.news.portal" template="Formax_News::news_portal_vue.phtml" />
+        </referenceContainer>
+
+    </body>
+</page>

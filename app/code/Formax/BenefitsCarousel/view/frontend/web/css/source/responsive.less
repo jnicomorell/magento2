@@ -1,0 +1,76 @@
+@maxwidth--responsive:  767px;
+
+@media screen and (max-width: @maxwidth--responsive) {
+
+    .coop-benefits-carousel {
+
+        .block-title {
+            > h2 {
+                text-align: left;
+                font-size: 20px;
+                padding: 0 5px;
+                line-height: 26px;
+            }
+        }
+
+        .action {
+            &.benefits-action {
+                display: block;
+                text-align: center;
+                padding: 0;
+            }
+
+        }
+
+        .carousel-box {
+            margin: 0 -20px;
+            width: auto;
+            padding-bottom: 10px;
+
+            .owl-stage-outer {
+                padding: 0;
+            }
+
+            .coop-carousel-item {
+                display: none;
+
+                ~ .action {
+                    &.benefits-action {
+                        width: 100%;
+                        margin-top: 20px;
+                    }
+
+                }
+
+                &:nth-of-type(1) {
+                    width: 100%;
+                    border-radius: 0;
+                    display: block;
+                }
+
+                .benefits-texts {
+                    padding: 20px 27px;
+
+                    .carousel-img-title {
+                        h4 {
+                            font-size: 24px;
+                            line-height: 30px;
+                        }
+                    }
+
+                    .carousel-img-desc {
+                        p {
+                            line-height: 20px;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}

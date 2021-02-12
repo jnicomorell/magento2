@@ -1,0 +1,101 @@
+<?php
+/**
+ * @var \Formax\Formularios\Block\Dap\Index $block
+ */
+?>
+
+<h1 class="simulator-title" style="margin-bottom: 5px;"><?= $block->getTitle() ?></h1>
+<h2 class="regular text-download" style="margin-top: 0;"><?= $block->getTextDownload() ?></h2>
+
+<div class="simulator-container">
+    <ol class="tabs" style="counter-reset: item 0;">
+        <li class="active"><span class="tab-title">Solicitud</span><span class="border border-left"></span></li>
+        <li ><span class="step">Paso 1/2</span><span class="tab-title">Comprobante</span><span class="border border-right"></span></li>
+        <li class="step-wrapper"><span class="step">Paso 2/2</span><span class="border border-right"></span></li>
+    </ol>
+
+    <div class="simulator-wrapper form-solicitud form-credit-card">
+
+        <form id="form-dap" action="<?= $block->getUrl('solicitud/dap/comprobante') ?>" method="post" >
+            <div class="modal-body three-colum-form">
+                <div class="control">
+                    <label for="name">Nombres</label>
+                    <input type="text" name="name" class="form-input form-field" maxlength="64">
+                </div>
+                <div class="control">
+                    <label for="lastname">Apellidos</label>
+                    <input type="text" name="lastname" class="form-input form-field" maxlength="64">
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <label for="rut">Rut</label>
+                        <input name="rut" class="form-input form-field" type="text" placeholder="Ej. 12.345.678-9" maxlength="12">
+                    </div>
+                </div>
+                <div class="control">
+                    <label for="phone">Teléfono</label>
+                    <div class="phone-group">
+                        <div class="coop-dropdown">
+                            <div class="dropbtn form-input phonebtn"><span class="main-prefix" data-value="9">9</span> <span class="coop-icon-down"></span></div>
+                            <div id="dropdown-list" class="dropdown-content">
+                                <div class="drop-item" data-value="9">9</div>
+                                <div class="drop-item" data-value="6">6</div>
+                                <div class="drop-item" data-value="7">7</div>
+                                <div class="drop-item" data-value="8">8</div>
+                                <div class="drop-item" data-value="2">2</div>
+                                <div class="drop-item" data-value="32">32</div>
+                                <div class="drop-item" data-value="33">33</div>
+                                <div class="drop-item" data-value="34">34</div>
+                                <div class="drop-item" data-value="35">35</div>
+                                <div class="drop-item" data-value="41">41</div>
+                                <div class="drop-item" data-value="42">42</div>
+                                <div class="drop-item" data-value="43">43</div>
+                                <div class="drop-item" data-value="45">45</div>
+                                <div class="drop-item" data-value="51">51</div>
+                                <div class="drop-item" data-value="52">52</div>
+                                <div class="drop-item" data-value="53">53</div>
+                                <div class="drop-item" data-value="55">55</div>
+                                <div class="drop-item" data-value="57">57</div>
+                                <div class="drop-item" data-value="58">58</div>
+                                <div class="drop-item" data-value="61">61</div>
+                                <div class="drop-item" data-value="63">63</div>
+                                <div class="drop-item" data-value="64">64</div>
+                                <div class="drop-item" data-value="65">65</div>
+                                <div class="drop-item" data-value="67">67</div>
+                                <div class="drop-item" data-value="71">71</div>
+                                <div class="drop-item" data-value="72">72</div>
+                                <div class="drop-item" data-value="73">73</div>
+                                <div class="drop-item" data-value="75">75</div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="code" id="prefix" value="9">
+                        <input type="tel" name="phone" class="form-input phone form-field digit" maxlength="8">
+                    </div>
+                </div>
+                <div class="control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-input form-field" maxlength="50">
+                </div>
+            </div>
+
+            <div class="field container-submit">
+                <div class="control button">
+                    <input class="button-coopeuch"  type="submit" value="Contáctenme" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="letra-pequena hipoteca">
+    <p><?= $block->getLegalTerms() ?></p>
+</div>
+<a href="<?= $block->getBaseUrl() ?>" class="semiBold link">&#60; Volver a Coopeuch</a>
+
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "dap-form": {}
+    }
+}
+</script>

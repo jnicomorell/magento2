@@ -1,0 +1,69 @@
+<?php
+/**
+ * @var Formax\News\Block\NewsPortal $block
+ */
+?>
+
+<?php
+
+$_articleCollection=$block->getAllArticles();
+
+$dateIcon = $this->getViewFileUrl('Formax_News::images/news-date.png');
+$home = $block->getStoreName();
+
+?>
+<div class="news-portal-layout">
+    <?php if (!$_articleCollection->count()) :?>
+        <div class="message main-margin-m"><div><?= $block->escapeHtml(__('We can\'t find news matching the selection.')) ?></div></div>
+    <?php else :?>
+        
+        <?php
+            $ind=0; 
+            foreach ($_articleCollection as $article) : 
+                $i=$ind%3;
+                $ind=$ind+1;
+                
+                $articleUrl=$this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+                $lastChart=substr($articleUrl,strlen($articleUrl)-1, 1)==="/"?"":"/";
+                $articleUrl=$articleUrl.$lastChart. "articulo?article=".$article->getId();
+
+            ?>
+            <div class="news-box news-wrapper n-<?= $i ?>">
+                <?php $img = $block->getArticleImage($article->getImage()) ?>
+                <span class="news-image-wrapper">
+                    <a href="<?=$articleUrl ?>">
+                        <img class="news-image" src="<?= $img ?>" alt="<?= $article->getTitle() ?>" title="<?= $article->getTitle() ?>"/>
+                    </a>
+                </span> 
+                <div class="news-desc-wrapper">
+                    <span class="content-flex date"><img src="<?=$dateIcon ?>"/>
+                        <span class="date-text shortTxt desk">
+                            <?= $block->getformatMoth($article->getCreatedAt()).' '.$block->getformatDay($article->getCreatedAt()).' del '.$block->getformatYear($article->getCreatedAt()).', '.$block->getformatTime($article->getCreatedAt()); ?>
+                        </span>
+                        <span class="date-text shortTxt mob">
+                            <?= $block->getformatMoth($article->getCreatedAt()).' '.$block->getformatDay($article->getCreatedAt()).' del '.$block->getformatYear($article->getCreatedAt()); ?>
+                        </span>
+                    </span>
+                    <h3 class="news-title"><a href="<?=$articleUrl ?>">
+                        <?= $block->limitTxt($article->getTitle(),75); ?> <span class="red-dash mob"></span>
+                    </a></h3>
+                    <p class="news-short-desc"><a href="<?=$articleUrl ?>">
+                        <?= $block->limitTxt($article->getShortContent(),120); ?><span class="red-dash"></span>
+                    </a></p>
+                    <span class="shortTxt">Categor&#237;a:  </span>
+                    <?php $categories=$block->getCategoriesByArticle( $article->getId());
+                    $categoriesTxt="";
+                    foreach($categories as $category){
+                        $categoryName=$categoriesTxt==""?$category->getName():", ".$category->getName();
+                        $categoriesTxt=$categoriesTxt.$categoryName;
+                    }
+                    ?>
+                    <span class="red semiBold shortTxt"><?=$categoriesTxt ?></span>
+                </div>
+            </div>
+        <?php endforeach; ?>
+              
+    <?php endif; ?>
+</div>
+
+

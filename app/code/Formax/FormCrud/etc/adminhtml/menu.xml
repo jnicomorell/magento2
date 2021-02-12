@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Formax_FormCrud::formcrud" translate="title" title="Formularíos Dinámicos" module="Formax_FormCrud" sortOrder="10" parent="Formax_CoopeuchMenu::main_menu" action="formcrud/formcrud/index" resource="Formax_FormCrud::formcrud"/>
+    </menu>
+</config>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * @var Formax\News\Block\News $block
+ */
+?>
+<?php
+$articleId   = $block->getArticleId();
+$relatedIds  = $block->getArticle($articleId)->getRelatedNews();?>
+
+<?php if(strlen($relatedIds) > 0): ?>
+    <?php $collectionRelatedNews = $block->getRelatedNews($relatedIds); ?>
+    <div class="container-related-news">
+        <?php foreach($collectionRelatedNews as $item) { ?>
+            <?php $baseUrl = $block->getUrl() . 'noticia/articulo?article=' . $item->getId(); ?>
+            <div class="news-item">
+                <a href="<?= $baseUrl ?>">
+                    <img class="news-img" src="<?= $item->getImageUrl() ?>" alt="<?= $item->getTitle() ?>">
+                </a>
+                <div class="news-item-details">
+                    <p class="news-date hide-mob">
+                        <img src="<?= $this->getViewFileUrl('Formax_News::images/news-date.png') ?>" alt="<?= __('Publication date') ?>" width="18">
+                        <span><?= $block->getformatMoth($item->getCreatedAt()).' '.$block->getformatDay($item->getCreatedAt()).' del '.$block->getformatYear($item->getCreatedAt())?>, <span class="upper"><?= $block->getformatTime($item->getCreatedAt()) ?></span></span>
+                    </p>
+                    <h3><a href="<?= $baseUrl ?>" class="keep-reading"><?= $item->getTitle() ?></a></h3>
+                    <p class="short-content hide-mob"><a href="<?= $baseUrl ?>" class="keep-reading"><?= $block->shortenString($item->getShortContent(),120) ?></a></p>
+                    <?php
+                        $categories = $block->getCategoriesByArticle( $item->getId());
+                        $categoriesTxt="";
+                        foreach($categories as $category)
+                        {
+                            $categoryName  = $categoriesTxt == "" ? $category->getName(): ", " . $category->getName();
+                            $categoriesTxt = $categoriesTxt . $categoryName;
+                        }
+                    ?>
+                    <p class="news-category hide-mob">Categoría: <span><?= $categoriesTxt ?></span></p>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+<?php endif; ?>

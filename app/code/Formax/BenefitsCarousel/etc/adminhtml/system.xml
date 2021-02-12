@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="coopeuch" sortOrder="100">
+            <label>Coopeuch</label>
+        </tab>
+        <section id="benefits_carousel" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Benefits Carousel</label>
+            <tab>coopeuch</tab>
+            <resource>Formax_BenefitsCarousel::benefitscarousel_resource</resource>
+
+            <!-- General -->
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <comment>If is empty, the title block will be hidden.</comment>
+                </field>
+
+                <field id="show_button" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Button?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Yes, then a button link will be shown below the boxes.</comment>
+                </field>
+
+                <field id="button_text" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Text</label>
+                    <depends>
+                        <field id="show_button">1</field>
+                    </depends>
+                </field>
+
+                <field id="button_link" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Link</label>
+                    <depends>
+                        <field id="show_button">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- Image Block One -->
+            <group id="img_block_one" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Block One</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_images</base_url>
+                </field>
+
+                <field id="show_icon" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="icon" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Icon</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_icons</base_url>
+                </field>
+
+                <field id="icon_bg" translate="label comment"  sortOrder="50" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon Background</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Color</frontend_model>
+                    <comment>By default is black; change this if you want to set another background color.</comment>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="description" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="ribbon" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ribbon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <comment>For bold use [], for new line |. I.e: Price from|[$50.000]</comment> 
+                </field>
+                
+                <field id="link" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="start_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+
+                <field id="end_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>End Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+            </group>
+
+            <!-- Image Block Two -->
+            <group id="img_block_two" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Block Two</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_images</base_url>
+                </field>
+
+                <field id="show_icon" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="icon" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Icon</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_icons</base_url>
+                </field>
+
+                <field id="icon_bg" translate="label comment"  sortOrder="50" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon Background</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Color</frontend_model>
+                    <comment>By default is black; change this if you want to set another background color.</comment>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="description" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="ribbon" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ribbon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <comment>For bold use [], for new line |. I.e: Price from|[$50.000]</comment> 
+                </field>
+
+                <field id="link" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="start_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+
+                <field id="end_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>End Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+            </group>
+
+            <!-- Image Block Three -->
+            <group id="img_block_three" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Block Three</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_images</base_url>
+                </field>
+
+                <field id="show_icon" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="icon" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Icon</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_icons</base_url>
+                </field>
+
+                <field id="icon_bg" translate="label comment"  sortOrder="50" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon Background</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Color</frontend_model>
+                    <comment>By default is black; change this if you want to set another background color.</comment>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="description" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="ribbon" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ribbon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <comment>For bold use [], for new line |. I.e: Price from|[$50.000]</comment> 
+                </field>
+
+                <field id="link" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="start_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+
+                <field id="end_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>End Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+            </group>
+
+            <!-- Image Block Four -->
+            <group id="img_block_four" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Block Four</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_images</base_url>
+                </field>
+
+                <field id="show_icon" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="icon" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Icon</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_icons</base_url>
+                </field>
+
+                <field id="icon_bg" translate="label comment"  sortOrder="50" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon Background</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Color</frontend_model>
+                    <comment>By default is black; change this if you want to set another background color.</comment>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="description" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="ribbon" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ribbon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <comment>For bold use [], for new line |. I.e: Price from|[$50.000]</comment> 
+                </field>
+
+                <field id="link" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="start_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+
+                <field id="end_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>End Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+            </group>
+
+            <!-- Image Block Five -->
+            <group id="img_block_five" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Block Five</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_images</base_url>
+                </field>
+
+                <field id="show_icon" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="icon" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <backend_model>Formax\BenefitsCarousel\Model\Config\Backend\Icon</backend_model>
+                    <base_url type="media" scope_info="1">benefits_carousel_icons</base_url>
+                </field>
+
+                <field id="icon_bg" translate="label comment"  sortOrder="50" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon Background</label>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="show_icon">1</field>
+                    </depends>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Color</frontend_model>
+                    <comment>By default is black; change this if you want to set another background color.</comment>
+                </field>
+
+                <field id="title" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="description" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="ribbon" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ribbon</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <comment>For bold use [], for new line |. I.e: Price from|[$50.000]</comment> 
+                </field>
+
+                <field id="link" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="start_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+
+                <field id="end_date" translate="label" type="date" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>End Date</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <frontend_model>Formax\BenefitsCarousel\Block\Type\Date</frontend_model>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

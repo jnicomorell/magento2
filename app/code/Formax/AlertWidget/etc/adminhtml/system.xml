@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="coopeuch" sortOrder="100">
+            <label>Coopeuch</label>
+        </tab>
+        <section id="header_coopeuch" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Header</label>
+            <tab>coopeuch</tab>
+            <resource>Formax_AlertWidget::header</resource>
+            <group id="alert_widget" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Alert Widget Configuration</label>
+                <!-- Enable this configuration -->
+                <field id="enable" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Active</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <!-- Alert type configuration -->
+                <field id="alert_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Alert Type</label>
+                    <source_model>Formax\AlertWidget\Model\Config\Source\AlertType</source_model>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                    </depends>
+                </field>
+                <!-- End Alert type configuration -->
+
+                <!-- Alert type icon configuration -->
+                <field id="alert_type_success_icon" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alert Type Icon</label>
+                    <backend_model>Formax\AlertWidget\Model\Config\Backend\AlertIconType</backend_model>
+                    <upload_dir config="system" scope_info="1">alert_type_success_icon</upload_dir>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                        <field id="header_coopeuch/alert_widget/alert_type">1</field>
+                    </depends>
+                </field>
+                <field id="alert_type_info_icon" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alert Type Icon</label>
+                    <backend_model>Formax\AlertWidget\Model\Config\Backend\AlertIconType</backend_model>
+                    <upload_dir config="system" scope_info="1">alert_type_info_icon</upload_dir>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                        <field id="header_coopeuch/alert_widget/alert_type">2</field>
+                    </depends>
+                </field>
+                <field id="alert_type_warning_icon" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alert Type Icon</label>
+                    <backend_model>Formax\AlertWidget\Model\Config\Backend\AlertIconType</backend_model>
+                    <upload_dir config="system" scope_info="1">alert_type_warning_icon</upload_dir>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                        <field id="header_coopeuch/alert_widget/alert_type">3</field>
+                    </depends>
+                </field>
+                <field id="alert_type_error_icon" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alert Type Icon</label>
+                    <backend_model>Formax\AlertWidget\Model\Config\Backend\AlertIconType</backend_model>
+                    <upload_dir config="system" scope_info="1">alert_type_error_icon</upload_dir>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                        <field id="header_coopeuch/alert_widget/alert_type">4</field>
+                    </depends>
+                </field>
+                <!-- end Alert type icon configuration -->
+                
+                <!-- Date configuration -->
+                <field id="initial_date" translate="label" type="date" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Initial Date</label>
+                    <frontend_model>Formax\AlertWidget\Block\Adminhtml\System\Config\Date</frontend_model>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                    </depends>
+                    <validate>required-entry validate-date</validate>
+                </field>
+                <field id="ending_date" translate="label" type="date" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ending Date</label>
+                    <frontend_model>Formax\AlertWidget\Block\Adminhtml\System\Config\Date</frontend_model>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                    </depends>
+                    <validate>required-entry validate-ending-date</validate>
+                </field>
+                <!-- End Date configuration -->
+
+                <!-- Title configuration -->
+                <field id="title" translate="label comment" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <comment>Title to display on this alert.</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                    </depends>
+                </field>
+
+                 <!-- WYSIWYG editor field code start-->
+                <field id="alert_content" translate="label comment" sortOrder="60" type="textarea" showInStore="1" showInDefault="1" >
+                    <label>Alert Content</label>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                    </depends>
+                </field>
+                <!-- WYSIWYG editor field code end-->
+
+                <!-- enable external url configuration -->
+                <field id="enable_external_url" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable External Url</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                    <field id="header_coopeuch/alert_widget/enable">1</field></depends>
+                </field>
+                <field id="external_url" translate="label comment" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>External URL</label>
+                    <comment>Only fill this field if you want to go to an external url instead of toggle the modal.</comment>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                        <field id="header_coopeuch/alert_widget/enable_external_url">1</field>
+                    </depends>
+                </field>
+                <field id="external_url_label" translate="label comment" sortOrder="66" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>External Url Label</label>
+                    <comment>Text to display on this label.</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="header_coopeuch/alert_widget/enable">1</field>
+                        <field id="header_coopeuch/alert_widget/enable_external_url">1</field>
+                    </depends>
+                </field>
+                <!-- end external url configuration -->
+            </group>
+        </section>
+    </system>
+</config>

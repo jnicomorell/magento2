@@ -1,0 +1,317 @@
+<?php
+
+/**
+ * BLOCK Formax\SimulatorHipotecario\Block\SimulatorHipotecario 
+ */
+?>
+<?php
+$input = $block->getSettingsInputs();
+$terms = $block->getLayout()->createBlock('Formax\MortgageSimulator\Block\Terms');
+
+?>
+<h1 class="simulator-title" style="margin-bottom: 5px;"><?= $block->getTitle() ?></h1>
+<h2 class="regular" style="margin-top: 0;"><?= $block->getTextDownload() ?></h2>
+
+<div class="simulator-container">
+    <ol class="tabs" style="counter-reset: item 0;">
+        <li class="active"><span class="tab-title">Solicitud</span><span class="border border-left"></span></li>
+        <li><span class="step">Paso 1/2</span><span class="tab-title">Comprobante</span><span class="border border-right"></span></li>
+        <li class="step-wrapper"><span class="step">Paso 2/2</span><span class="border border-right"></span></li>
+    </ol>
+
+    <div class="simulator-container">
+
+
+        <div class="simulator-wrapper form-solicitud form-credit-card">
+
+            <form id="hipotecarioform" action="<?= $block->getUrl('simulator/hipotecario/resultado') ?>" method="POST">
+                <div class="modal-body three-colum-form">
+                    <div class="control">
+                        <label for="name">Nombres</label>
+                        <input type="text" name="name" id="mf-name" class="form-input mf-field">
+                    </div>
+                    <div class="control">
+                        <label for="lastname">Apellidos</label>
+                        <input type="text" name="lastname" id="mf-lname" class="form-input mf-field">
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <label for="rut">Rut</label>
+                            <input name="rut" id="mf-rut" class="form-input mf-field" type="text" placeholder="Ej. 12.345.678-9">
+                        </div>
+                    </div>
+                    <div class="control">
+                        <label for="phone">Teléfono</label>
+                        <div class="phone-group">
+                            <div class="coop-dropdown">
+                                <div class="dropbtn form-input phonebtn"><span id="mf-code" class="main-prefix" data-value="9">9</span> <span class="coop-icon-down"></span></div>
+                                <div id="dropdown-list" class="dropdown-content">
+                                    <div class="drop-item" data-value="9">9</div>
+                                    <div class="drop-item" data-value="6">6</div>
+                                    <div class="drop-item" data-value="7">7</div>
+                                    <div class="drop-item" data-value="8">8</div>
+                                    <div class="drop-item" data-value="2">2</div>
+                                    <div class="drop-item" data-value="32">32</div>
+                                    <div class="drop-item" data-value="33">33</div>
+                                    <div class="drop-item" data-value="34">34</div>
+                                    <div class="drop-item" data-value="35">35</div>
+                                    <div class="drop-item" data-value="41">41</div>
+                                    <div class="drop-item" data-value="42">42</div>
+                                    <div class="drop-item" data-value="43">43</div>
+                                    <div class="drop-item" data-value="45">45</div>
+                                    <div class="drop-item" data-value="51">51</div>
+                                    <div class="drop-item" data-value="52">52</div>
+                                    <div class="drop-item" data-value="53">53</div>
+                                    <div class="drop-item" data-value="55">55</div>
+                                    <div class="drop-item" data-value="57">57</div>
+                                    <div class="drop-item" data-value="58">58</div>
+                                    <div class="drop-item" data-value="61">61</div>
+                                    <div class="drop-item" data-value="63">63</div>
+                                    <div class="drop-item" data-value="64">64</div>
+                                    <div class="drop-item" data-value="65">65</div>
+                                    <div class="drop-item" data-value="67">67</div>
+                                    <div class="drop-item" data-value="71">71</div>
+                                    <div class="drop-item" data-value="72">72</div>
+                                    <div class="drop-item" data-value="73">73</div>
+                                    <div class="drop-item" data-value="75">75</div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="code" id="prefix" value="9">
+                            <input type="tel" id="mf-phone" name="phone" class="form-input phone mf-field digit" maxlength="8">
+                        </div>
+                    </div>
+                    <div class="control">
+                        <label for="email">Email</label>
+                        <input type="email" id="mf-email" name="email" class="form-input mf-field" >
+                    </div>
+                    <div class="control">
+                        <label for="salary">Ingreso líquido mensual</label>
+                        <input type="tel" class="form-input mf-field digit money" id="mf-salary" name="monthly-income" maxlength="10" value="$">
+                    </div>
+                    <div class="control">
+                        <label for="amount">Precio Venta</label>
+                        <input type="tel" class="form-input mf-field digit money" id="mf-amount" name="amount" value="$">
+                    </div>
+                    <div class="control">
+                        <label for="plazo">Plazo en años</label>
+                        <div class="coop-dropdown plazodrop">
+                            <div class="dropbtn form-input">
+                                <span id="mf-code2" class="main-prefix" data-value="5">5
+                                </span>
+                                <span class="coop-icon-down"></span></div>
+                            <div id="dropdown-list-plazo" class="dropdown-content">
+                                <?php
+                                $terms = $terms->getTermCollection();
+                                $plazo = "";
+                                $x = 0;
+                                foreach ($terms as $term) {
+                                    if ($x == 0) {
+                                        $plazo = $term->getOptionOne();
+                                    }
+                                ?>
+                                    <div class="drop-item drop-plazo" data-value="<?= $term->getOptionOne(); ?>"><?= $term->getOptionOne(); ?></div>
+                                <?php $x++;
+                                } ?>
+                            </div>
+                        </div>
+                        <input type="hidden" name="plazo" id="plazo" value="<?= $plazo ?>" />
+                    </div>
+                    <div class="control2 plazo-container">
+                        <label for="plazo">¿Tienes el 20% del pie?</label>
+                        <div class="control">
+                            <input type="checkbox" value="si"  class="more" id="moreyes" name="more_pie">
+                            <label for="">Si</label>
+                            <br>
+                            <input type="checkbox" checked value="no" class="more" id="moreno" name="more_pie">
+                            <label for="">No, tengo más ahorro</label>
+                            <input style="width: 35%;" type="tel" value="$" id="mf-pie" class="mf-field  digit money" name="pie">
+                            <input type="hidden" class="ufvalue" value="<?= $block->getValorActualUf() ?>">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="field">
+                <div class="control button">
+                    <br>
+                    <button class="button-coopeuch" id="submit-mf-form">Enviar</button>
+                </div>
+            </div>
+            <input type="hidden" id="checkstatus">
+        </div>
+    </div>
+</div>
+<a class="semiBold link back-coop" href="<?= $block->getBaseUrl() ?>">&#60; Volver a Coopeuch</a>
+<div class="loader"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
+<style>
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #00000025;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    display:none;
+}
+
+.lds-ellipsis {
+    left: calc(50% - 40px);
+    top: 50%;
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #E81E2B;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+    .plazodrop {
+        width: 100%;
+    }
+
+    .plazo-container input {
+        display: inline-block;
+    }
+
+    .plazo-container label {
+        display: inline-block;
+    }
+    .fixed {
+        position: inherit !important;
+    }
+    .control2.plazo-container label {
+        margin-bottom: 4px !important;
+    }
+
+    .mf-pie-error-msg {margin: 0 !important;}
+</style>
+
+<script type="text/x-magento-init">
+    {
+    "*": 
+    {
+        "form-hipotecarios": {}
+    } 
+}
+</script>
+
+<script>
+let valorUF = '<?= $block->getValorActualUf() ?>';
+require([
+    'jquery', 'format-currency-min'
+], function ($) {
+    $(function () { // to ensure that code evaluates on page load
+
+        var $checkStatus = 'true'
+        $('#checkstatus').val($checkStatus)
+        $('.drop-plazo').on('click', function() {
+            let plazo = $(this).attr('data-value')
+            $('#plazo').attr('value', plazo)
+        })
+
+        $('#moreyes').on('change', function() {
+            if ($(this).prop("checked")) {
+                $('#moreno').prop("checked", false)
+                $checkStatus = 'false'
+                $('#checkstatus').val($checkStatus)
+                $('#mf-pie').attr('disabled', true)
+                $('#mf-pie').val('$0')
+                $(this).parent().find("div.mage-error").remove();
+            }
+        })
+
+        $('#moreno').on('change', function() {
+            if ($(this).prop("checked")) {
+                $('#moreyes').prop("checked", false)
+                $checkStatus = 'true'
+                $('#checkstatus').val($checkStatus)
+                $('#mf-pie').attr('disabled', false)
+            }
+        })
+
+        $(document).ready(function(){
+            if ($('#moreyes').prop("checked")) {
+                $('#moreno').prop("checked", false)
+                $checkStatus = 'false'
+                $('#checkstatus').val($checkStatus)
+                $('#mf-pie').attr('disabled', true)
+                $('#mf-pie').val('$0')
+                $(this).parent().find("div.mage-error").remove();
+            }
+            $("#dropdown-list > div:eq(0)").trigger("click")
+            $("#dropdown-list-plazo > div:eq(0)").trigger("click")
+        })
+
+        window.dataLayer = window.dataLayer || [];
+        // Cuando el socio vea esta página
+        setTimeout(
+            function() {
+                dataLayer.push({
+                    'event': 'vpv',
+                    'page': '/simuladorhipotecario/datos-personales'
+                });
+        }, 2000);
+
+        // Cuando el socio hace click en Volver a Coopeuch
+        $('.back-coop').click(function() {
+            dataLayer.push({
+                'event': 'trigger_event',
+                'event-config': {
+                    'eve-acc': '/simuladorhipotecario/datos-personales',
+                    'eve-cat': 'Click',
+                    'eve-lab': 'Volver a Coopeuch'
+                }
+            });
+        });
+    });
+});
+</script>

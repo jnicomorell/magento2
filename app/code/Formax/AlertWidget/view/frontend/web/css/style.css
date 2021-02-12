@@ -1,0 +1,152 @@
+.alertWidget-box.alertWidget-box-success {
+    color: #155724;
+    background: #D4EDDA;
+    border-color: #C3E6CB;
+}
+
+.alertWidget-box.alertWidget-box-success a,
+.alertWidget-box.alertWidget-box-success .btn-close::after {
+    color: #155724;
+}
+
+.alertWidget-box.alertWidget-box-success .icon img:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.alertWidget-box.alertWidget-box-info {
+    color: #004085;
+    background: #CCE5FF;
+    border-color: #B8DAFF;
+}
+
+.alertWidget-box.alertWidget-box-info a,
+.alertWidget-box.alertWidget-box-info .btn-close::after {
+    color: #004085;
+}
+
+.alertWidget-box.alertWidget-box-info .icon img:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.alertWidget-box.alertWidget-box-warning {
+    color: #856404;
+    background: #FFF3CD;
+    border-color: #FFEEBA;
+}
+
+.alertWidget-box.alertWidget-box-warning a,
+.alertWidget-box.alertWidget-box-warning .btn-close::after {
+    color: #856404;
+}
+
+.alertWidget-box.alertWidget-box-warning .icon img:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.alertWidget-box.alertWidget-box-error {
+    color: #721C24;
+    background: #FBBDC2;
+    border-color: #F4B0B6;
+}
+
+.alertWidget-box.alertWidget-box-error a,
+.alertWidget-box.alertWidget-box-error .btn-close::after {
+    color: #721C24;
+}
+
+.alertWidget-box.alertWidget-box-error .icon img:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.alertWidget-box .page-main {
+    display: flex;
+}
+
+.box-alert-component {
+    position: relative;
+    padding: 25px 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.alertWidget-box .icon {
+    margin-right: 10px;
+}
+
+.alertWidget-box .title {
+    margin: 0;
+    padding-bottom: 3px;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.alertWidget-box .icon img {
+    width: 24px;
+    height: 24px;
+}
+
+.alertWidget-box .box-alert {
+    height: 100%;
+    font-size: 14px;
+}
+
+.alertWidget-box .box-alert .alertContent {
+    display: inline-flex;
+}
+
+.alertWidget-box .box-alert a {
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 5px;
+    text-decoration: underline;
+}
+
+.alertWidget-box .btn-close {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    border: none;
+    font-size: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.alertWidget-box .btn-close:after {
+    font-family: 'icomoon';
+    font-weight: 300;
+    content: "\e901";
+    display: inline-block;
+    font-size: 35px;
+}
+
+@media only screen and (max-width: 1169px) and (min-width: 768px) {
+    .box-alert-component {
+        padding: 25px 5px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .alertWidget-box {
+        top: 68px;
+    }
+    .alertWidget-box .box-alert {
+        font-size: 12px;
+    }
+}

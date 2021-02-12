@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>DDP001 descarga</title>
+    <desc>Created with Sketch.</desc>
+    <g id="DDP001-descarga" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        <g id="Group-16" transform="translate(4.000000, 5.000000)" fill-rule="nonzero" stroke="#F42534" stroke-linecap="round" stroke-width="2">
+            <g id="Group-15">
+                <path d="M0,10.3157895 L0,12 C1.3527075e-16,13.1045695 0.8954305,14 2,14 L14.2105263,14 C15.3150958,14 16.2105263,13.1045695 16.2105263,12 L16.2105263,10.3157895 L16.2105263,10.3157895" id="Path-4"></path>
+                <line x1="8.10526316" y1="0" x2="8.10526316" y2="9.57894737" id="Path-5"></line>
+                <polyline id="Path-6" stroke-linejoin="round" points="4.42105263 7.36842105 8.01942809 10.3157895 11.7894737 7.36842105"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

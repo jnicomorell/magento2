@@ -1,0 +1,15 @@
+.checkbox-group {
+    flex-shrink: 0;
+    width: 70px;
+}
+
+input[name="down-payment"] {
+    width: calc(100% - 80px);
+    display: none;
+}
+
+.checkbox-flex {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+}

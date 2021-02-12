@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cred_hipotecario_config>
+            <general>
+                <title>Solicitud de Crédito Hipotecario</title>
+                <text_download>Por favor ingresa tus datos para que uno de nuestros ejecutivos pueda contactarte.</text_download>
+                <legal_terms></legal_terms>
+            </general>
+            <voucher>
+                <button_text>Volver</button_text>
+                <button_link>solicitud/hipotecario/index</button_link>
+            </voucher>
+        </cred_hipotecario_config>
+        <haztesocio_config>
+            <general>
+                <title>Solicitud Hazte Socio Coopeuch</title>
+                <text_download>Por favor ingresa tus datos para que uno de nuestros ejecutivos pueda contactarte.</text_download>
+            </general>
+            <voucher>
+                <button_text>Volver</button_text>
+                <button_link>hazte-socio-digital.html</button_link>
+            </voucher>
+        </haztesocio_config>
+        <ahorro_config>
+            <general>
+                <title>Solicitud de Ahorro</title>
+                <text_download>Por favor ingresa tus datos para que uno de nuestros ejecutivos pueda contactarte.</text_download>
+            </general>
+            <voucher>
+                <button_text>Volver</button_text>
+            </voucher>
+        </ahorro_config>
+        <dap_config>
+            <general>
+                <title>Solicitud de Depósito a plazo</title>
+                <text_download>Por favor ingresa tus datos para que uno de nuestros ejecutivos pueda contactarte.</text_download>
+            </general>
+            <voucher>
+                <button_text>Volver</button_text>
+                <button_link>solicitud/dap/index</button_link>
+            </voucher>
+        </dap_config>
+    </default>
+</config>

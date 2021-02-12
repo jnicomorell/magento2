@@ -1,0 +1,86 @@
+{
+    "formax_news_category": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "name": true,
+            "status": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "FORMAX_NEWS_CATEGORY_STORE_ID": true,
+            "FORMAX_NEWS_CATEGORY_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_NEWS_CATEGORY_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_NEWS_CATEGORY_ID_STORE_ID": true
+        }
+    },
+    "formax_news_article": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "status": true,
+            "title": true,
+            "short_content": true,
+            "content": true,
+            "image": true,
+            "sort_order": true,
+            "categories": true,
+            "created_at": true,
+            "updated_at": true,
+            "related_news": true
+        },
+        "index": {
+            "FORMAX_NEWS_ARTICLE_STORE_ID": true,
+            "FORMAX_NEWS_ARTICLE_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_NEWS_ARTICLE_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_NEWS_ARTICLE_ID_STORE_ID": true
+        }
+    },
+    "formax_news_category_article": {
+        "column": {
+            "id": true,
+            "category_id": true,
+            "article_id": true
+        },
+        "index": {
+            "FORMAX_NEWS_CATEGORY_ARTICLE_CATEGORY_ID": true,
+            "FORMAX_NEWS_CATEGORY_ARTICLE_ARTICLE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_NEWS_CATEGORY_ARTICLE_CATEGORY_ID_ARTICLE_ID": true,
+            "FORMAX_NEWS_CATEGORY_ARTICLE_CATEGORY_ID_FORMAX_NEWS_CATEGORY_ID": true,
+            "FORMAX_NEWS_CATEGORY_ARTICLE_ARTICLE_ID_FORMAX_NEWS_ARTICLE_ID": true
+        }
+    },
+    "formax_news_homenews": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "title": true,
+            "status": true,
+            "id_first_article": true,
+            "id_second_article": true,
+            "id_third_article": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "FORMAX_NEWS_HOMENEWS_STORE_ID": true,
+            "FORMAX_NEWS_HOMENEWS_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_NEWS_HOMENEWS_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_NEWS_HOMENEWS_ID_STORE_ID": true
+        }
+    }
+}

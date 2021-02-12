@@ -1,0 +1,16 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <!-- Term -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="formax_form_crud_formcrud_listing_data_source" xsi:type="string">Formax\FormCrud\Model\ResourceModel\FormCrud\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Formax\FormCrud\Model\ResourceModel\FormCrud\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">formax_form_crud_formcrud</argument>
+            <argument name="resourceModel" xsi:type="string">Formax\FormCrud\Model\ResourceModel\FormCrud</argument>
+        </arguments>
+    </virtualType>
+</config>

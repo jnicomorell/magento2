@@ -1,0 +1,726 @@
+<?php
+
+/**
+ * BLOCK Formax\SimulatorHipotecario\Block\SimulatorHipotecario 
+ */
+?>
+
+<?php
+$options = $block->getTermOption();
+?>
+<h1 class="simulator-title" style="margin-bottom: 5px;"><?= $block->getTitle() ?></h1>
+<h2 class="regular" style="margin-top: 0;"><?= $block->getTextDownload() ?></h2>
+<div class="simulator-container">
+    <ol class="tabs" style="counter-reset: item 0;">
+        <li class="active"><span class="tab-title">Simulación</span><span class="border border-left"></span></li>
+        <li><span class="step">Paso 1/2</span><span class="tab-title">Comprobante</span><span class="border border-right"></span></li>
+        <li class="step-wrapper"><span class="step">Paso 2/2</span><span class="border border-right"></span></li>
+    </ol>
+    <div class="data_header_hipotecario">
+        <b>Resultado de simulación:</b>
+        <p>Valor propiedad:</p>
+        <b><?= $block->getValorPropiedad() ?> UF</b>
+        |
+        <p>Valor actual UF:</p>
+        <b>$<?= $block->getValorActualUf() ?></b>
+        al
+        <p><?= $block->getDate('d/m/Y') ?></p>
+    </div>
+    <div class="consumer-credit__container">
+        <div class="consumer-credit__card grow-card-center order-1 ">
+            <div class="consumer-credit-card__content-header bg-card-middle" style="position: relative;">
+                <span>TU SIMULACIÓN</span>
+                <h5><b class="plazo-anos"><?= $block->getPlazo() ?> años</b></h5>
+                <ul>
+                    <li>Dividendo Mensual</li>
+                    <li style="font-size: 25px;">$<?= number_format($block->getDividendo() * ($block->getValorActualUf()), 0,',','.') ?></li>
+                    <li>UF <?= number_format($block->getDividendo(), 2,',','.') ?></li>
+                </ul>
+            </div>
+            <span class="tooltip-content-cae">
+               Es el porcentaje que revela el costo del crédito en un año, sin importar el plazo o las cuotas.
+            </span>
+            
+
+            <div class="consumer-credit-card__content one-show">
+                <div>
+                    <p>Financiamiento: </p>
+                    <b><?=number_format(100-$block->getPercentPie(), 2, ',', '.')?>%</b>
+                </div>
+                <div>
+                    <p class="">
+                        Tasa anual:
+                    </p>
+                    <b class="tasa-anual"><?= $block->getTasaAnual() ?>%</b>
+                </div>
+                <div>
+                    <p class="w-tooltip tooltip-for-cae">
+                        CAE:
+                    </p>
+                    <b><?= $block->getCaeTir() ?></b>
+                </div>
+                <div>
+                    <p>
+                        Gastos operacionales:
+                    </p>
+                    <b><?= number_format($block->getGastosOperacionales(), 2, ',', '.')  ?> UF</b>
+                </div>
+                <div>
+                    <p class="">
+                        Seguro de incendio y sismo:
+                    </p>
+                    <b><?= number_format($block->getSeguroIncendio(),2,',','.')." UF" ?></b>
+                </div>
+                <div>
+                    <p class="">
+                        Seguro Desgravamen:
+                    </p>
+                    <b><?= number_format($block->getSeguroDesgravamen(),2,',','.')." UF" ?></b>
+                </div>
+                <div>
+                    <p class="">
+                        Costo total del crédito:
+                    </p>
+                    <b class="valor-total"><?= round($block->getCtc())  ?> UF</b>
+                </div>
+                <a value="one" data-plazo="<?= $block->getPlazo() ?>" class="button-coopeuch main-margin solicitar_credito" style="margin-bottom: 27px;" href="#"">Solicítalo</a>
+        </div>
+
+        <div class=" consumer-credit-card-hide one-hide">
+                    <small>Ingresa tu teléfono y te contactaremos</small>
+                    <div class="control">
+                        <label for="phone">Teléfono</label>
+                        <div class="phone-group">
+                            <div class="coop-dropdown">
+                                <div class="dropbtn form-input phonebtn">
+                                    <span id="mf-code" class="main-prefix" data-value="<?= $block->getPrefix();?>"><?= $block->getPrefix();?></span> <span class="coop-icon-down"></span>
+                                </div>
+                                <div id="dropdown-list" class="dropdown-content">
+                                    <div class="drop-item" data-value="9">9</div>
+                                    <div class="drop-item" data-value="6">6</div>
+                                    <div class="drop-item" data-value="7">7</div>
+                                    <div class="drop-item" data-value="8">8</div>
+                                    <div class="drop-item" data-value="2">2</div>
+                                    <div class="drop-item" data-value="32">32</div>
+                                    <div class="drop-item" data-value="33">33</div>
+                                    <div class="drop-item" data-value="34">34</div>
+                                    <div class="drop-item" data-value="35">35</div>
+                                    <div class="drop-item" data-value="41">41</div>
+                                    <div class="drop-item" data-value="42">42</div>
+                                    <div class="drop-item" data-value="43">43</div>
+                                    <div class="drop-item" data-value="45">45</div>
+                                    <div class="drop-item" data-value="51">51</div>
+                                    <div class="drop-item" data-value="52">52</div>
+                                    <div class="drop-item" data-value="53">53</div>
+                                    <div class="drop-item" data-value="55">55</div>
+                                    <div class="drop-item" data-value="57">57</div>
+                                    <div class="drop-item" data-value="58">58</div>
+                                    <div class="drop-item" data-value="61">61</div>
+                                    <div class="drop-item" data-value="63">63</div>
+                                    <div class="drop-item" data-value="64">64</div>
+                                    <div class="drop-item" data-value="65">65</div>
+                                    <div class="drop-item" data-value="67">67</div>
+                                    <div class="drop-item" data-value="71">71</div>
+                                    <div class="drop-item" data-value="72">72</div>
+                                    <div class="drop-item" data-value="73">73</div>
+                                    <div class="drop-item" data-value="75">75</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="prefix" name="code-one" value="<?= $block->getPrefix();?>" />
+                            <input type="tel" id="mf-phone-one" name="phone" class="form-input phone mf-field digit" maxlength="8" value="<?= $block->getPhone();?>">
+                        </div>
+                    </div>
+
+                    <a data-index="one" class="button-coopeuch main-margin solicitar_credito_show fix-box" style="margin-bottom: 27px;" href="#">Contáctenme</a>
+
+                <a href=" #" value="one" class="semiBold link close-back"> Volver </a>
+            </div>
+        </div>
+
+        <div class="consumer-credit__card grow-card-center order-1 ">
+            <div class="consumer-credit-card__content-header bg-card-disable" style="position: relative;">
+                <h5><b class="plazo-anos"><?= $options[0] ?> años</b></h5>
+                <ul>
+                    <li>Dividendo Mensual</li>
+                    <li style="font-size: 25px;">$<?= number_format($block->getDividendo($options[0]) * ($block->getValorActualUf()), 0,',','.') ?></li>
+                    <li>UF <?= number_format($block->getDividendo($options[0]), 2,',','.') ?></li>
+                </ul>
+            </div>
+            <span class="tooltip-content-cae">
+               Es el porcentaje que revela el costo del crédito en un año, sin importar el plazo o las cuotas.
+            </span>
+            
+
+            <div class="consumer-credit-card__content two-show">
+                <div>
+                    <p>Financiamiento: </p>
+                    <b><?=number_format(100-$block->getPercentPie(), 2,',','.')?>%</b>
+                </div>
+                <div>
+                    <p class="">
+                        Tasa anual:
+                    </p>
+                    <b class="tasa-anual"><?= $block->getTasaAnual($options[0]) ?>%</b>
+                </div>
+                <div>
+                    <p class="w-tooltip tooltip-for-cae">
+                        CAE:
+                    </p>
+                    <b><?= $block->getCaeTir($options[0]) ?></b>
+                </div>
+                <div>
+                    <p>
+                        Gastos operacionales:
+                    </p>
+                    <b><?= number_format($block->getGastosOperacionales($options[0]), 2, ',', '.')  ?> UF</b>
+                </div>
+                <div>
+                    <p class="">
+                        Seguro de incendio y sismo:
+                    </p>
+                    <b><?= number_format($block->getSeguroIncendio($options[0]),2,',','.')." UF" ?></b>
+                </div>
+                <div>
+                    <p class="">
+                        Seguro Desgravamen:
+                    </p>
+                    <b><?=number_format($block->getSeguroDesgravamen($options[0]),2,',','.')." UF" ?></b>
+                </div>
+                <div>
+                    <p class="">
+                        Costo total del crédito:
+                    </p>
+                    <b class="valor-total"><?= round($block->getCtc($options[0]))  ?> UF</b>
+                </div>
+                <a value="two" data-plazo="<?= $options[0] ?>" class="button-coopeuch main-margin solicitar_credito" style="margin-bottom: 27px;" href="#">Solicítalo</a>
+            </div>
+
+            <div class=" consumer-credit-card-hide two-hide">
+                <small>Ingresa tu teléfono y te contactaremos</small>
+                <div class="control">
+                    <label for="phone">Teléfono</label>
+                    <div class="phone-group">
+                        <div class="coop-dropdown">
+                            <div class="dropbtn form-input phonebtn">
+                                <span id="mf-code" class="main-prefix" data-value="<?= $block->getPrefix();?>"><?= $block->getPrefix();?></span> <span class="coop-icon-down"></span>
+                            </div>
+                            <div id="dropdown-list" class="dropdown-content">
+                                <div class="drop-item" data-value="9">9</div>
+                                <div class="drop-item" data-value="6">6</div>
+                                <div class="drop-item" data-value="7">7</div>
+                                <div class="drop-item" data-value="8">8</div>
+                                <div class="drop-item" data-value="2">2</div>
+                                <div class="drop-item" data-value="32">32</div>
+                                <div class="drop-item" data-value="33">33</div>
+                                <div class="drop-item" data-value="34">34</div>
+                                <div class="drop-item" data-value="35">35</div>
+                                <div class="drop-item" data-value="41">41</div>
+                                <div class="drop-item" data-value="42">42</div>
+                                <div class="drop-item" data-value="43">43</div>
+                                <div class="drop-item" data-value="45">45</div>
+                                <div class="drop-item" data-value="51">51</div>
+                                <div class="drop-item" data-value="52">52</div>
+                                <div class="drop-item" data-value="53">53</div>
+                                <div class="drop-item" data-value="55">55</div>
+                                <div class="drop-item" data-value="57">57</div>
+                                <div class="drop-item" data-value="58">58</div>
+                                <div class="drop-item" data-value="61">61</div>
+                                <div class="drop-item" data-value="63">63</div>
+                                <div class="drop-item" data-value="64">64</div>
+                                <div class="drop-item" data-value="65">65</div>
+                                <div class="drop-item" data-value="67">67</div>
+                                <div class="drop-item" data-value="71">71</div>
+                                <div class="drop-item" data-value="72">72</div>
+                                <div class="drop-item" data-value="73">73</div>
+                                <div class="drop-item" data-value="75">75</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="prefix" name="code-two" style="display:none;" value="<?= $block->getPrefix();?>" />
+                        <input type="tel" id="mf-phone-two" name="phone" class="form-input phone mf-field digit" maxlength="8" value="<?= $block->getPhone();?>">
+                    </div>
+                </div>
+
+                <a data-index="two" class="button-coopeuch main-margin solicitar_credito_show fix-box" style="margin-bottom: 27px;" href="#">Contáctenme</a>
+
+                <a href=" #" value="two" class="semiBold link close-back"> Volver </a>
+            </div>
+        </div>
+
+        <div class="consumer-credit__card grow-card-center order-1 ">
+            <div class="consumer-credit-card__content-header bg-card-disable" style="position: relative;">
+                <h5><b class="plazo-anos"><?= $options[1] ?> años</b></h5>
+                <ul>
+                    <li>Dividendo Mensual</li>
+                    <li style="font-size: 25px;">$<?= number_format($block->getDividendo($options[1]) * ($block->getValorActualUf()), 0,',','.') ?></li>
+                    <li>UF <?= number_format($block->getDividendo($options[1]), 2,',','.') ?></li>
+                </ul>
+            </div>
+            <span class="tooltip-content-cae">
+               Es el porcentaje que revela el costo del crédito en un año, sin importar el plazo o las cuotas.
+            </span>
+            
+
+            <div class="consumer-credit-card__content three-show">
+                <div>
+                    <p>Financiamiento: </p>
+                    <b><?=number_format(100-$block->getPercentPie(), 2,',','.')?>%</b>
+                </div>
+                <div>
+                    <p class="">
+                        Tasa anual:
+                    </p>
+                    <b class="tasa-anual"><?= $block->getTasaAnual($options[1]) ?>%</b>
+                </div>
+                <div>
+                    <p class="w-tooltip tooltip-for-cae">
+                        CAE:
+                    </p>
+                    <b><?= $block->getCaeTir($options[1]) ?></b>
+                </div>
+                <div>
+                    <p>
+                        Gastos operacionales:
+                    </p>
+                    <b><?= number_format($block->getGastosOperacionales($options[1]), 2, ',', '.')  ?> UF</b>
+                </div>
+                <div>
+                    <p class="">
+                        Seguro de incendio y sismo:
+                    </p>
+                    <b><?= number_format($block->getSeguroIncendio($options[1]),2,',','.')." UF" ?></b>
+                </div>
+                <div>
+                    <p class="">
+                        Seguro Desgravamen:
+                    </p>
+                    <b><?= number_format($block->getSeguroDesgravamen($options[1]),2,',','.')." UF" ?></b>
+                </div>
+                <div>
+                    <p class="">
+                        Costo total del crédito:
+                    </p>
+                    <b class="valor-total"><?= round($block->getCtc($options[1]))  ?> UF</b>
+                </div>
+                <a value="three" data-plazo="<?= $options[1] ?>" class="button-coopeuch main-margin solicitar_credito" style="margin-bottom: 27px;" href="#">Solicítalo</a>
+            </div>
+
+            <div class=" consumer-credit-card-hide three-hide">
+                <small>Ingresa tu teléfono y te contactaremos</small>
+                <div class="control">
+                    <label for="phone">Teléfono</label>
+                    <div class="phone-group">
+                        <div class="coop-dropdown">
+                            <div class="dropbtn form-input phonebtn">
+                                <span id="mf-code" class="main-prefix" data-value="<?= $block->getPrefix();?>"><?= $block->getPrefix();?></span> <span class="coop-icon-down"></span>
+                            </div>
+                            <div id="dropdown-list" class="dropdown-content">
+                                <div class="drop-item" data-value="9">9</div>
+                                <div class="drop-item" data-value="6">6</div>
+                                <div class="drop-item" data-value="7">7</div>
+                                <div class="drop-item" data-value="8">8</div>
+                                <div class="drop-item" data-value="2">2</div>
+                                <div class="drop-item" data-value="32">32</div>
+                                <div class="drop-item" data-value="33">33</div>
+                                <div class="drop-item" data-value="34">34</div>
+                                <div class="drop-item" data-value="35">35</div>
+                                <div class="drop-item" data-value="41">41</div>
+                                <div class="drop-item" data-value="42">42</div>
+                                <div class="drop-item" data-value="43">43</div>
+                                <div class="drop-item" data-value="45">45</div>
+                                <div class="drop-item" data-value="51">51</div>
+                                <div class="drop-item" data-value="52">52</div>
+                                <div class="drop-item" data-value="53">53</div>
+                                <div class="drop-item" data-value="55">55</div>
+                                <div class="drop-item" data-value="57">57</div>
+                                <div class="drop-item" data-value="58">58</div>
+                                <div class="drop-item" data-value="61">61</div>
+                                <div class="drop-item" data-value="63">63</div>
+                                <div class="drop-item" data-value="64">64</div>
+                                <div class="drop-item" data-value="65">65</div>
+                                <div class="drop-item" data-value="67">67</div>
+                                <div class="drop-item" data-value="71">71</div>
+                                <div class="drop-item" data-value="72">72</div>
+                                <div class="drop-item" data-value="73">73</div>
+                                <div class="drop-item" data-value="75">75</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="prefix" name="code-three" value="<?= $block->getPrefix();?>" />
+                        <input type="tel" id="mf-phone-three" name="phone" class="form-input phone mf-field digit" maxlength="8" value="<?= $block->getPhone();?>">
+                    </div>
+                </div>
+
+                <a data-index="three" class="button-coopeuch main-margin solicitar_credito_show fix-box" style="margin-bottom: 27px;" href="#">Contáctenme</a>
+
+                <a href=" #" value="three" class="semiBold link close-back"> Volver </a>
+            </div>
+        </div>
+    </div>
+    <div class="voucher-content">
+        <div class="letra-pequena hipoteca">
+            <p><?= $block->getLegalTerms() ?></p>
+        </div>
+    </div>
+</div>
+<a class="semiBold linkback-coop link" href="<?= $block->getBaseUrl() ?>">&#60; Volver a Coopeuch</a>
+
+<form  id="hipotecarioformsolicitud" action="<?= $block->getUrl('simulator/hipotecario/comprobante') ?>" method="post" style="display: none;">
+    <input type="hidden" name="name" value="<?= $block->getName() ?>">
+    <input type="hidden" name="lastname" value="<?= $block->getLastName() ?>">
+    <input type="hidden" name="rut" value="<?= $block->getRut() ?>">
+    <input type="hidden" name="code" id="code" value="<?= $block->getPrefix() ?>">
+    <input type="hidden" name="phone" id="phone" value="<?= $block->getPhone() ?>">
+    <input type="hidden" name="email" value="<?= $block->getEmail() ?>">
+    <input type="hidden" name="monthly-income" value="<?= $block->getMonthlyIncome() ?>">
+    <input type="hidden" name="amount" value="<?= $block->getAmount() ?>">
+    <input type="hidden" name="plazo" id="plazo" value="<?= $block->getPlazo() ?>">
+    <input type="hidden" name="more_pie" value="<?= $block->getMorePie() ?>">
+    <input type="hidden" name="pie" value="<?= $block->getPie() ?>">
+</form>
+
+
+<script type="text/x-magento-init">
+    {
+    "*": 
+    {
+        "form-hipotecarios": {}
+    } 
+}
+</script>
+
+<script>
+    require(['jquery', 'jquery/ui'], function($) {
+
+        //Remover recaptcha
+        $(document).ready(function(){
+            setInterval(function(){
+                if($(".g-recaptcha").length){
+                    $(".g-recaptcha").remove();
+                }
+            },2000)
+        })
+        // Cuando el socio vea esta página
+        window.dataLayer = window.dataLayer || [];
+        setTimeout(
+            function() {
+                dataLayer.push({
+                    'event': 'vpv',
+                    'page': '/simuladorhipotecario/simulación'
+                });
+        }, 2000);
+
+        $('.solicitar_credito').on('mousedown', function() {
+            var id = $(this).attr('value')
+            $(`.${id}-show`).hide()
+            $(`.${id}-hide`).show()
+            var plazo = $(this).attr("data-plazo")
+            $('#plazo').val(plazo)
+
+            // Cuando el socio hace click en Solicítalo
+            el = $(this).parents('.consumer-credit__card');
+            monto = el.find('.valor-total').text().split(' ')[0];
+            tasa = el.find('.tasa-anual').text();
+            plazo = el.find('.plazo-anos').text().split(' ')[0];
+
+            dataLayer.push({
+                'event': 'trigger_event',
+                'monto': monto,
+                'cuotas': plazo,
+                'tasaInteres': tasa,
+                'event-config': {
+                    'eve-acc': '/simuladorhipotecario/simulación',
+                    'eve-cat': 'Click',
+                    'eve-lab': 'Solicítalo'
+                }
+            });
+
+            dataLayer.push({
+                'event': 'vpv',
+                'page' : '/simuladorhipotecario/contacto'
+            });
+        })
+
+        $('.close-back').on('click', function(event) {
+            event.preventDefault();
+            let id = $(this).attr('value')
+            $(`.${id}-hide`).hide()
+            $(`.${id}-show`).show()
+
+            // Cuando el socio haga click en Volver
+            dataLayer.push({
+                'event': 'trigger_event',
+                'event-config': {
+                    'eve-acc': '/simuladorhipotecario/contacto',
+                    'eve-cat': 'Click',
+                    'eve-lab': 'Volver'
+                }
+            });
+        })
+
+        // Cuando el socio hace click en Volver a Coopeuch
+        $('.back-coop').click(function() {
+            dataLayer.push({
+                'event': 'trigger_event',
+                'event-config': {
+                    'eve-acc': '/simuladorhipotecario/simulación',
+                    'eve-cat': 'Click',
+                    'eve-lab': 'Volver a Coopeuch'
+                }
+            });
+        });
+    });
+</script>
+<style>
+    .voucher-content {
+        width: 90%;
+        max-width: 100%;
+        margin: 20px;
+    }
+    .consumer-credit-card__content-header h5{
+        font-size: 25px;
+    }
+    .consumer-credit-card__content-header ul {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        list-style: none;
+        font-weight: bold;
+    }
+
+    .consumer-credit-card__content-header ul li {
+        margin-bottom: 0;
+        text-align: right;
+    }
+
+    .consumer-credit-card__content-header span {
+        background: rgba(255, 255, 255, 0.4);
+        padding: 5px 10px 2px 10px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        position: absolute;
+        font-weight: 900;
+        top: 0;
+        font-size: 10px;
+    }
+
+    .data_header_hipotecario {
+        text-align: center;
+        background-color: #E9E9E9 !important;
+        padding: 15px 10px;
+        margin: 20px 20px;
+        border-radius: 7px;
+        border: 1px solid #c4c4c4;
+    }
+
+    .data_header_hipotecario p,
+    .data_header_hipotecario b {
+        display: inline-block;
+    }
+
+    .bg-card-disable {
+        background-color: #e4e6ef !important;
+    }
+
+    .bg-card-disable ul li {
+        color: #333333 !important;
+    }
+
+    .bg-card-disable h5,
+    .bg-card-disable span {
+        color: #333333 !important;
+    }
+
+    .consumer-credit-card__content p {
+        display: inline-block;
+    }
+
+    .consumer-credit-card__content b {
+        float: right;
+    }
+
+    .consumer-credit-card-hide {
+        text-align: center;
+        display: none;
+        padding: 30px 20px;
+        height: 100%;
+        background-color: #E4E6F0;
+    }
+
+    .consumer-credit-card-hide a {
+        margin: 0 auto;
+    }
+
+    .consumer-credit-card-hide .control {
+        margin: 15px auto;
+        text-align: left;
+    }
+
+    .tooltip-content {
+        z-index: 5;
+    }
+
+    .consumer-credit__old-amount {
+        text-decoration: line-through;
+        color: #fcfcfcc7;
+        font-size: 14px;
+    }
+
+    .consumer-credit__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .consumer-credit__card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        overflow: hidden;
+        max-width: 368px;
+        width: 100%;
+    }
+
+    .consumer-credit-card__content-header {
+        background-color: #2b6ab4;
+        color: #fff;
+        padding: 20px 20px 35px 20px;
+    }
+
+    .consumer-credit-card__content-header h5 {
+        margin: 10px 0px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+    .fix-box{
+        width: 82% !important;
+    text-align: center !important;
+    margin-top: 80px !important;
+    margin-bottom: 20px !important;
+    }
+
+    .consumer-credit-card__content-header h2 {
+        letter-spacing: 1px;
+        font-family: "Poppins semiBold", Helvetica, Arial, Verdana, Tahoma, sans-serif;
+        font-size: 36px;
+        margin: 10px 0;
+        color: #fff;
+    }
+
+    .consumer-credit-card__content {
+        padding: 10px 18px;
+    }
+
+    .consumer-credit-card__content-info {
+        display: flex;
+        background: rgb(45 71 181 / 0.15);
+        border-radius: 10px;
+        padding: 0 10px;
+        align-items: center;
+        color: #26345c;
+        height: 80px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .consumer-credit-card__content-info p {
+        font-weight: normal;
+    }
+
+    #chevron {
+        position: relative;
+        top: 0;
+        left: 10px;
+        width: 100px;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+
+    #chevron:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1px;
+        width: 50%;
+        background: hsl(229 60% 44% / 0.25);
+        -webkit-transform: skew(0deg, -35deg);
+        -moz-transform: skew(0deg, -35deg);
+        -ms-transform: skew(0deg, -35deg);
+        -o-transform: skew(0deg, -35deg);
+        transform: skew(0deg, -35deg);
+    }
+
+    #chevron:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 1px;
+        width: 50%;
+        background: rgb(45 71 181 / 0.25);
+        -webkit-transform: skew(0deg, 35deg);
+        -moz-transform: skew(0deg, 35deg);
+        -ms-transform: skew(0deg, 35deg);
+        -o-transform: skew(0deg, 35deg);
+        transform: skew(0deg, 35deg);
+    }
+
+    .consumer-credit-card__content-icon {
+        width: 15px;
+        margin: 0 2px;
+    }
+
+    .grow-card-center {}
+
+
+
+    .ribbon-box-discount {
+        width: 50px;
+        background: #b1bfed;
+        color: #001140;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        padding: 10px;
+        position: absolute;
+        top: 0;
+        right: 33px;
+        text-align: center;
+    }
+
+    @media (max-width:855.1px) {
+        .order-2 {
+            order: 2;
+        }
+
+        .order-3 {
+            order: 3;
+        }
+    }
+
+    @media (max-width: 961.1px) {
+        .consumer-credit__container {
+            flex-wrap: wrap;
+        }
+
+        .grow-card-center {
+            margin: 20px;
+        }
+
+        .order-1 {
+            order: 1;
+        }
+
+        a.button-coopeuch {
+            text-align: center;
+            width: calc(100% - 50px);
+        }
+
+    }
+    .fixed {
+        position: inherit !important;
+    }
+</style>

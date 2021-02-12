@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Formax_Sniffer::msniffer" translate="title" title="Site Sniffer" module="Formax_Sniffer" sortOrder="90" parent="Formax_CoopeuchMenu::main_menu" resource="Formax_Sniffer::msniffer" />
+        <add id="Formax_Sniffer::logs" title="Logs" module="Formax_Sniffer" sortOrder="0" parent="Formax_Sniffer::msniffer" action="snifferadm/logs" resource="Formax_Sniffer::logs" />
+    </menu>
+</config>

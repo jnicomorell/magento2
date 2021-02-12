@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="coopeuch" sortOrder="100">
+            <label>Coopeuch</label>
+        </tab>
+        <section id="sniffer_coopeuch" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Sniffer</label>
+            <tab>coopeuch</tab>
+            <resource>Formax_Sniffer::formax_sniffer</resource>
+            <group id="sniffer" translate="label" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sniffer Configuration</label>
+                <!-- Enable this configuration -->
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- Allowed URL's configuration -->
+                <field id="allowed_urls" translate="label comment" sortOrder="12" type="textarea" showInStore="1" showInDefault="1" >
+                    <label>Allowed URL's</label>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="sniffer_coopeuch/sniffer/enable">1</field>
+                    </depends>
+                </field>
+                <!--
+                <field id="allowed_urls" translate="label comment" sortOrder="12" type="multiselect" showInStore="1" showInDefault="1" >
+                    <label>Allowed URL's</label>
+                    <source_model>Formax\Sniffer\Model\Adminhtml\System\Config\Source\Controllers\Options</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                -->
+                <!-- end external url configuration -->
+            </group>
+        </section>
+    </system>
+</config>

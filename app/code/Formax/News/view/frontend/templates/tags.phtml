@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var Formax\News\Block\News $block
+ */
+?>
+<?php
+$articleId  = $block->getArticleId();
+$categories = is_numeric($articleId) ? $block->getCategoriesByArticle($articleId) : false;
+?>
+
+<?php if($categories): ?>
+    <div class="tags-container">
+        <?php foreach($categories as $item): ?>
+            <span id="<?= $item->getId() ?>" class="news-tag"><?= $item->getName() ?></span>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<form id="news" action="<?= $block->getUrl('noticia') ?>" method="post" style="display: none">
+    <input type="hidden" name="category">
+</form>
+
+<script>
+    require(['jquery'], function($){
+        $('.news-tag').click(function(){
+            var id = $(this).attr('id');
+            $('input[name="category"]').val(id);
+            $('form#news').submit();
+        });
+    });
+</script>

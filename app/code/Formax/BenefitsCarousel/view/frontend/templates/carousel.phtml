@@ -1,0 +1,127 @@
+<?php
+/**
+ * @var $block \Formax\BenefitsCarousel\Block\Carousel
+ */
+?>
+<?php
+$carouselData = $block->getCarouselData();
+$config = $carouselData['config'];
+$carousels = $carouselData['carousels'];
+
+$title = $config->getTitle();
+$showButton = $config->getShowButton();
+$buttonText = $config->getButtonText();
+$buttonLink = $config->getButtonLink();
+?>
+<?php if( $config->getIsActive() ): ?>
+
+<div class="block coop-benefits-carousel coop-carousel">
+    <?php if( !empty($title) ): ?>
+    <div class="block-title">
+        <h2><?= $title ?></h2>
+    </div>
+    <?php endif; ?>
+
+    <div class="carousel-box">
+
+        <?php foreach($carousels as $carousel): ?>
+            <?php
+                if( !$carousel->getIsActive() || !$carousel->getIsInDate() )
+                    continue;
+
+                $ribbon = $block->getFormattedRibbon( $carousel->getRibbon() );
+                $iconBg = $carousel->getIconBackground();
+                $c_title = $carousel->getTitle();
+                $c_desc = $carousel->getDescription();
+                $styleIcon = !empty($iconBg) ? 'style="background-color:' . $iconBg . '"' : '';
+                $link = $carousel->getLink();
+            ?>
+            
+            <div class="box-item coop-carousel-item">
+                
+                <div class="benefits-options">
+                    <?php if( $carousel->getShowIcon() ): ?>
+                        <div class="icon-box" <?= $styleIcon ?>>
+                            <?php if( !empty($link) ): ?>
+                                <a href="<?= $link ?>" class="icon-link">
+                            <?php endif; ?>
+                            <img src="<?= $carousel->getIconSrc() ?>" class="img icon"/>
+                            <?php if( !empty($link) ): ?>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if( !empty($ribbon) ): ?>
+                        <div class="ribbon-box">
+                            <span><?= $ribbon ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="benefits-image">
+                    <?php if( !empty($link) ): ?>
+                        <a href="<?= $link ?>" class="image-link">
+                    <?php endif; ?>
+                    <img src="<?= $carousel->getImageSrc() ?>" class="img"/>
+                    <?php if( !empty($link) ): ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
+                
+                <?php if( !empty($c_title) || !empty($c_desc) ): ?>
+                <div class="benefits-texts">
+                    <?php if( !empty($c_title) ): ?>
+                    <div class="carousel-img-title">
+                        <h4>
+                            <?php if( !empty($link) ): ?>
+                                <a href="<?= $link ?>" class="title-link">
+                            <?php endif; ?>
+                            <?= $c_title ?>
+                            <?php if( !empty($link) ): ?>
+                                </a>
+                            <?php endif; ?>
+                        </h4>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <?php if( !empty($c_desc) ): ?>
+                    <div class="carousel-img-desc">
+                        <p>
+                            <?php if( !empty($link) ): ?>
+                                <a href="<?= $link ?>" class="desc-link">
+                            <?php endif; ?>
+                            <?= $c_desc ?>
+                            <?php if( !empty($link) ): ?>
+                                </a>
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+            </div>
+
+        <?php endforeach; ?>
+
+        <?php if( $showButton && !empty($buttonText) ): ?>
+            <a href="<?= !empty($buttonLink) ? $buttonLink : '#' ?>" class="action primary benefits-action">
+                <span><?= $buttonText ?></span>
+            </a>
+        <?php endif; ?>
+        
+    </div>
+
+    <div class="carousel-box-out"></div>
+
+</div>
+
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "coo-benefits-carousel": {}
+    }
+}
+</script>

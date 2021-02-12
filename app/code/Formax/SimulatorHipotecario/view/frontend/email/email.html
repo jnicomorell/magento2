@@ -1,0 +1,75 @@
+<!--@subject Comprobante Solicitud Tarjeta de Credito @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+{{template config_path="design/email/header_template"}}
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<tr style="display: none;">
+				<th scope="col">Item</th>
+			</tr>
+			<tr>
+				<td align="center" valign="top" style="padding:20px 0 20px 0">
+					<table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+						<tr style="display: none;">
+							<th scope="col">Item</th>
+						</tr>
+						<tr>
+							<td>
+								<div class="voucher-wrapper">
+									<p class="voucher-title">Comprobante de solicitud</p>
+									<div class="simulator-voucher">
+										<div class="simulator-result">
+											<table>
+												<tr style="display: none;">
+													<th scope="col">Item</th>
+													<th scope="col">Valor</th>
+												</tr>
+												<tr>
+													<td width="150">Nombres</td>
+													<td>{{var name}}</td>
+												</tr>
+												<tr>
+													<td width="150">Apellidos</td>
+													<td>{{var lastname}}</td>
+												</tr>
+												<tr>
+													<td width="150">Rut</td>
+													<td>{{var rut}}</td>
+												</tr>
+												<tr>
+													<td width="150">Teléfono</td>
+													<td>{{var phone}}</td>
+												</tr>
+												<tr>
+													<td width="150">Email</td>
+													<td>{{var email}}</td>
+												</tr>
+												<tr>
+													<td width="150">Ingreso líquido mensual</td>
+													<td>{{var amount}}</td>
+												</tr>
+											</table>
+											
+										</div>
+									</div>
+								</div>
+								<div class="letra-pequena" style="margin-top:15px;">
+									<p>(1) Para efectos de la simulación se incluyó el Seguro de Desgravamen, pero este seguro no es de carácter obligatorio</p>
+									<p>(2) La simulación de crédito de consumo que da cuenta esta hoja, requiere que el consumidor contratante disponga de un patrimonio 
+										y/o ingresos futuros suficientes para pagar su costo total y el valor cuota mensual, durante todo el período del crédito. Esta es sólo una 
+										simulación NO vinculante y el otorgamiento del crédito está sujeto a aprobación comercial previa, de acuerdo a las políticas de créditos vigentes 
+										al momento de la solicitud. El deudor podrá prepagar este crédito. Hay que considerar que en estos casos el socio deberá pagar una comisión 
+										sobre el capital que se prepaga asociada a esta operación, equivalente a 30 días de intereses calculado. Simulación válida sólo durante el día 
+										de su emisión, expirando en 24 horas. Los valores expresados en la presente simulación son referenciales y podrían variar al momento del curse.</p>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	{{template config_path="design/email/footer_template"}}

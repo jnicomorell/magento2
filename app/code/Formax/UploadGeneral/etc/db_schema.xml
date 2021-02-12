@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Organization Chart File Table -->
+    <table name="formax_uploadgeneral_file" resource="default" engine="innodb" comment="Organization Chart File Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" default="1" comment="Store Id"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Status: Enabled is 1 and Disabled is 2"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="image" length="255" nullable="false" default="" comment="Image"/>
+        <column xsi:type="varchar" name="file" length="255" nullable="false" default="" comment="File"/>
+        <column xsi:type="varchar" name="created_user" length="50" nullable="true" default="" comment="User Name"/>
+        <column xsi:type="varchar" name="updated_user" length="50" nullable="true" default="" comment="User Name"/>
+        <column xsi:type="int" name="sort_order" padding="5" unsigned="true" nullable="false" default="1" identity="false" comment="Order"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FORMAX_UPLOAD_GENERAL_FILE_STORE_ID_STORE_STORE_ID" table="formax_uploadgeneral_file"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="FORMAX_UPLOAD_GENERAL_FILE_ID_STORE_ID">
+            <column name="id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="FORMAX_UPLOAD_GENERAL_FILE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="FORMAX_UPLOAD_GENERAL_FILE_TITLE" indexType="fulltext">
+            <column name="title"/>
+        </index>
+    </table>
+
+</schema>

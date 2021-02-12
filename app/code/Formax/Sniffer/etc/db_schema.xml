@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="formax_sniffer" resource="default" engine="innodb" comment="Sniffer Data Table">
+        <column xsi:type="bigint" name="id" padding="12" unsigned="false" nullable="false" identity="true" comment="Row ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" default="0" comment="Store Id for row" />
+        <column xsi:type="varchar" name="id_tracing" length="64" nullable="false" default="0" comment="Id or Tracing Id Entity"/>
+        <column xsi:type="varchar" name="entity" length="255" nullable="false" default="0" comment="Product or Entity,Cms Page,Category"/>
+        <column xsi:type="varchar" name="browser" length="255" nullable="false" default="0" comment="Browser" />
+        <column xsi:type="varchar" name="device" length="255" nullable="false" default="0" comment="Device" />
+        <column xsi:type="varchar" name="referer" length="255" nullable="false" default="0" comment="Referer Url" />
+        <column xsi:type="varchar" name="uri" length="255" nullable="false" default="0" comment="Uri access" />
+        <column xsi:type="varchar" name="ip_address" length="15" nullable="false" default="0" comment="Ip Address Origin" />
+        <column xsi:type="text" name="additional_data" nullable="false" comment="Additional Data" />
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created at date" />
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated at date" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="FORMAX_SNIFFER_ID_STORE_ID">
+            <column name="id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="FORMAX_SNIFFER_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="FORMAX_SNIFFER_STORE_ID_STORE_STORE_ID" table="formax_sniffer"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>                
+    </table>   
+</schema>

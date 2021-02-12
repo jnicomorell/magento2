@@ -1,0 +1,26 @@
+{
+    "formax_sniffer": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "id_tracing": true,
+            "entity": true,
+            "browser": true,
+            "device": true,
+            "referer": true,
+            "uri": true,
+            "ip_address": true,
+            "additional_data": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "FORMAX_SNIFFER_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_SNIFFER_ID_STORE_ID": true,
+            "FORMAX_SNIFFER_STORE_ID_STORE_STORE_ID": true
+        }
+    }
+}

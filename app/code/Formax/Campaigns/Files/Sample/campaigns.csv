@@ -1,0 +1,9 @@
+id,store_id,status,title,description,name,rut,amount,sort_order,type_id
+,1,1,"Prueba importacion1","Descripcion1","Nombre del cliente1", 1234567,100000,1,1
+,1,1,"Prueba importacion2","Descripcion2","Nombre del cliente2", 1547852,100000,1,1
+,1,1,"Prueba importacion3","Descripcion3","Nombre del cliente3", 2581478,100000,1,1
+,1,1,"Prueba importacion4","Descripcion4","Nombre del cliente4", 9638521,100000,1,1
+,1,1,"Prueba importacion5","Descripcion5","Nombre del cliente5", 1593574,100000,1,1
+,1,1,"Prueba importacion6","Descripcion6","Nombre del cliente6", 1597536,100000,1,1
+,1,1,"Prueba importacion7","Descripcion7","Nombre del cliente7", 9513571,100000,1,1
+,1,1,"Prueba importacion8","Descripcion8","Nombre del cliente8", 7854123,100000,1,1

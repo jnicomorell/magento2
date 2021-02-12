@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Formax_AlertWidget::css/style.css" media="all"/>
+    </head>
+    <body>
+        <referenceContainer name="page.wrapper">
+            <container name="alert.custom.container" htmlTag="div" after="header.container">
+                <block  class="Formax\AlertWidget\Block\Content\AlertWidget" name="content.alert.widget" template="Formax_AlertWidget::content/alert-widget.phtml"/>
+            </container>
+        </referenceContainer>
+        
+    </body>
+
+</page>

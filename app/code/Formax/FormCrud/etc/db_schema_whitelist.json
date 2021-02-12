@@ -1,0 +1,23 @@
+{
+    "formax_form_crud_formcrud": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "name_form": true,
+            "btn_content": true,
+            "about": true,
+            "id_title": true,
+            "title_form": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "FORMAX_FORM_CRUD_FORMCRUD_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_FORM_CRUD_FORMCRUD_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_FORM_CRUD_FORMCRUD_ID_STORE_ID": true
+        }
+    }
+}

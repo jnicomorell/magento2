@@ -1,0 +1,97 @@
+<form id="coo-contact-form" action="<?= $block->getUrl('ayuda/solicitud/index') ?>" method="post">
+    <div class="contact-form">
+        <div class="grid-two-columns">
+            <div class="field">
+                <label for="cf-name"><?php echo __('Name') ?></label>
+                <div class="control">
+                    <input type="text" name="name" id="cf-name" class="form-input cf-field" maxlength="50">
+                </div>
+            </div>
+            <div class="field">
+                <label for="rut"><?php echo __('Rut') ?></label>
+                <div class="control">
+                    <input type="text" name="rut" id="cf-rut" class="form-input cf-field" maxlength="12" placeholder="Ej: 12.345.678-9">
+                </div>
+            </div>
+            <div class="field">
+                <label for="phone"><?php echo __('Phone') ?></label>
+                <div class="control">
+                    <div class="coop-dropdown">
+                        <div class="dropbtn phone form-input"><span id="cf-code" class="main-prefix" data-value="9">9</span> <span class="coop-icon-down"></span></div>
+                        <div id="dropdown-list" class="dropdown-content">
+                            <div class="drop-item" data-value="9">9</div>
+                            <div class="drop-item" data-value="6">6</div>
+                            <div class="drop-item" data-value="7">7</div>
+                            <div class="drop-item" data-value="8">8</div>
+                            <div class="drop-item" data-value="2">2</div>
+                            <div class="drop-item" data-value="32">32</div>
+                            <div class="drop-item" data-value="33">33</div>
+                            <div class="drop-item" data-value="34">34</div>
+                            <div class="drop-item" data-value="35">35</div>
+                            <div class="drop-item" data-value="41">41</div>
+                            <div class="drop-item" data-value="42">42</div>
+                            <div class="drop-item" data-value="43">43</div>
+                            <div class="drop-item" data-value="45">45</div>
+                            <div class="drop-item" data-value="51">51</div>
+                            <div class="drop-item" data-value="52">52</div>
+                            <div class="drop-item" data-value="53">53</div>
+                            <div class="drop-item" data-value="55">55</div>
+                            <div class="drop-item" data-value="57">57</div>
+                            <div class="drop-item" data-value="58">58</div>
+                            <div class="drop-item" data-value="61">61</div>
+                            <div class="drop-item" data-value="63">63</div>
+                            <div class="drop-item" data-value="64">64</div>
+                            <div class="drop-item" data-value="65">65</div>
+                            <div class="drop-item" data-value="67">67</div>
+                            <div class="drop-item" data-value="71">71</div>
+                            <div class="drop-item" data-value="72">72</div>
+                            <div class="drop-item" data-value="73">73</div>
+                            <div class="drop-item" data-value="75">75</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="code" id="prefix" value="9">
+                    <input type="tel" name="phone" id="cf-phone" class="form-input phone cf-field" placeholder="Ej: 98765432" maxlength="8">
+                </div>
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <div class="control">
+                    <input type="email" name="email" id="cf-email" class="form-input cf-field" maxlength="100">
+                </div>
+            </div>
+            <div class="field">
+                <label for="subject"><?php echo __('Message Subject') ?></label>
+                <div class="control">
+                <div class="coop-dropdown subject-dropdown">
+                        <div class="dropbtn form-input">
+                            <span id="cf-subject" class="main-prefix" data-value="0"><?php echo __('Select Subject') ?></span>
+                            <span class="coop-icon-down"></span>
+                        </div>
+                        <div id="dropdown-list" class="dropdown-content">
+                            <div class="drop-item drop-subject" data-value="consultas_001"><?php echo __('Consult') ?></div>
+                            <div class="drop-item drop-subject" data-value="sugerencias_001"><?php echo __('Suggestion') ?></div>
+                            <div class="drop-item drop-subject" data-value="felicitaciones_001"><?php echo __('Congratulation') ?></div>
+                            <div class="drop-item drop-subject" data-value="reclamos_001"><?php echo __('Claim') ?></div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="formato-id">
+            </div>
+        </div>
+        <div class="field">
+            <label for="email"><?php echo __('Message') ?></label>
+            <div class="control">
+                <textarea name="comment" id="cf-message" class="form-textarea cf-textarea cf-field"></textarea>
+            </div>
+        </div>
+        <button id="submit-form-btn" type="button" class="primary">Enviar</button>
+    </div>
+</form>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "contact-form": {}
+    }
+}
+</script>

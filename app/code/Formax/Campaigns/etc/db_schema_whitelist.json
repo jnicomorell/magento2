@@ -1,0 +1,80 @@
+{
+    "formax_campaigns_campaign": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "status": true,
+            "title": true,
+            "description": true,
+            "name": true,
+            "rut": true,
+            "amount": true,
+            "sort_order": true,
+            "type_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "FORMAX_CAMPAIGNS_CAMPAIGN_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_CAMPAIGN_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_CAMPAIGNS_CAMPAIGN_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_CAMPAIGN_ID_STORE_ID": true
+        }
+    },
+    "formax_campaigns_type": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "name": true,
+            "status": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true,
+            "icon": true,
+            "image": true,
+            "button_status": true,
+            "button_text": true,
+            "button_link": true,
+            "id_campaign": true
+        },
+        "index": {
+            "FORMAX_CAMPAIGNS_TYPE_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_TYPE_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_CAMPAIGNS_TYPE_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_TYPE_ID_STORE_ID": true
+        }
+    },
+    "formax_campaigns_credit_card": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "status": true,
+            "title": true,
+            "description": true,
+            "name": true,
+            "rut": true,
+            "amount": true,
+            "sort_order": true,
+            "type_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "FORMAX_CAMPAIGNS_CREDIT_CARD_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_CREDIT_CARD_TITLE": true,
+            "FORMAX_CAMPAIGNS_CREDIT_CARD_RUT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FORMAX_CAMPAIGNS_CREDIT_CARD_STORE_ID_STORE_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_CREDIT_CARD_ID_STORE_ID": true,
+            "FORMAX_CAMPAIGNS_CREDIT_CARD_TYPE_ID_FORMAX_CAMPAIGNS_TYPE_ID": true
+        }
+    }
+}

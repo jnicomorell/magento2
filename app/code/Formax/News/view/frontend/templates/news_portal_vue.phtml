@@ -1,0 +1,200 @@
+<?php
+/**
+ * @var Formax\News\Block\NewsPortal $block
+ */
+?>
+
+<?php
+
+$_category = $block->getCategory();
+
+
+$dateIcon = $this->getViewFileUrl('Formax_News::images/news-date.png');
+$home = $block->getStoreName();
+$articleUrl=$block->getUrl('noticia');
+$articleUrl=$articleUrl.'articulo?article=';
+
+$_yearsCollection = $block->getYearsCollection();
+$_year=$block->getYear();
+
+$_categories = $block->getCategories();
+$render=false;
+if(!empty($_category)){
+    $_categoryName = $block->getCategoryById($_category)->getName();
+    $render=true;
+}else{
+    $size=$_categories->getSize();
+    if($size>0){
+        $categoryZero=$_categories->getData()[0];
+        $_category=$categoryZero["id"];
+        $_categoryName=$categoryZero["name"];
+        $render=true;
+    }
+}
+
+if($render){
+?>
+
+<div id="app" >
+    <div class="news-portal-layout">
+
+        <div class="row files-page">
+            <h3 class="left">{{year}}</h3>
+
+
+            <div id="categories-form" class="sucursales-form categories-form">
+                <span class="semiBold h6">Categor&#237;a:</span>
+                <div class="field">
+                    <div class="control">
+                        <div class="coop-dropdown coop-dropdown-category" v-on:click="dropdown('coop-dropdown-category')">
+                            <div class="dropbtn form-input"><span class="main-prefix" data-value="<?=$_year??''?>">{{categoryName}}</span> <span class="coop-icon-down"></span></div>
+                            <div id="dropdown-list" class="dropdown-content">
+                                <?php foreach ($_categories as $category): ?>
+                                    <div class="drop-item" data-value="<?=$category->getName() ?>" v-on:click="loadNews( year, '<?= $category->getId() ?>', '<?=$category->getName() ?>', page)" ><?=$category->getName() ?></div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="years-form" class="sucursales-form years-form">
+                <span class="semiBold h6">Año de publicaci&#243;n:</span>
+                <div class="field">
+                    <div class="control">
+                        <div class="coop-dropdown coop-dropdown-year" v-on:click="dropdown('coop-dropdown-year')">
+                            <div class="dropbtn form-input"><span class="main-prefix" data-value="<?=$_year??''?>">{{year}}</span> <span class="coop-icon-down"></span></div>
+                            <div id="dropdown-list" class="dropdown-content">
+                                <?php foreach ($_yearsCollection as $year): ?>
+                                    <div class="drop-item" data-value="<?=$year->getyear() ?>" v-on:click="loadNews('<?= $year->getyear() ?>', category, categoryName, page)" ><?=$year->getyear() ?></div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <input id="year" name="year" class="inputValue" style="display:none;" value="<?=$_year??''?>"/>
+                    </div>
+                </div>
+            </div>
+           
+            <h4 class="">{{year}}</h4>
+        </div>
+
+        <div v-for="(item, index) in news"  class="news-box news-wrapper " v-bind:class="item.class">
+
+            <span class="news-image-wrapper">
+                <a v-bind:href="item.articleUrl">
+                    <img class="news-image" v-bind:src="item.image" v-bind:alt="item.title" v-bind:title="item.title"/>
+                </a>
+            </span> 
+            <div class="news-desc-wrapper">
+                <span class="content-flex date"><img src="<?=$dateIcon ?>"/>
+                    <span class="date-text shortTxt desk">
+                        {{item.created_at}}
+                    </span>
+                    <span class="date-text shortTxt mob">
+                        {{item.created_at_mob}}
+                    </span>
+                </span>
+                <h3 class="news-title">
+                    <a v-bind:href="item.articleUrl">
+                        {{item.title}} <span class="red-dash mob"></span>
+                    </a>
+                </h3>
+                <p class="news-short-desc">
+                    <a v-bind:href="item.articleUrl">
+                        {{item.short_content}}<span class="red-dash"></span>
+                    </a>
+                </p>
+                <span class="shortTxt">Categor&#237;a:  </span>
+                <span v-for="(category, indexCat) in item.categories"  class="red semiBold shortTxt">
+                    <span v-if="indexCat!=0">,</span> {{category.name}}
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div v-if="totalPages>1" class="pager">
+        <span class="prev" v-on:click="loadNews(year, category, categoryName, page-1)" >&#60;</span>
+        <ul>
+            <li v-for="(item, index) in pages"  class="page" v-bind:class="{ active: item==page }" v-on:click="loadNews(year, category, categoryName, item)">
+                {{item}}
+            </li>
+        </ul>
+        <span class="next" v-on:click="loadNews(year, category, categoryName, page+1)" >&#62;</span>
+    </div>
+</div>
+
+
+<script>
+require(["jquery", "vue"], function($, Vue) {
+
+    // Creamos nuestra instancia de Vues
+    var app = new Vue({
+        el: '#app',
+        data: {
+            category: '<?= $_category ?>',
+            categoryName: '<?= $_categoryName ?>',
+            articleUrl: '<?= $articleUrl ?>',
+            year: '<?= $_year ?>',
+            news: [],
+            pages: [],
+            totalPages:1,
+            page:1
+        },methods: {
+            dropdown: function (classSelected) {
+                $(".coop-dropdown."+classSelected).addClass("show");
+            },
+            loadNews(yearSelected, categorySelected, categoryNameSelected, pageSelected){
+                this.category=categorySelected;
+                this.year=yearSelected;
+                this.categoryName=categoryNameSelected;
+                this.page=pageSelected<0?0:pageSelected;
+                $.ajax({
+                    url: '<?= $block->getUrl('noticia/noticias/index') ?>',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: {
+                        category: app.category,
+                        articleUrl: app.articleUrl,
+                        year: app.year,
+                        page: app.page
+                    },
+                    beforeSend: function() {
+                        $(".coop-dropdown.show").removeClass("show");
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        try {
+                            if (response == false || response == '') {
+                            } else {
+                                app.news=response.news;
+                                app.totalPages=response.totalPages+0;
+                                app.page=response.page;
+                                if(app.totalPages>1){
+                                    app.pages=[];
+                                    for(i=0;i<app.totalPages;i++){
+                                        app.pages[i]=i+1;
+                                    }
+                                }
+                            }
+                        }catch(e){}
+                    },
+                    error: function() {
+                    },
+                    complete: function() {
+                        $(".coop-dropdown.show").removeClass("show");
+                    }
+                });
+            }
+        }
+    });
+
+    app.loadNews(app.year, app.category, app.categoryName, app.page);
+
+});
+</script>
+
+<?php
+}
+?>
+

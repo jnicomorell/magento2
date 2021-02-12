@@ -1,0 +1,180 @@
+<?php
+/**
+ * BLOCK Formax\SimulatorHipotecario\Block\ComprobanteHipotecario
+ */
+?>
+<?php
+    $buttonLLink = $block->getButtonLink();
+?>
+<h1 class="simulator-title"><?= $block->getTitle() ?></h1>
+
+<div class="simulator-container">
+    <ol class="tabs" style="counter-reset: item 1;">
+        <li ><span class="tab-title">Simulación</span><span class="border border-left"></span></li>
+        <li class="active"><span class="step">Paso 1/2</span><span class="tab-title">Comprobante</span><span class="border border-right"></span></li>
+        <li class="step-wrapper"><span class="step">Paso 2/2</span><span class="border border-right"></span></li>
+    </ol>
+
+    <div class="voucher-content">
+        <div class="alerta-exito">
+            <div class="content">
+                <p class="title">Te contactaremos en breve</p>
+            </div>
+        </div>
+        <div class="voucher-wrapper">
+            <div class="simulator-voucher">
+                <div class="simulator-result">
+                <p class="voucher-title">Comprobante de simulación</p>
+                <table>
+                <tr>
+                            <th scope="col">Fecha de simulación</th>
+                            <th scope="col"><?=$block->getDate('d/m/Y')?></th>
+                        </tr>
+                        <tr>
+                            <td>Valor UF</td>
+                            <td>$<?= $block->getValorActualUf() ?></td>
+                        </tr>
+
+                </table>
+                <table>
+                        <tr>
+                            <td>Tipo de propiedad</td>
+                            <td>Casa</td>
+                        </tr>
+                        <tr>
+                            <td>Precio de venta</td>
+                            <td><?= $block->getValorPropiedad() ?> UF</td>
+                        </tr>
+                        <tr>
+                            <td>Valor Pie</td>
+                            <td><?= $block->getPieUf() ?> UF</td>
+                        </tr>
+                        <tr>
+                            <td>Financiamiento</td>
+                            <td><?= number_format(100-$block->getPercentPie(), 2,',','.')?>%</td>
+                        </tr>
+                        </table>
+                        <table>
+
+                        <tr>
+                            <td>Dividendo mensual</td>
+                            <td>$<?= number_format($block->getDividendo() * ($block->getValorActualUf()), 0,',','.')?> - <?= number_format($block->getDividendo(), 2,',','.') ?> UF</td>
+                        </tr>
+                        <tr>
+                            <td>Tasa de interés anual simulada</td>
+                            <td><?= $block->getTasaAnual() ?>%</td>
+                        </tr>
+                        <tr>
+                            <td>Plazo</td>
+                            <td><?=$block->getPlazo()?> años</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Seguro de desgravamen</td>
+                            <td><?= $block->ufFormat($block->getSeguroDesgravamen()) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Seguro de incendio y sismo</td>
+                            <td><?= $block->ufFormat($block->getSeguroIncendio()) ?></td>
+                        </tr>
+                        <tr>
+                            <td><b>CAE </b> (Carga anual equivalente)</td>
+                            <td><b><?=$block->getCaeTir()?></b></td>
+                        </tr>
+                        <tr>
+                            <td><b>Costo total del crédito</b></td>
+                            <td><b><?=round($block->getCtc())?> UF</b></td>
+                        </tr>                                              
+                    </table>
+                    <table>
+                        <tr>
+                            <th scope="col">Gastos Operacionales</th>
+                            <th scope="col"><?= number_format($block->getGastosOperacionales(),2,',','.')?> UF</th>
+                        </tr>
+
+                        <!--<tr>
+                            <td><b>Garantías asociadas</b></td>
+                            <td><b>No</b></td>
+                        </tr>-->
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="letra-pequena hipoteca">
+            <p><?= $block->getLegalTerms() ?></p>
+        </div>
+        <div class="links container-submit">
+            <div class="actions">
+            <a id="return-button" class="button-coopeuch" href="/simulator/hipotecario/index">Volver a simular</a>
+
+                <div class="item" onclick="window.print();return false;">
+                    <img src="/pub/media/comprobante/imprimir.svg" alt="Imprimir"/>
+                    <span>Imprimir</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<a class="semiBold link back-coop" href="<?= $block->getBaseUrl() ?>">&#60; Volver a Coopeuch</a>
+
+<script>
+require([
+    'jquery'
+], function ($) {
+    $(function () { // to ensure that code evaluates on page load
+        window.dataLayer = window.dataLayer || [];
+        
+        // Cuando el socio vea esta página
+        setTimeout(
+            function() {
+                dataLayer.push({
+                    'event': 'vpv',
+                    'page' : '/simuladorhipotecario/exito',
+                    'monto': '<?= $block->getValorActualUf() ?>',
+                    'cuotas': '<?=$block->getPlazo()?>',
+                    'tasaInteres': '<?= $block->getTasaAnual() ?>'
+                });
+        }, 2000);
+
+        // Cuando el socio hace click en Volver a Coopeuch
+        $('.back-coop').click(function(){
+            dataLayer.push({
+                'event': 'trigger_event',
+                'event-config': {
+                    'eve-acc' : '/simuladorhipotecario/exito',
+                    'eve-cat' : 'Click',
+                    'eve-lab' : 'Volver a Coopeuch'
+                }
+            });
+        });
+
+        // Cuando el socio hace click en Volver a Simular
+        $('#return-button').click(function(){
+            dataLayer.push({
+                'event': 'trigger_event',
+                'event-config': {
+                    'eve-acc' : '/simuladorhipotecario/exito',
+                    'eve-cat' : 'Click',
+                    'eve-lab' : 'Volver a simular'
+                }
+            });
+        });
+    });
+});
+</script>
+<style>
+.voucher-content .links .actions {
+    width: 100%;
+    flex-basis: 100%;
+    justify-content: space-between;
+}
+.voucher-content .links a:hover{
+    color:#FFF;
+}
+.fixed {
+    position: inherit !important;
+}
+</style>

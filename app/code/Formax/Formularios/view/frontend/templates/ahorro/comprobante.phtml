@@ -1,0 +1,75 @@
+<?php
+/**
+ * @var \Formax\Formularios\Block\Ahorro\Comprobante $block
+ */
+?>
+<?php
+$dataForm  = $block->getFormData();
+$baseMedia = $block->getBaseMediaDir();
+$buttonLLink = $block->getButtonLink();
+?>
+
+<h1 class="simulator-title"><?= $block->getTitle() ?></h1>
+
+<div class="simulator-container">
+    <ol class="tabs" style="counter-reset: item 1;">
+        <li ><span class="tab-title">Solicitud</span><span class="border border-left"></span></li>
+        <li class="active"><span class="step">Paso 1/2</span><span class="tab-title">Comprobante</span><span class="border border-right"></span></li>
+        <li class="step-wrapper"><span class="step">Paso 2/2</span><span class="border border-right"></span></li>
+    </ol>
+
+    <div class="voucher-content">
+        <image class="Print-image" src="<?php echo $this->getViewFileUrl('Formax_SimulatorCreditCard::images/logo-rojo.svg'); ?>"/>
+        <div class="alerta-exito">
+            <div class="content">
+                <p class="title">Te contactaremos en breve</p>
+            </div>
+        </div>
+        <div class="voucher-wrapper">
+            <p class="voucher-title">Comprobante de solicitud</p>
+            <div class="simulator-voucher">
+                <div class="simulator-result">
+                    <table>
+                        <tr>
+                            <th scope="col">Nombres</th>
+                            <th scope="col"><?= $dataForm['name'] ?></th>
+                        </tr>
+                        <tr>
+                            <td>Apellidos</td>
+                            <td><?= $dataForm['lastname'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Rut</td>
+                            <td><?= $dataForm['rut'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono</td>
+                            <td><?= $dataForm['phone'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><?= $dataForm['email'] ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="links container-submit">
+            <div class="return">
+                <button id="return-button" class="button-coopeuch" type="button" onclick="location.href='<?= $block->getBaseUrl().$buttonLLink ?>'"><?= $block->getButtonText() ?></button>
+            </div>
+            <div class="actions">
+                <div class="item" onclick="window.print();return false;">
+                    <img src="<?= $baseMedia . 'comprobante/imprimir.svg' ?>" alt="Imprimir"/>
+                    <span>Imprimir</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="letra-pequena hipoteca">
+    <p><?= $block->getLegalTerms() ?></p>
+</div>
+
+<a href="<?= $block->getBaseUrl() ?>" class="semiBold link">&#60; Volver a Coopeuch</a>
