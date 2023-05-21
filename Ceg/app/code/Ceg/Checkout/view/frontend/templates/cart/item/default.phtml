@@ -1,0 +1,192 @@
+
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var $block \Magento\Checkout\Block\Cart\Item\Renderer
+ * @var \Ceg\Impo\ViewModel\ImpoData $viewModel
+ */
+
+$_item = $block->getItem();
+$product = $_item->getProduct();
+$viewModel = $block->getViewModelImpo();
+$taxPercent = $_item->getTaxPercent();
+$productId = $product->getEntityId();
+
+$tierprices = $product->getTierPrice();
+$count_prices = count($tierprices);
+$prduct_tierprice = array_reverse($tierprices);
+
+$priceLegend = $viewModel->getLegendPrice($product->getSellby());
+$productStockData = $product->getExtensionAttributes()->getStockItem();
+$minSaleQty = isset($tierprices[0]['price_qty'])?$tierprices[0]['price_qty']:$productStockData->getMinSaleQty();
+$qtyIncrements = $productStockData->getQtyIncrements();
+$productInCartQty = $_item->getQty();
+$qtyInBox = $product->getQtyinbox();
+$decimals = $viewModel->getPriceDecimals();
+$endDate = $viewModel->endDate($_item->getImpoId());
+$formatPrice = $viewModel->convertAndFormatPrice(0);
+?>
+        <div class="pre-loading product_item" id="product_<?= /* @noEscape */ $_item->getId();?>">
+            <div class="product_image">
+                <span class="product-item-photo">
+                <?= $block
+                    ->getImage($block->getProductForThumbnail(), 'cart_page_product_thumbnail')->toHtml() ?>
+                </span>
+            </div>
+            <div class="product_details">
+                <h3>
+                    <?php if ($block->hasProductUrl()):?>
+                        <?= $block->escapeHtml($product->getName()) ?>
+                    <?php endif; ?>
+                </h3>
+                <div class="product_brand">
+                    <span><?= /* @noEscape */ __("Model");?>:
+                        <?= /* @noEscape */ $product->getModel() ?></span>
+                    <span><?= /* @noEscape */ __("Brand");?>:
+                        <?= /* @noEscape */ $product->getBrand() ?></span>
+                </div>
+                <div class="end_date"><?= /* @noEscape */ __("Close Import");?> <?= /* @noEscape */ $endDate ?></div>
+                <div class="product_commercial_package">
+                    <span><?= /* @noEscape */ __("Units per box");?>:
+                        <strong><?=  /* @noEscape */ $qtyInBox;?></strong>
+                    </span>
+                    <span><?= /* @noEscape */ __("Minimum purchase");?>:
+                        <strong><?= (int)$minSaleQty * $qtyInBox;?> <?= /* @noEscape */ __("Units");?></strong>
+                    </span>
+                </div>
+                <?php if ($messages = $block->getMessages()):?>
+                    <?php foreach ($messages as $message):?>
+                        <div class= "cart item message <?= $block->escapeHtmlAttr($message['type']) ?>">
+                            <div><?= $block->escapeHtml($message['text']) ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+                <?php if ($addInfoBlock):?>
+                    <?= $addInfoBlock->setItem($_item)->toHtml() ?>
+                <?php endif;?>
+                <a href="#"
+                title="<?= $block->escapeHtml(__('Remove item')) ?>"
+                class="action action-delete-item"
+                data-action-delete='<?=
+                /* @noEscape */ $this->helper(Magento\Checkout\Helper\Cart::class)->getDeletePostJson($_item) ?>'>
+                    <span>
+                        <i class="fas fa-trash-alt"></i>
+                        <?= /* @noEscape */ __('Remove item') ?>
+                    </span>
+                </a>
+            </div>
+            <div class="product_package<?= $block->getSellby()==2 ? ' isbox' : '' ?>"  style="display:none">
+                <div class="product_tier_prices">
+                    <div class="product_qty_prices">
+                        <?php foreach ($prduct_tierprice as $key => $price):?>
+                            <div class="tierprices"
+                                 data-qty-from="<?= (int)$price['price_qty']?>"
+                                 data-qty-to="<?= $key==0 ? 99999999 :
+                                     ($key-1<$count_prices?
+                                         (int)$prduct_tierprice[$key-1]['price_qty']-$qtyIncrements:
+                                         (int)$price['price_qty']) ?>" >
+                                <span><?= (int)$price['price_qty']?> <?=  $key==0?
+                                        '&infin;':
+                                        ($key-1<$count_prices?
+                                            (int)$prduct_tierprice[$key-1]['price_qty']-$qtyIncrements:
+                                            (int)$price['price_qty'])?>
+                                </span>
+                                <?php $priceTax = $price['price']*($taxPercent*0.01) ?>
+                                <span data-price="<?=  $price['price']+($priceTax)?>">
+                                <?= $block->escapeHtml(number_format($price['price'], 3))?>
+                                <small data-tax="<?= $block->escapeHtml($priceTax) ?>">
+                                (<?= $block->escapeHtml(number_format($priceTax, 3))?>)(*)
+                                </small></span>
+                                <?php if ($block->getSellby()==2):
+                                    $qtyInBox=$_item->getProduct()->getData('qtyinbox')
+                                        ? $_item->getProduct()->getData('qtyinbox') : '1';
+                                    $decimals = 3;
+                                    ?>
+                                    <span>
+                                    <?= /* @noEscape */number_format($price['price']/$qtyInBox, $decimals)?>
+                                    <small>
+                                    (<?= /* @noEscape */ number_format(($priceTax)/$qtyInBox, $decimals)?>)(*)
+                                    </small></span>
+                                <?php endif;?>
+                            </div>
+                        <?php endforeach;?>
+                    </div>
+                    <small><?= $block->escapeHtml($priceLegend) ?></small>
+                </div>
+            </div>
+            <div class="product_actions">
+                <div class="product_prices">
+                    <div class="total_price">
+                        <span class="product_price">
+                            Total
+                            <?= /* @noEscape */ $formatPrice ?>
+                        </span>
+                    </div>
+                    <span class="net-price-appr"><?= /* @noEscape */ __("Approximate net unit price")?>
+                    <span><?= /* @noEscape */ $formatPrice ?></span></span>
+
+                    <?php if ($viewModel->isCustomerEnableToCheckout()): ?>
+                        <div class="product_add">
+                            <div class="addtocart">
+                                    <div class="action_buttons">
+                                        <div>
+                                            <a class="minusQty minusCart">
+                                                <svg width="14" height="20" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 0.96875C3.25391 0.96875 0.21875 4.00391 0.21875 7.75C0.21875 11.4961 3.25391 14.5312 7 14.5312C10.7461 14.5312 13.7812 11.4961 13.7812 7.75C13.7812 4.00391 10.7461 0.96875 7 0.96875ZM3.39062 8.84375C3.19922 8.84375 3.0625 8.70703 3.0625 8.51562V6.98438C3.0625 6.82031 3.19922 6.65625 3.39062 6.65625H10.6094C10.7734 6.65625 10.9375 6.82031 10.9375 6.98438V8.51562C10.9375 8.70703 10.7734 8.84375 10.6094 8.84375H3.39062Z" fill="#1A1A1A"/>
+                                                </svg>
+                                            </a>
+                                            <?php if ($viewModel->productInCart($productId)) { ?>
+                                                <span class="qty_box">
+                                                    <span><?= $block->escapeHtml($productInCartQty*$qtyInBox);?></span>
+                                                    <?= /* @noEscape */ __("Units")?>
+                                                </span>
+                                                <input type="number"
+                                                    class="input-text qty"
+                                                    data-role="cart-item-qty"
+                                                    name="cart[<?= $block->escapeHtml($_item->getId()) ?>][qty]"
+                                                    id="cart-<?= $block->escapeHtml($_item->getId()) ?>-qty"
+                                                    title="Cantidad"
+                                                    value="<?= $block->escapeHtml($productInCartQty);?>"
+                                                    data-current-value="<?= $block->escapeHtml($productInCartQty);?>"
+                                                    data-cart-item-id="<?= $block->escapeHtml($product->getName())?>"
+                                                    data-qtyinbox="<?= /* @noEscape */ $qtyInBox;?>"
+                                                    data-defaultmin="<?= (int)$minSaleQty ?>"
+                                                    step="<?= (int)$qtyIncrements?>"
+                                                    min="<?= (int)$minSaleQty ?>"
+                                                    >
+
+                                            <?php } else {?>
+                                                <?php $qtyValue = $productInCartQty ? $productInCartQty : '0'; ?>
+                                                <input
+                                                    type="number"
+                                                    name="qty"
+                                                    class="qty"
+                                                    value="<?= $block->escapeHtml($qtyValue)?>"
+                                                    step="<?= (int)$qtyIncrements?>"
+                                                    min="<?= (int)$minSaleQty ?>"
+                                                    data-defaultmin="<?= (int)$minSaleQty ?>"
+                                                    data-current-value="<?= $block->escapeHtml($qtyValue)?>"
+                                                    autocomplete="off">
+                                            <?php }?>
+                                            <a class="plusQty plusCart">
+                                                <svg width="14" height="20" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 0.96875C3.25391 0.96875 0.21875 4.00391 0.21875 7.75C0.21875 11.4961 3.25391 14.5312 7 14.5312C10.7461 14.5312 13.7812 11.4961 13.7812 7.75C13.7812 4.00391 10.7461 0.96875 7 0.96875ZM10.9375 8.51562C10.9375 8.70703 10.7734 8.84375 10.6094 8.84375H8.09375V11.3594C8.09375 11.5508 7.92969 11.6875 7.76562 11.6875H6.23438C6.04297 11.6875 5.90625 11.5508 5.90625 11.3594V8.84375H3.39062C3.19922 8.84375 3.0625 8.70703 3.0625 8.51562V6.98438C3.0625 6.82031 3.19922 6.65625 3.39062 6.65625H5.90625V4.14062C5.90625 3.97656 6.04297 3.8125 6.23438 3.8125H7.76562C7.92969 3.8125 8.09375 3.97656 8.09375 4.14062V6.65625H10.6094C10.7734 6.65625 10.9375 6.82031 10.9375 6.98438V8.51562Z" fill="#1A1A1A"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="messages" role="alert">
+                            <div class="message-error error message">
+                                <span>
+                                    <?= $block->escapeHtml($block->getLayout()->createBlock(\Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart::class)->getCheckoutNotAllowedMessage()); ?>
+                                </span>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,63 @@
+<?php
+/** @var $block \Magento\Framework\Pricing\Render\Amount */
+$parentBlock = $block->getLayout()->getBlock('render.product.prices');
+
+/** @var $productInfo \Ceg\Catalog\ViewModel\ProductInfo */
+$productInfo = $parentBlock->getProductInfo();
+
+/** @var $impoData \Ceg\Impo\ViewModel\ImpoData */
+$impoData = $parentBlock->getImpoData();
+
+$amount = $block->getAmount();
+$product = $block->getSaleableItem();
+$qtyInBox = $product->getData('qtyinbox');
+$qtyInBox = (!isset($qtyInBox) || ($qtyInBox == 0)) ? 1 : $qtyInBox;
+$maxTierPrice = $productInfo->getMaxTierPrice($product);
+$netBoxPrice = (!empty($maxTierPrice) && $maxTierPrice != "0") ? $maxTierPrice['price'] : $product->getData("price");
+$netUnitPrice = (float)$netBoxPrice / (int)$qtyInBox;
+$taxUnitValue = (float)$amount->getAdjustmentAmount('tax') / (int)$qtyInBox;
+$finalUnitPrice = $netUnitPrice + $taxUnitValue;
+$prduct_tierprice = array_reverse($productInfo->getTierPrice($product->getId()));
+$taxPercent = $productInfo->getTax($product->getTaxClassId());
+$qtyInBox=($product->getQtyinbox()?$product->getQtyinbox():'1');
+$count_prices = count($prduct_tierprice);
+$price_prod = 0;
+foreach ($prduct_tierprice as $key => $price):
+    if($key==0):
+        $price_prod = number_format($price['price'] / ($qtyInBox != 0 ? $qtyInBox : 1), 2);
+    endif;
+endforeach;
+$priceBlock = $productInfo->convertAndFormatPrice($price_prod, 2);
+
+$isSaleableProduct = $impoData->isSaleableProduct($product->getEntityId());
+$hideStaticPrice = ($isSaleableProduct && ($block->getZone() === "item_view"));
+if (($finalUnitPrice != '0') && (!$hideStaticPrice)): ?>
+    <div class="price-container <?= $block->escapeHtmlAttr($block->getAdjustmentCssClasses()) ?>"
+        <?= $block->getSchema() ? ' itemprop="offers" itemscope itemtype="http://schema.org/Offer"' : '' ?>>
+        <?php if ($block->getDisplayLabel()):?>
+            <span class="price-label"><?= $block->escapeHtml($block->getDisplayLabel()) ?></span>
+        <?php endif; ?>
+    </div>
+    <div class="price-data">
+            <span>
+                <span class="label"><?= $block->escapeHtml(__('Precio neto unitario')) ?></span>
+                <?= /* @noEscape */ $priceBlock ?>
+            </span>
+            <?php if ($block->hasAdjustmentsHtml()):?>
+                <?= $block->getAdjustmentsHtml() ?>
+            <?php endif; ?>
+        </div>
+        <?php if ($block->getSchema()):?>
+            <meta itemprop="price" content="<?= $block->escapeHtmlAttr($block->getDisplayValue()) ?>" />
+            <meta itemprop="priceCurrency" content="<?= $block->escapeHtmlAttr($block->getDisplayCurrencyCode()) ?>" />
+        <?php endif; ?>
+        <?php else: ?>
+    <div class="hide-static-price"></div>
+<?php endif; ?>
+
+<script>
+    require(['jquery'], function($) {
+        $(".hide-static-price").closest(".product-info-price").hide();
+        $(".hide-static-price").closest(".product-info-main").find(".tier.static-price").hide();
+    });
+</script>

@@ -1,0 +1,5 @@
+"Welcome %1!","¡Bienvenido %1!"
+"Something went wrong!","¡Algo salió mal!"
+"The access token is invalid.","El token de acceso no es válido"
+"The e-mail is empty or invalid.","El correo electrónico esta vacío o no tiene el formato correcto"
+"Token algorithm is wrong configured","El algoritmo del token esta mal configurado"

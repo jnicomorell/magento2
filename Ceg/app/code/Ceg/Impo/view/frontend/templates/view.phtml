@@ -1,0 +1,322 @@
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Ceg\Impo\Block\View $block
+ * @var \Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart $cartBlock
+ * @var \Ceg\Impo\ViewModel\ImpoData $viewModel
+ */
+$cartBlock = $block->getLayout()->createBlock(\Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart::class);
+$viewModel = $block->getViewModelImpo();
+$parentOrderId = $viewModel->getParentOrderId();
+($parentOrderId != 0) && ($parentOrderId != null) ? $showOrderId = true : $showOrderId = false;
+echo $cartBlock->getChildHtml('reopened-cart');
+$imageBlock = $block->getLayout()->createBlock(\Magento\Catalog\Block\Product\ListProduct::class);
+
+if ($viewModel->hasImpoAccess() && $viewModel->hasValidImpoAccess()):
+    $cartUpdateUrl = $viewModel->getCartUpdateUrl();
+    $collection = $block->getLoadedProductCollection();
+    foreach ($collection as $product):
+
+        $productImage = $imageBlock->getImage($product, 'category_page_grid');
+        $taxPercent = $product->getTaxPercent();
+        $productId = $product->getEntityId();
+        $tierprices = $product->getTierPrice();
+        $product_tierprice=array_reverse($tierprices);
+        $count_prices=count($product_tierprice);
+        $priceLegend = $viewModel->getLegendPrice($product->getSellby());
+        $productStockData = $viewModel->getProductStockData($product);
+        $minSaleQty = $tierprices[0]['price_qty'] ?? $productStockData['min_sale_qty'];
+        $varMinQty= $productStockData['min_sale_qty'] ?? 0;
+        $qtyIncrements = (int)$productStockData['qty_increments'];
+        $productInCartQty = $viewModel->productInCartQty($productId);
+        $endDate = $viewModel->endDate($product->getImpoId());
+        $productUrl = $product->getProductUrl();
+        $productQtyInBox = $product->getQtyinbox();
+        $defaultPrice = $product->getData("price");
+
+        $isSaleableProduct = $viewModel->isSaleableProduct($product->getEntityId());
+        $hideAddToCart = (!$isSaleableProduct || $count_prices == 0 || $defaultPrice == '0');
+        ?>
+        <div class="pre-loading product_item <?= ($productInCartQty) ? 'product-added' : ''; ?>" id="card-<?= /* @noEscape */$productId ?>">
+            <span class="added-to-cart" id="lblatc_<?= /* @noEscape */ $productId ?>"
+                  style="<?= ($productInCartQty) ? '' : 'display: none'; ?> ">
+                    <?= /* @noEscape */ __("Added to cart");?>
+                </span>
+            <div class="product_image">
+                <a href="<?= $escaper->escapeUrl($productUrl) ?>">
+                    <?= $productImage->toHtml();?>
+                </a>
+            </div>
+            <div class="product_details">
+                <a class="see-detail-black" href="<?= $block->escapeUrl($productUrl); ?>">
+                    <h3><?= $escaper->escapeHtml($product->getName()); ?></h3>
+                </a>
+
+                <div class="product_brand">
+                    <span><?= /* @noEscape */ __("Model"); ?>: <?= /* @noEscape */ $product->getModel(); ?></span>
+                    <span><?= /* @noEscape */ __("Brand"); ?>: <?= /* @noEscape */ $product->getBrand(); ?></span>
+                </div>
+                <div class="end_date"><?= /* @noEscape */ __("Close Import"); ?> <?= /* @noEscape */ $endDate; ?></div>
+                <?php
+                $qtyInBox=($productQtyInBox?:'1');
+                $decimals=($viewModel->getPriceDecimals()?$viewModel->getPriceDecimals():'1');
+                ?>
+                <div class="product_commercial_package">
+                    <span><?= /* @noEscape */ __("Units per box"); ?>:
+                        <strong><?=  /* @noEscape */ $qtyInBox; ?></strong>
+                    </span>
+                    <span><?= /* @noEscape */ __("Minimum purchase"); ?>:
+                        <strong><?=  (int)$minSaleQty * $qtyInBox; ?> <?= /* @noEscape */ __("Units"); ?></strong>
+                    </span>
+                </div>
+                <a class="see-detail" href="<?= $block->escapeUrl($productUrl); ?>">
+                    <strong><?= /* @noEscape */__("See detail"); ?></strong>
+                </a>
+                <div class="best-price-purchase">
+                    <?php if (isset($product_tierprice[0])):
+                        $units = (int)$product_tierprice[0]['price_qty']*$qtyInBox;
+                        $unitPrice = $product_tierprice[0]['price']/$qtyInBox;
+                        ?>
+                        <span>
+                            <?= /* @noEscape */ __('Buying %1 units or more', $units); ?>
+                        </span>
+                        <?= /* @noEscape */ $viewModel->convertAndFormatPrice($unitPrice, 3); ?>
+                        <br>
+                        <?= /* @noEscape */ __("Approximate net unit price") ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="product_package<?=  $product->getSellby()==2?' isbox':'' ?>"  style="display:none">
+                <div class="product_tier_prices">
+                    <div class="product_qty_prices">
+                        <?php foreach ($product_tierprice as $key => $price): ?>
+                            <?php $priceQty =
+                                $viewModel->dataQtyTo($key, $count_prices, $product_tierprice, $qtyIncrements, $price);
+                            ?>
+                            <div class="tierprices"
+                                 data-qty-from="<?= (int)$price['price_qty']; ?>"
+                                 data-qty-to="<?= /* @noEscape */ $priceQty; ?>" >
+                                <span>
+                                    <?= (int)$price['price_qty']; ?>
+                                    <?= $key==0 ? '&infin;' : /* @noEscape */ $priceQty; ?>
+                                </span>
+                                <?php $priceTax = $price['price']*($taxPercent*0.01) ?>
+                                <span data-price="<?=  $price['price']+($priceTax)?>">
+                                <?= $escaper->escapeHtml(number_format($price['price'], 3))?>
+                                <small data-tax="<?= $escaper->escapeHtml($priceTax) ?>">
+                                (<?= $escaper->escapeHtml(number_format($priceTax, 3))?>)(*)
+                                </small></span>
+                                <?php if ($product->getSellby()==2):
+                                    $qtyInBox=($productQtyInBox?:'1');
+                                    $decimals=($viewModel->getPriceDecimals()?$viewModel->getPriceDecimals():'1');
+                                    ?>
+                                    <span>
+                                    <?= /* @noEscape */number_format($price['price']/$qtyInBox, $decimals) ?>
+                                    <small>
+                                    (<?= /* @noEscape */ number_format(($priceTax)/$qtyInBox, $decimals) ?>)(*)
+                                    </small></span>
+                                <?php endif;?>
+                            </div>
+                        <?php endforeach;?>
+                    </div>
+                    <small><?= $escaper->escapeHtml($priceLegend); ?></small>
+                </div>
+            </div>
+            <div class="product_actions">
+                <?php if (!$hideAddToCart): ?>
+                    <div class="product_prices">
+                        <div class="product_netprice_tax">
+                        <span class="netprice_tax">
+                             <?php $initialValue = $viewModel->convertAndFormatPrice(0); ?>
+                            <span class="label-net-tax"><span><?= /* @noEscape */ __("Net"); ?></span>
+                            <?= /* @noEscape */ $initialValue ?></span>
+                            <span class="label-net-tax"><span><?= /* @noEscape */ __("Taxes"); ?></span>
+                            <span class="tax"><?= /* @noEscape */ $initialValue; ?></span></span>
+                        </span>
+                        </div>
+                        <div class="total_price">
+                        <span class="product_price">
+                            Total
+                            <?= /* @noEscape */ $viewModel->convertAndFormatPrice(0); ?>
+                        </span>
+                        </div>
+                        <span class="net-price-appr"><?= /* @noEscape */ __("Approximate net unit price"); ?>
+                    <span><?= /* @noEscape */ $viewModel->convertAndFormatPrice(0); ?></span></span>
+
+                        <?php if ($viewModel->isCustomerEnableToCheckout()): ?>
+                            <div class="product_add">
+                                <div class="addtocart">
+                                    <form id="form-validate-<?= $escaper->escapeHtml($productId); ?>"
+                                          method="post" autocomplete="off"
+                                        <?php $addToCartUrl = $viewModel->getAddToCartUrl($product); ?>
+                                        <?= /* @noEscape */ !$viewModel->productInCart($productId)?
+                                            'data-role="tocart-form" action="'. $escaper->escapeUrl($addToCartUrl).'"':
+                                            'action="'.$escaper->escapeUrl($cartUpdateUrl).'"' ?>
+                                          data-product-id="<?= $escaper->escapeHtml($productId); ?>"
+                                          data-product-sku="<?= $escaper->escapeHtmlAttr($product->getSku()); ?>"
+                                          data-product-impoid="<?= $escaper->escapeHtmlAttr($product->getImpoId()); ?>"
+                                          data-product-qtyInbox="<?= $escaper->escapeHtmlAttr($productQtyInBox); ?>"
+                                          data-add-action="<?= $escaper->escapeUrl($addToCartUrl) ?>">
+                                        <input type="hidden" name="product"
+                                               value="<?= (int)$productId; ?>">
+                                        <input type="hidden" name="impoid"
+                                               value="<?= /* @noEscape */ $product->getImpoId(); ?>">
+                                        <input type="hidden" name="qtyInbox" class="qtyInbox"
+                                               value="<?= /* @noEscape */ $qtyInBox; ?>">
+                                        <input type="hidden" name="varMinQty" class="varMinQty"
+                                               value="<?= (int)$varMinQty; ?>">
+                                        <?=  $block->getBlockHtml('formkey'); ?>
+                                        <div class="action_buttons">
+                                            <div>
+                                                <a class="minusQty disable">
+                                                    <?php  //phpcs:ignore ?>
+                                                    <svg width="14" height="20" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <?php  //phpcs:ignore ?>
+                                                        <path d="M7 0.96875C3.25391 0.96875 0.21875 4.00391 0.21875 7.75C0.21875 11.4961 3.25391 14.5312 7 14.5312C10.7461 14.5312 13.7812 11.4961 13.7812 7.75C13.7812 4.00391 10.7461 0.96875 7 0.96875ZM3.39062 8.84375C3.19922 8.84375 3.0625 8.70703 3.0625 8.51562V6.98438C3.0625 6.82031 3.19922 6.65625 3.39062 6.65625H10.6094C10.7734 6.65625 10.9375 6.82031 10.9375 6.98438V8.51562C10.9375 8.70703 10.7734 8.84375 10.6094 8.84375H3.39062Z" fill="#1A1A1A"/>
+                                                    </svg>
+                                                </a>
+                                                <?php if ($viewModel->productInCart($productId)) { ?>
+                                                    <?php $quoteId = $viewModel->getQuoteId($productId); ?>
+                                                    <span class="qty_box">
+                                                    <span>
+                                                        <?= $escaper->escapeHtml($productInCartQty*$qtyInBox); ?>
+                                                    </span>
+                                                    <?= /* @noEscape */ __("Units"); ?>
+                                                </span>
+                                                    <input type="number"
+                                                           class="input-text qty"
+                                                           data-role="cart-item-qty"
+                                                           name="cart[<?= $escaper->escapeHtml($quoteId) ?>][qty]"
+                                                           id="cart-<?= $escaper->escapeHtml($quoteId); ?>-qty"
+                                                           title="Cantidad"
+                                                           value="<?= $escaper->escapeHtml($productInCartQty); ?>"
+                                                           data-current-value="<?= $escaper->escapeHtml($productInCartQty);?>"
+                                                           data-cart-item-id="<?= $escaper->escapeHtml($product->getName());?>"
+                                                           data-qtyinbox="<?= /* @noEscape */ $qtyInBox;?>"
+                                                           step="<?= (int)$qtyIncrements; ?>"
+                                                           min="<?= (int)$minSaleQty; ?>">
+                                                <?php } else { ?>
+                                                    <?php $qtyValue = $productInCartQty ? $productInCartQty : (int)$varMinQty ; ?>
+                                                    <span class="qty_box">
+                                                    <span class="units">
+                                                        <?= $escaper->escapeHtml((int)$minSaleQty * $qtyInBox); ?>
+                                                    </span> <?= /* @noEscape */ __("Units"); ?>
+                                                </span>
+                                                    <input
+                                                        type="number"
+                                                        name="qty"
+                                                        class="qty"
+                                                        value="<?= $escaper->escapeHtml($qtyValue); ?>"
+                                                        data-qtyinbox="<?= /* @noEscape */ $qtyInBox; ?>"
+                                                        step="<?= (int)$qtyIncrements; ?>"
+                                                        min="<?= (int)$minSaleQty; ?>"
+                                                        autocomplete="off">
+                                                <?php }?>
+                                                <a class="plusQty">
+                                                    <?php  //phpcs:ignore ?>
+                                                    <svg width="14" height="20" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <?php  //phpcs:ignore ?>
+                                                        <path d="M7 0.96875C3.25391 0.96875 0.21875 4.00391 0.21875 7.75C0.21875 11.4961 3.25391 14.5312 7 14.5312C10.7461 14.5312 13.7812 11.4961 13.7812 7.75C13.7812 4.00391 10.7461 0.96875 7 0.96875ZM10.9375 8.51562C10.9375 8.70703 10.7734 8.84375 10.6094 8.84375H8.09375V11.3594C8.09375 11.5508 7.92969 11.6875 7.76562 11.6875H6.23438C6.04297 11.6875 5.90625 11.5508 5.90625 11.3594V8.84375H3.39062C3.19922 8.84375 3.0625 8.70703 3.0625 8.51562V6.98438C3.0625 6.82031 3.19922 6.65625 3.39062 6.65625H5.90625V4.14062C5.90625 3.97656 6.04297 3.8125 6.23438 3.8125H7.76562C7.92969 3.8125 8.09375 3.97656 8.09375 4.14062V6.65625H10.6094C10.7734 6.65625 10.9375 6.82031 10.9375 6.98438V8.51562Z" fill="#1A1A1A"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <?php
+                                            $addbtntxt = $viewModel->getButtonTxt('add');
+                                            $updatebtntxt = $viewModel->getButtonTxt('update');
+                                            ?>
+                                            <?php if ($productInCartQty) {?>
+                                                <button
+                                                    id="btn-<?= (int)$productId; ?>"
+                                                    type="submit"
+                                                    title="<?= $escaper->escapeHtml($updatebtntxt); ?>"
+                                                    class="action tocart updatecart actionupdate disabled"
+                                                    data-add-text="<?= $escaper->escapeHtml($addbtntxt); ?>"
+                                                    data-update-text="<?= $escaper->escapeHtml($updatebtntxt); ?>">
+                                                    <?= $escaper->escapeHtml($updatebtntxt); ?>
+                                                </button>
+                                            <?php } else {?>
+                                                <button
+                                                    id="btn-<?= (int)$productId; ?>"
+                                                    type="submit"
+                                                    title="<?= $escaper->escapeHtml($addbtntxt); ?>"
+                                                    class="action tocart updatecart actionadd disabled"
+                                                    data-add-text="<?= $escaper->escapeHtml($addbtntxt); ?>"
+                                                    data-update-text="<?= $escaper->escapeHtml($updatebtntxt); ?>">
+                                                    <?= $escaper->escapeHtml($addbtntxt); ?>
+                                                </button>
+                                            <?php }?>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <div class="messages" role="alert">
+                                <div class="message-error error message">
+                                <span>
+                                    <?= $escaper->escapeHtml($cartBlock->getCheckoutNotAllowedMessage()); ?>
+                                </span>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif;?>
+            </div>
+            <script type="text/x-magento-init">
+            {
+                "[data-role=tocart-form], .form.map.checkout": {
+                    "catalogAddToCart": {
+                        "product_sku": "<?=  $escaper->escapeJs($product->getSku()) ?>"
+                    }
+                }
+            }
+            </script>
+        </div>
+    <?php endforeach; ?>
+    <?= $block->getToolbarHtml() ?>
+<?php else: ?>
+    <div class="empty-impo">
+        <p class="empty-impo-subtitle">
+            <?= $escaper->escapeHtml($cartBlock->getExpiredImpoTitle()); ?>
+        </p>
+        <p class="empty-impo-text">
+            <?= $escaper->escapeHtml($cartBlock->getExpiredImpoMessage()); ?>
+        </p>
+        <a href="<?= $escaper->escapeHtml($block->getBaseUrl()); ?>">
+            <?= $escaper->escapeHtml(__('View Catalog')); ?>
+        </a>
+        <script>
+            require(['jquery'], function($) {
+                $('.columns .sidebar-main').hide();
+                $('.columns .column.main').width('40%');
+            });
+        </script>
+    </div>
+<?php endif ?>
+
+<div class="modal_wrapper hide">
+    <div class="modal_container modal_remove">
+        <h3><?= /* @noEscape */ __("Remove product?");?></h3>
+        <span><?= /* @noEscape */ __("You will remove")?>
+            <span class="product-to-remove"></span> <?= /* @noEscape */ __("from your cart.")?>
+        </span>
+    </div>
+    <div class="modal_container modal_clearcart">
+        <h3><?=/* @noEscape */ __("Do you want to empty your cart?");?></h3>
+        <span><?= /* @noEscape */ __("You are about to remove")?>
+        <span class="product-to-remove"></span>
+        <?= /* @noEscape */ __("from your cart.")?>
+            <?= /* @noEscape */ __("and you are going to empty your cart.")?><br>
+        <?= /* @noEscape */ ($showOrderId)
+            ? __("This implies that you are going to cancel your order.") .' Nº '. $parentOrderId : ""; ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Ceg_Impo/js/impo": {
+                "currency": "<?= $escaper->escapeHtml($viewModel->getCurrencySymbol()) ?>"
+            }
+        }
+    }
+</script>

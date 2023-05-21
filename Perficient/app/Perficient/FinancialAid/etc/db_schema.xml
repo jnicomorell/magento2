@@ -1,0 +1,31 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="perficient_financialaid">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" comment=" Customer ID"/>
+        <column xsi:type="varchar" name="fname" length="60" comment="First Name"/>
+        <column xsi:type="varchar" name="lname" length="60" comment="Last Name"/>
+        <column xsi:type="varchar" name="email" length="60" comment="Email"/>
+        <column xsi:type="varchar" name="school" length="60" comment="School"/>
+        <column xsi:type="varchar" name="studentid" length="60" comment="Student Id"/>
+        <column xsi:type="varchar" name="phone" length="60" comment="Phone Number"/>
+        <column xsi:type="varchar" name="isbn" length="60" comment="ISBN"/>
+        <column xsi:type="varchar" name="price" length="60" comment="Product Price"/>
+        <column xsi:type="varchar" name="description" length="60" comment="Description"/>
+        <column xsi:type="varchar" name="address" length="60" comment="Shipping Address"/>
+        <column xsi:type="varchar" name="address_one" length="60" comment="Address Line 1"/>
+        <column xsi:type="varchar" name="address_two" length="60" comment="Address Line 2"/>
+        <column xsi:type="varchar" name="country" length="60" comment="Country/Region"/>
+        <column xsi:type="varchar" name="zip" length="60" comment="Zip Code"/>
+        <column xsi:type="varchar" name="state" length="60" comment="State"/>
+        <column xsi:type="varchar" name="city" length="60" comment="City"/>
+        <column xsi:type="varchar" name="pdf" length="60" comment="PDF"/>
+        <column xsi:type="varchar" name="signature" length="60" comment="Signature"/>
+        <column xsi:type="boolean" name="consent" comment="Consent" nullable="false" />
+        <column xsi:type="varchar" name="status" length="60" comment="Status" default="New" />
+        <column name="created_at" nullable="false" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

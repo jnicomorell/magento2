@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * @var \Magento\Framework\View\Element\AbstractBlock $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Ceg\Backend\ViewModel\BackendData $viewModel
+ */
+$viewModel = $block->getBackendViewModel();
+$inDevMode = $viewModel->inDevMode();
+$urlLogin = $viewModel->getLoginUrl();
+?>
+<div class="actions">
+    <?php if ($inDevMode): ?>
+    <button
+        <?php $block->getUiId(); ?>
+        class="action-login action-primary">
+        <span><?= $block->escapeHtml(__('Sign in')) ?></span>
+    </button>
+    <?php endif?>
+    <button
+        <?php $block->getUiId(); ?>
+        class="action-login action-primary auth0-login">
+        <span><?= $block->escapeHtml(__('Sign in with Auth0')) ?></span>
+    </button>
+</div>
+
+<script>
+    window.auth0Url = "<?= $escaper->escapeUrl($viewModel->getLoginUrl()) ?>";
+</script>

@@ -1,0 +1,16 @@
+<!--@subject {{trans "Your Financial Aid Request Submission for Vista Higher Learning"}}  @-->
+{{template config_path="design/email/header_template"}}
+
+<body style="padding: 300px;">
+
+<h1 class="one" style="color:#202020;margin-bottom: 30px;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 24px;width: 693px;text-align: left;">Thank you for submitting a request to use your financial aid. This request will now be transmitted to your Financial Aid Office for review.</h1>
+<p style="margin-bottom: 30px;line-height: 26px;font-weight: 400;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;" >Based on the review of your eligibility, your request will be approved or denied by your Financial Aid Office. They may reach out to you for more information regarding this request or your financial aid status.</p>
+<p style="margin-bottom: 30px;line-height: 26px;font-weight: 400;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;">The approval process may take up to 7-10 days. You will be notified by Vista Higher Learning after we’ve received confirmation from your Financial Aid office. If approved, your digital access will be activated in your account at {{trans '<a href="http://vhlcentral.com">VHLcentral.com</a>'|raw}} and a confirmation email will be sent to you. If your order contains a print item, it will be shipped to the address you provided. If denied, you will receive a notification from Vista Higher Learning. </p>
+<p style="margin-bottom: 30px;line-height: 26px;font-weight: 400;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;">If you have questions about gaining temporary access to your course while this request is in progress, please contact your instructor. If you have any questions regarding your eligibility for financial aid or the use of your financial aid funds, please reach out to your Financial Aid Officer.</p>
+<p style="margin: 0;color:#202020;line-height: 26px;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;">Product Requested</p>
+<p style="margin: 0;color:#202020;line-height: 26px;font-weight: 400;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;"><b>Description: </b>{{var productname|raw}}</p>
+<p style="margin: 0;color:#202020;line-height: 26px;font-weight: 400;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;"><b>ISBN: </b>{{var isbn|raw}}</p>
+<p style="margin: 0;color:#202020;line-height: 26px;font-weight: 400;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;"><b>Price: </b>{{var price|raw}}</p>
+
+</body>
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,23 @@
+
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $viewModel \Ceg\Catalog\ViewModel\ProductInfo */
+$viewModel = $block->getProductInfo();
+$maxTierPrice = $viewModel->getMaxTierPrice($block->getProduct());
+$lastImpoDate = $viewModel->getLastImpoDate($block->getProduct());
+$showTierText = false;
+if (isset($maxTierPrice) && (!empty($maxTierPrice)) && $maxTierPrice['price_qty'] !=0) {
+    $showTierText = true;
+    $priceQty = round($maxTierPrice['price_qty'], 0);
+}
+?>
+
+<?php if ($showTierText): ?>
+    <?php if(empty($lastImpoDate)): ?>
+        <p class="tier static-price"><?= $block->escapeHtml(__('Unit price buying %1 or more units according to last import', $priceQty)); ?> </p>
+    <?php else: ?>
+        <?php $impoDate = new DateTime($lastImpoDate['last_impo_date']); ?>
+        <p class="tier static-price"><?= $block->escapeHtml(__('Unit price buying %1 or more units according to last import date %2', $priceQty, $impoDate->format("d M. Y"))); ?> </p>
+    <?php endif; ?>
+<?php endif; ?>
+

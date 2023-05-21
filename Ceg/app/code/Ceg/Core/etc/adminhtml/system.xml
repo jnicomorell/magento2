@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cegnet" translate="label" sortOrder="0" class="ceg-tab">
+            <label>Comprandoengrupo.net</label>
+        </tab>
+        <section id="ceg" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General</label>
+            <tab>cegnet</tab>
+            <group id="build" translate="label" type="text" sortOrder="1" showInDefault="1">
+                <label>Project information</label>
+                <field id="current_build" translate="label" type="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Current Build</label>
+                    <frontend_model>Ceg\Core\Block\System\Config\Build</frontend_model>
+                    <backend_model>Ceg\Core\Model\Config\Build</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

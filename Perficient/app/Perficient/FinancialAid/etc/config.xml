@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <financial_aid>
+            <financial_aid_conf>
+                <enabled>1</enabled>
+                <financial_aid_emails>test@test.com, test2@test.com</financial_aid_emails>
+            </financial_aid_conf>
+            <financial_form>
+                <consent_title>Legal consent</consent_title>
+                <consent_text>I give my consent for my Financial Aid office to use any available financial aid funds that I have available to me for the purchase of the Vista Higher Learning product(s) specified on this page. Furthermore, I expressly allow my Financial Aid office to pay Vista Higher Learning directly from my available funds the final purchase price of the product(s). I understand that the final purchase price may differ from the price shown on this page to account for any required tax(es) due on the product(s).</consent_text>
+            </financial_form>
+        </financial_aid>
+    </default>
+</config>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <referenceContainer name="sidebar.main" remove="true"/>
+    <referenceContainer name="div.sidebar.additional" remove="true"/>
+
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="main">
+            <container name="order.view.goback" before="content.top">
+                <block class="Magento\Framework\View\Element\Template" name="order.view.goback.link"
+                       template="Ceg_Sales::order/goback_link.phtml">
+                    <arguments>
+                        <argument name="view_model_order" xsi:type="object">Ceg\Sales\ViewModel\Order</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="page.main.title">
+            <block class="Ceg\Sales\Block\Order\Header" name="order.Header" template="Ceg_Sales::order/header.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Html\Links" as="links" name="sales.order.info.links" before="-">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">items order-links</argument>
+                </arguments>
+                <block class="Ceg\Sales\Block\Order\Link" name="sales.order.info.links.information">
+                    <arguments>
+                        <argument name="path" xsi:type="string">cegsales/order/view</argument>
+                        <argument name="label" xsi:type="string" translate="true">Items Ordered</argument>
+                    </arguments>
+                </block>
+            </block>
+            <block class="Ceg\Sales\Block\Order\View" name="sales.order.view" template="Ceg_Sales::order/view.phtml"/>
+            <block class="Ceg\Sales\Block\Order\Info" as="info" name="sales.order.info" after="sales.order.view" template="Ceg_Sales::order/info.phtml"/>
+        </referenceContainer>
+        <block class="Magento\Framework\View\Element\Template" name="additional.product.info" template="Magento_Theme::template.phtml"/>
+    </body>
+</page>

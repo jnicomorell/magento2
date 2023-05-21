@@ -1,0 +1,11 @@
+<?php
+/** @var $escaper \Magento\Framework\Escaper */
+/** @var $block \Magento\Framework\View\Element\Template */
+$vmOrder = $block->getViewModelOrder();
+?>
+<span class="link" >
+    <a id="goback_link" target="_blank" class="action back"
+       href="<?= $escaper->escapeUrl($vmOrder->getAppGoBackUrl()) ?>" >
+        <span><?= $escaper->escapeHtml(__('Volver al listado')) ?> </span>
+    </a>
+</span>

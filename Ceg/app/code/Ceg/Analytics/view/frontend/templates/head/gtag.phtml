@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Ceg\Analytics\ViewModel\AnalyticsData $viewModel
+ */
+
+$viewModel = $block->getAnalyticsViewModel();
+$code = $viewModel->getConfig($block->getConfig());
+if (!empty($code)): ?>
+
+<!-- CEG | GOOGLE UNIVERSAL TAG MANAGER -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?=/* @noEscape */$code?>"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '<?=/* @noEscape */$code?>');
+</script>
+<!-- CEG | GOOGLE UNIVERSAL TAG MANAGER -->
+
+<?php endif;?>
+

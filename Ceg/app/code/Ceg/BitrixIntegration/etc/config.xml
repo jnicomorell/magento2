@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ceg_bitrixintegration>
+            <general>
+                <active>0</active>
+                <resend_cron_schedule>0 */2 * * *</resend_cron_schedule>
+            </general>
+            <api>
+                <timeout>5</timeout>
+                <token>
+                    <client_id>9Srq8NRIBmHhLbthDG6y47vVmBOKwSpE</client_id>
+                    <client_secret>8bqtGFKymGqAJgJWPp0ezn8jBDT7Qdup8ugQh-66p07r5B7kFHgy2SDrncaMnba5</client_secret>
+                    <audience>https://develop-cegdev.us.auth0.com/api/v2/</audience>
+                    <url>https://develop-cegdev.us.auth0.com/oauth/token</url>
+                </token>
+                <send>
+                    <use_access_token>1</use_access_token>
+                    <enable_impo>1</enable_impo>
+                    <impo_url>https://publications-api-release-1-0-0-dev.cegdev.net/api/impo</impo_url>
+                    <enable_order>1</enable_order>
+                    <order_url>https://publications-api-release-1-2-0-dev.cegdev.net/api/notification</order_url>
+                </send>
+            </api>
+        </ceg_bitrixintegration>
+    </default>
+</config>

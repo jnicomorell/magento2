@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ceg_analytics>
+            <ga_settings>
+                <active>0</active>
+                <account>111276645</account>
+                <code>UA-111276645-4</code>
+                <ga_events>
+                    <events_config></events_config>
+                </ga_events>
+            </ga_settings>
+
+            <gtag_settings>
+                <active>0</active>
+                <code>G-B5TNDD4PLL</code>
+            </gtag_settings>
+            <gtm_settings>
+                <active>0</active>
+                <code>GTM-WDN8HBH</code>
+                <active_successpage>1</active_successpage>
+            </gtm_settings>
+            <hotjar_settings>
+                <active>0</active>
+                <code>2277721</code>
+            </hotjar_settings>
+            <fb_settings>
+                <active>0</active>
+                <code>1096920284168406</code>
+                <active_successpage>1</active_successpage>
+            </fb_settings>
+
+        </ceg_analytics>
+    </default>
+</config>

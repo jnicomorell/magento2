@@ -1,0 +1,64 @@
+{
+    "ceg_impo_entity": {
+        "column": {
+            "entity_id": true,
+            "is_active": true,
+            "store_id": true,
+            "website_id": true,
+            "ceg_id": true,
+            "title": true,
+            "free_on_board": true,
+            "start_at": true,
+            "finish_at": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "CEG_IMPO_ENTITY_STORE_ID": true,
+            "CEG_IMPO_ENTITY_WEBSITE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CEG_IMPO_ENTITY_STORE_ID_STORE_STORE_ID": true,
+            "CEG_IMPO_ENTITY_WEBSITE_ID_STORE_WEBSITE_WEBSITE_ID": true
+        }
+    },
+    "ceg_impo_product": {
+        "column": {
+            "entity_id": true,
+            "impo_id": true,
+            "product_id": true
+        },
+        "index": {
+            "CEG_IMPO_PRODUCT_IMPO_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CEG_IMPO_PRODUCT_IMPO_ID_CEG_IMPO_ENTITY_ENTITY_ID": true
+        }
+    },
+    "quote": {
+        "column": {
+            "ceg_ids": true,
+            "impo_ids": true
+        }
+    },
+    "quote_item": {
+        "column": {
+            "ceg_id": true,
+            "impo_id": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "ceg_ids": true,
+            "impo_ids": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "ceg_id": true,
+            "impo_id": true
+        }
+    }
+}

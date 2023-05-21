@@ -1,0 +1,40 @@
+<?php
+/**
+ * Empty cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ * @var $escaper Magento\Framework\Escaper
+ */
+?>
+<div class="cart-empty">
+    <img alt="empty_cart"
+         src="<?= /* @noEscape */ $block->getViewFileUrl('images/cart/empty_cart.svg'); ?>" />
+    <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
+    <p class="cart-empty-subtitle">
+        <?= $escaper->escapeHtml(__('Your cart is empty')); ?>
+    </p>
+    <p class="cart-empty-text">
+        <?=
+        $escaper->escapeHtml(
+            __('You can continue importing by adding or modifying products until the import closing date.')
+        ) ?>
+    </p>
+    <p>
+        <a href="<?= $block->escapeUrl($block->getUrl('impo/view')) ?>">
+            <?= $escaper->escapeHtml(__('Continue importing')); ?>
+        </a>
+    </p>
+    <?= $block->getChildHtml('shopping.cart.table.after') ?>
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Checkout/js/empty-cart": {}
+    }
+}
+</script>
+<style>
+    .ceg-theme.checkout-cart-index .nav-sections, .ceg-theme.checkout-cart-index .page-main{
+        background-image:none !important;
+    }
+</style>

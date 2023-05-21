@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="sidebar.main" remove="true"/>
+        <referenceContainer name="div.sidebar.additional" remove="true"/>
+
+        <referenceContainer name="main">
+            <container name="order.view.goback" before="content.top">
+                <block class="Magento\Framework\View\Element\Template" name="order.view.goback.link"
+                       template="Ceg_Sales::order/goback_link.phtml">
+                    <arguments>
+                        <argument name="view_model_order" xsi:type="object">Ceg\Sales\ViewModel\Order</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="page.main.title">
+            <referenceBlock name="order.status" remove="true"/>
+            <referenceContainer name="order.actions.container" remove="true"/>
+            <block class="Magento\Framework\View\Element\Template" name="order.view.goorders"
+                   template="Ceg_Sales::order/goorders_link.phtml" before="order.date">
+                <arguments>
+                    <argument name="view_model_order" xsi:type="object">Ceg\Sales\ViewModel\Order</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <referenceBlock  name="sales.order.view">
+                <referenceBlock name="order_items">
+                    <action method="setTemplate">
+                        <argument name="template" xsi:type="string">Ceg_Sales::order/order_items.phtml</argument>
+                    </action>
+                    <arguments>
+                        <argument name="view_model_order_items" xsi:type="object">Ceg\Sales\ViewModel\OrderItems</argument>
+                    </arguments>
+                </referenceBlock>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

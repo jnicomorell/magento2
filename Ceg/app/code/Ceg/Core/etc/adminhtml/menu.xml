@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ceg_Core::menu_index"
+             title="Comprando En Grupo"
+             module="Ceg_Core"
+             sortOrder="10"
+             resource="Ceg_Core::menu_index"/>
+
+        <!-- Pedidos -->
+        <add id="Ceg_Core::ceg_quotes"
+             title="Pedidos"
+             module="Ceg_Core"
+             sortOrder="10"
+             parent="Ceg_Core::menu_index"
+             resource="Ceg_Core::ceg_quotes" />
+
+        <add id="Ceg_Core::view"
+             title="Ver Pedidos"
+             module="Ceg_Core"
+             sortOrder="10"
+             parent="Ceg_Core::ceg_quotes"
+             resource="Ceg_Core::view"
+             action="quote/view/index" />
+
+
+        <add id="Ceg_Core::export"
+             title="Exportar Pedidos"
+             module="Ceg_Core"
+             sortOrder="10"
+             parent="Ceg_Core::ceg_quotes"
+             resource="Ceg_Core::export"
+             action="ceg/export/index" />
+
+        <add id="Ceg_Core::import"
+             title="Importar Pedidos"
+             module="Ceg_Core"
+             sortOrder="20"
+             parent="Ceg_Core::ceg_quotes"
+             resource="Ceg_Core::import"
+             action="ceg/import/index" />
+
+
+        <!-- Config -->
+        <add id="Ceg_Core::ceg_config"
+             title="Configuraciones"
+             module="Ceg_Core"
+             sortOrder="20"
+             parent="Ceg_Core::menu_index"
+             resource="Ceg_Core::ceg_config" />
+
+        <add id="Ceg_Core::ceg"
+             title="CEG Configs"
+             module="Ceg_Core"
+             sortOrder="20"
+             parent="Ceg_Core::ceg_config"
+             resource="Ceg_Core::ceg"
+             action="admin/system_config/edit/section/ceg" />
+    </menu>
+</config>

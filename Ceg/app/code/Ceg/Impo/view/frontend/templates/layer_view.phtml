@@ -1,0 +1,49 @@
+<?php
+/**
+ * @var $block \Smile\ElasticsuiteCatalog\Block\Navigation
+ */
+?>
+
+<?php if ($block->canShowBlock()): ?>
+    <?php $activeFilters = $block->getActiveFilters(); ?>
+<div class="block filter" id="layered-filter-block"
+     data-mage-init='{"collapsible":
+        {"openedState": "active", "collapsible": true, "active": false,
+            "collateral":{ "openedState": "force-index", "element": ".page-header" } }}'>
+    <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+    <div class="block-title filter-title" data-count="<?= /* @noEscape */ $filtered ?>">
+        <strong data-role="title"><?= $block->escapeHtml(__('Shop By')) ?></strong>
+    </div>
+
+    <div class="block-content filter-content">
+    <?= $block->getChildHtml('state') ?>
+
+    <?php if ($block->getLayer()->getState()->getFilters()): ?>
+        <div class="block-actions filter-actions">
+            <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>"
+               class="action clear filter-clear"><span><?= $block->escapeHtml(__('Clear All')) ?></span></a>
+        </div>
+        <?php endif; ?>
+        <strong role="heading" aria-level="2"
+                class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Shop By')) ?></strong>
+        <div class="filter-options" id="narrow-by-list" data-role="content"
+             data-mage-init='{"accordion":{"openedState": "active", "collapsible": true,
+                    "active": <?=  /* @noEscape */ $activeFilters; ?>,
+                    "multipleCollapsible": <?= /* @noEscape */ $block->isInline() ? "false" : "true"; ?>}}'>
+            <?php foreach ($block->getFilters() as $filter): ?>
+                <?php $rendered = $block->getChildBlock('renderer')->render($filter);?>
+                <?php if ($rendered != ""): ?>
+                    <div data-role="collapsible" class="filter-options-item">
+                        <div data-role="title"
+                             class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></div>
+                        <?php if ($filter->getItemsCount()): ?>
+                            <div data-role="content"
+                                 class="filter-options-content"><?= /* @noEscape */ $rendered ?></div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,62 @@
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Ceg\Checkout\Block\Success $block
+ * @var \Ceg\Analytics\ViewModel\AnalyticsData $viewModel
+ */
+$viewModel = $block->getAnalyticsViewModel();
+$code = $viewModel->getFbConfigSuccess();
+$token = $viewModel->getFbToken();
+
+// get quote items collection
+$itemsCollection = $block->getQuote()->getItemsCollection();
+
+// get array of all items what can be display directly
+$itemsVisible = $block->getQuote()->getAllVisibleItems();
+// get quote items array
+$items = $block->getQuote()->getAllItems();
+
+if (!empty($code)):
+    $time = new DateTime();
+    $contents=[];
+    foreach ($items as $item) { 
+        $contents['id']=$item->getProductId();
+        $contents['quantity']=$item->getQty();
+    }
+    $contents=json_encode($contents);
+    $data = ['data' => [json_encode([
+        'event_name'=>'Purchase',
+        'event_time'=>$time->getTimestamp(),
+        'user_data'=>[
+            'client_ip_address'=>$viewModel->getServer('REMOTE_ADDR'),
+            'client_user_agent'=>$viewModel->getServer('HTTP_USER_AGENT')
+        ],
+        'contents'=>[$contents],
+        'value'=>$block->getQuote()->getGrandTotal(),
+        'currency'=>$viewModel->getCurrencySymbol(),
+        'event_source_url'=>$viewModel->getCurrentUrl(),
+        'action_source'=>'website'
+    ])],
+    'access_token' => $viewModel->getFbToken()];
+
+    $viewModel->fbPostApi($data)
+?>
+    <script type="text/javascript">
+        fbq('track', 'Purchase',
+        // begin parameter object data
+        {
+        value: <?= /* @noEscape */ $block->getQuote()->getGrandTotal();?>,
+        currency: 'USD',
+        contents: [
+            <?php foreach ($items as $item) { ?>
+                <?= /* @noEscape */ '{id: "'.$item->getProductId().'",';?>
+                <?= /* @noEscape */ 'quantity: "'.$item->getQty().'"},';?>
+            <?php }?>
+        ],
+        content_type: 'product'
+        }
+        // end parameter object data
+        );
+    </script>
+<?php endif; ?>
+<!-- Tag manager section -->

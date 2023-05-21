@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ceg_checkout>
+            <general>
+                <active>1</active>
+                <success_message>Su pedido ha sido recibido. Será contactado pronto.</success_message>
+                <approved_cart_message>Usted ya posee un pedido en curso. Dirijasé al carrito para reabrirlo.</approved_cart_message>
+                <closed_cart_message>Su pedido en curso ha sido procesado, por lo tanto no es posible reabrirlo durante esta impo.</closed_cart_message>
+                <reopened_message>Su carrito ha sido reabierto. Si ha realizado modificaciones, deberá volver a tramitar el pedido y aceptar los términos y condiciones.</reopened_message>
+                <cannot_reopen_message>Usted tiene un pedido en curso, sin embargo la impo ha finalizado y no puede editarse.</cannot_reopen_message>
+                <reopen_message>Usted tiene un pedido en curso, la impo todavia está vigente y puede editarse.¿Desea reabrir su carrito?</reopen_message>
+                <reopen_button_message>Reabrir Carrito</reopen_button_message>
+                <invalid_impo_message>Su carrito contiene productos de una Importación finalizada. Por favor, reviselos para poder terminar el pedido.</invalid_impo_message>
+                <quote_status_label_open>Abierto</quote_status_label_open>
+                <quote_status_label_approved>En curso</quote_status_label_approved>
+                <quote_status_label_closed>En revisión</quote_status_label_closed>
+                <products_qty_in_summary>3</products_qty_in_summary>
+            </general>
+        </ceg_checkout>
+    </default>
+</config>

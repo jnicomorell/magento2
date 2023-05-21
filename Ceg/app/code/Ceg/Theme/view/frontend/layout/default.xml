@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="viewport"
+              content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1, user-scalable = no"/>
+        <css src="https://use.fontawesome.com/releases/v5.7.1/css/all.css" src_type="url"/>
+    </head>
+    <body>
+        <attribute name="class" value="ceg-theme"/>
+        <attribute name="class" value="full-width"/>
+        <referenceBlock name="logo">
+            <action method="setLogoFile">
+                <argument name="logo_file" xsi:type="string">Ceg_Theme::images/logo.svg</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="catalog.topnav" >
+            <arguments>
+                <argument name="view_model_customer_session" xsi:type="object">Ceg\Core\ViewModel\CustomerSession</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Ceg_Theme::html/topmenu.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="skip_to_content" remove="true" />
+        <move element="top.search" destination="header-wrapper" after="logo" />
+        <move element="header.panel.wrapper" destination="header-wrapper"/>
+
+        <referenceBlock name="navigation.sections" template="Ceg_Theme::html/sections.phtml">
+            <block class="Magento\Framework\View\Element\Template" name="mobile-menu" group="navigation-sections" template="Ceg_Theme::html/mobilemenu.phtml">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Menu</argument>
+                </arguments>
+                <block class="Magento\Theme\Block\Html\Topmenu" name="mobile-menu-topnav" template="Ceg_Theme::html/topmenu.phtml" />
+                <block class="Magento\Theme\Block\Html\Header" name="mobile-menu-apps" />
+                <block class="Magento\Customer\Block\Account\Customer" name="mobile-menu-customer" template="Magento_Customer::account/customer.phtml" >
+                    <block class="Magento\Customer\Block\Account\Link" name="mobile-menu-myaccount" template="Ceg_Theme::html/link.phtml" />
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" name="mobile-menu-authorizationlink" template="Ceg_Theme::html/authorization.phtml" />
+                </block>
+            </block>
+        </referenceBlock>
+
+    </body>
+</page>

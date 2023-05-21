@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ceg_checkout" translate="label" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Quote Checkout</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_Checkout::checkout</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Quote Checkout Configuration</label>
+                <field id="active" translate="label comment" sortOrder="01" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="success_message" translate="label" type="textarea" sortOrder="02" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Success Page Message</label>
+                    <comment>Message shown to customer when Quote is confirmed</comment>
+                </field>
+                <field id="approved_cart_message" translate="label" type="textarea" sortOrder="03" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cart Approved Message</label>
+                    <comment>Message shown to customer when current quote is approved and try to add new products</comment>
+                </field>
+                <field id="closed_cart_message" translate="label" type="textarea" sortOrder="04" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cart Closed Message</label>
+                    <comment>Message shown to customer when Quote is closed</comment>
+                </field>
+                <field id="reopened_message" translate="label" type="textarea" sortOrder="05" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cart Reopened Message</label>
+                    <comment>Message shown to customer when Quote is reopen</comment>
+                </field>
+                <field id="cannot_reopen_message" translate="label" type="textarea" sortOrder="06" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cart Can't Be Reopen Message</label>
+                    <comment>Message shown to customer when Quote can't be reopen</comment>
+                </field>
+                <field id="invalid_impo_message" translate="label" type="textarea" sortOrder="07" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Invalid importation Message</label>
+                    <comment>Text shown to customer when Quote contains item of an finished Importation</comment>
+                </field>
+                <field id="reopen_message" translate="label" type="textarea" sortOrder="08" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cart Reopen Message</label>
+                    <comment>Message shown to customer when Quote will be reopen</comment>
+                </field>
+                <field id="reopen_button_message" translate="label" type="text" sortOrder="09" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cart Reopen Button Message</label>
+                    <comment>Text shown to customer when Quote will be reopen on button</comment>
+                </field>
+
+                <field id="quote_status_label_approved" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Label for Cart Status Approved</label>
+                    <comment>Label shown to customer when view Order List or Order Detail</comment>
+                </field>
+                <field id="quote_status_label_closed" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Label for Cart Status Closed</label>
+                    <comment>Label shown to customer when view Order List or Order Detail</comment>
+                </field>
+
+                <field id="products_qty_in_summary" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Products quantity in summary</label>
+                    <comment>Quantity of products that will be shown in the preview of the cart summary</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,24 @@
+<?php
+/**
+ * Reopen cart template
+ *
+ * @var $escaper \Magento\Framework\Escaper
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if ($block->getItemsCount() > '0' && $block->isCheckoutAllowed()): ?>
+    <?php if ($block->isReopen() && $block->isValidImpo()): ?>
+        <div class="messages_dark" role="alert">
+            <div class="message-warning warning message">
+                <span><?= $escaper->escapeHtml($block->getReopenedMessage()); ?></span>
+                <button type="button"
+                        data-role="proceed-to-checkout"
+                        title="Continuar pedido"
+                        class="action primary checkout click-continue-order-buton"
+                        onclick="document.location='<?=/* @noEscape */ $block->getUrl('checkout/cart', ['_secure' => true]); ?>'">
+                    <span><?= /* @noEscape */ __('Continuar pedido')?></span>
+                </button>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Quote\Model\QuoteRepository"
+                type="Ceg\Quote\Rewrite\Magento\Quote\Model\QuoteRepository" />
+
+    <preference for="Magento\Quote\Model\Quote"
+                type="Ceg\Quote\Rewrite\Magento\Quote\Model\Quote" />
+
+    <preference for="Magento\Quote\Model\Quote\Item"
+                type="Ceg\Quote\Rewrite\Magento\Quote\Model\Quote\Item" />
+
+    <preference for="Magento\Sales\Model\ResourceModel\Collection\ExpiredQuotesCollection"
+                type="Ceg\Quote\Rewrite\Magento\Sales\Model\ResourceModel\Collection\ExpiredQuotesCollection" />
+
+    <preference for="Magento\InventorySales\Plugin\Sales\OrderManagement\AppendReservationsAfterOrderPlacementPlugin"
+                type="Ceg\Quote\Rewrite\Magento\InventorySales\Plugin\OrderManagement\AppendReservationsAfterOrderPlacement" />
+
+    <preference for="Magento\Sales\Cron\CleanExpiredQuotes"
+                type="Ceg\Quote\Cron\CleanExpiredQuotes" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="quotes_listing_data_source" xsi:type="string">QuotesGridDataCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="QuotesGridDataCollection" type="Ceg\Quote\Ui\Component\Providers\View\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">quote</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Quote\Model\ResourceModel\Quote\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Sales\Model\Service\OrderService">
+        <plugin name="OrderServicePlugin" type="Ceg\Quote\Plugin\OrderService" />
+    </type>
+
+</config>

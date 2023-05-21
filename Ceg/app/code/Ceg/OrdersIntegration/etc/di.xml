@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Ceg\OrdersIntegration\Api\IntegrationRepositoryInterface"
+                type="Ceg\OrdersIntegration\Model\IntegrationRepository" />
+    <preference for="Ceg\OrdersIntegration\Api\Data\Integration\OrderInterface"
+                type="Ceg\OrdersIntegration\Model\Integration\Order" />
+    <preference for="Ceg\OrdersIntegration\Api\Data\Integration\ProductInterface"
+                type="Ceg\OrdersIntegration\Model\Integration\Product" />
+    <preference for="Ceg\OrdersIntegration\Api\Data\Integration\ResultInterface"
+                type="Ceg\OrdersIntegration\Model\Integration\Result" />
+
+    <preference for="Ceg\OrdersIntegration\Api\QueueRepositoryInterface"
+                type="Ceg\OrdersIntegration\Model\QueueRepository" />
+    <preference for="Ceg\OrdersIntegration\Api\Data\QueueInterface"
+                type="Ceg\OrdersIntegration\Model\Queue" />
+
+    <type name="Ceg\Quote\Rewrite\Magento\Quote\Model\Quote">
+        <plugin name="CegOrdersIntegrationQuote"
+                type="Ceg\OrdersIntegration\Plugin\Quote" />
+    </type>
+
+</config>

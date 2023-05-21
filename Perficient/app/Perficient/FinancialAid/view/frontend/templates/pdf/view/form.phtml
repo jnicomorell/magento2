@@ -1,0 +1,294 @@
+<?php
+$form_data = $block->getFormData();
+$consenttitle = $block->getConsenttitle();
+$consenttext = $block->getConsenttext();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    @page {
+        margin: 20px 20px;
+        padding-bottom: 90px;
+    }
+
+    header {
+        position: fixed;
+        top: -70px;
+        left: 0px;
+        right: 0px;
+        height: 100px;
+        color: white;
+        text-align: left;
+        line-height: 35px;
+        margin: 0 30px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 70px;
+        padding: 5px 20px 20px 20px;
+        background: #62bace;
+    }
+
+    a {
+        color: #62bace;
+    }
+
+    div {
+        color: #000
+    }
+    </style>
+</head>
+
+<body>
+    <div class="col-md-12 col-m-6 page-title-wrapper">
+        <h1 style="font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;; color: #150E56; text-align: left; font-size:25px"
+            class="page-title">
+            <span class="base" data-ui-id="page-title-wrapper">Lake Tahoe Community College</span>
+        </h1>
+        <h1 style="font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;; color: #150E56; text-align: left; font-size:11px"
+            class="page-title">
+            <span class="base" data-ui-id="page-title-wrapper">Request to use my financial aid</span>
+        </h1>
+        <p style=" color: ##202020;font-size: 10px !important;" class="text1">Use this form to submit a request to use your financial aid funds to purchase the product you selected.
+            <br><br>
+            By submitting this form, Vista Higher Learning will transmit this information to your Financial Aid Office for review.
+            <br><br>
+
+            Based on the review of your eligibility, your request will be approved or denied by your Financial Aid Office. They may reach out to you for more information regarding this request or your financial aid status.
+            <br><br>
+            
+            This process may take up to 7-10 days. You will be notified by Vista Higher Learning after we’ve received confirmation from your Financial Aid Office. If approved, your digital access will be activated in your account at VHLcentral and a confirmation email will be sent to you.. If your order contains a print item, it will be shipped to the address you provide below. If denied, you will receive a notification from Vista Higher Learning.
+            <br><br>
+
+            If you have any questions regarding your eligibility for financial aid or the use of your financial aid funds, please reach out to your Financial Aid Officer. If you have any questions about completing this form, you can contact VHL Customer Service.</p>
+        <h3 style="font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;; font-size: 11px; color: #150E56; text-align: left;"
+            class="page-subtitle">
+            <span class="base" data-ui-id="page-subtitle-wrapper">Complete and submit the form below for review by your
+                Financial Aid Office.</span>
+        </h3>
+    </div>
+    <div class="col-md-12 col-m-6">
+        <fieldset
+            style="background: white;border-radius: 8px;box-shadow: 0px 1px 8px #00000014;margin-bottom: 20px;border: 0;padding: 11px;"
+            class="fieldset">
+            <div style="display: flex;margin-bottom: 10px;" class="group-1">
+                <div style="width: 250px; display:inline-block;" class="field first-name required">
+                    <label class="label" for="first-name"><span>First name</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="first-name" id="first-name" title="First Name" class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['fname']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 250px; display:inline-block;"
+                    class="field last-name required">
+                    <label class="label" for="last-name"><span>Last name</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="last-name" id="last-name" title='Last Name' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['lname']?>" />
+                    </div>
+                </div>
+
+            </div>
+            <div style="display: flex;margin-bottom: 10px;" class="group-2">
+                <div style="width: 250px; display:inline-block;" class="field email required">
+                    <label class="label" for="email"><span>Email address</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="email" id="email" title='Email Adress' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['email']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 250px; display:inline-block;"
+                    class="field student required">
+                    <label class="label" for="student"><span>Phone number</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="student" id="student" title='Student ID' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['phone']?>" />
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;margin-bottom: 10px;" class="group-3">
+                <div style="width: 250px; display:inline-block;" class="field phone required">
+                    <label class="label" for="phone"><span>School student ID</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="phone" id="phone" title='Phone Number' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['studentid']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 250px; display:inline-block;"
+                    class="field school required reveal-if-educator">
+                    <label class="label" for="school" data-role="minisearch-label"><span>School name</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            id="school" data-mage-init='{"vhlSchoolSearch":{
+                                        "formSelector":"#trial-request-form",
+                                        "destinationSelector":"#school_autocomplete",
+                                        "minSearchLength": 3}
+                                }' type="text" name="school" title="School" class="input-text require-if-educator"
+                            maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both"
+                            autocomplete="on" data-validate="{required:true}"
+                            value="<?php echo $form_data['school']?>" />
+                        <div id="school_autocomplete" class="search-autocomplete"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8 col-m-6">
+                <div class="product-item-details">
+                    <strong
+                        style="font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;color: #150E56; font-size:11px"
+                        class="productrequested">Product requested</strong>
+                </div>
+            </div><br>
+            <div style="display: flex;margin-bottom: 10px;" class="group-4">
+                <div style="width: 250px; display:inline-block;" class="field isbn">
+                    <label class="label" for="isbn"><span>ISBN</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="isbn" id="isbn" title='ISBN' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['isbn']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 265px; display:inline-block;"
+                    class="field product-price">
+                    <label class="label" for="product-price"><span>Description</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;;"
+                            name="product-price" id="product-price"
+                            title='School Product price (Tax faucibus orci condimentum)' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['description']?>" />
+                    </div>
+                </div>
+            </div>
+            <div class="field product-name">
+                <label class="label" for="product-name"><span>Price (Sales tax not included) </span></label>
+                <div class="control">
+                    <input
+                        style="margin-bottom: 12px;background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;box-sizing: border-box;width: 250px;"
+                        name="product-name" id="product-name" title='Description' class="input-text" type="text"
+                        data-validate="{required:true}" value="<?php echo $form_data['price']?>" />
+                </div>
+            </div>
+
+            <div class="col-md-8 col-m-6">
+                <div class="product-item-details">
+                    <strong
+                        style="font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #150E56;font-size:11px"
+                        class="shipping">Address information</strong>
+                    <p
+                        style="font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:10px">
+                        We are asking for this in order to calculate the sales tax. If your order contains a print item, that will be shipped to this address as well.</p>
+                </div>
+            </div>
+            <div style="display: flex;margin-bottom: 10px;" class="group-5">
+                <div style="width: 250px; display:inline-block;" class="field address-1">
+                    <label class="label" for="addres-1"><span>Address line 1 </span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="addres-1" id="addres-1" title='Addres Line 1' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['address_one']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 250px; display:inline-block;"
+                    class="field address-2">
+                    <label class="label" for="address-2"><span>Address line 2 (Optional)</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="address-2" id="address-2" title='Address Line 2 (Optional)' class="input-text"
+                            type="text" data-validate="{required:true}"
+                            value="<?php echo $form_data['address_two']?>" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex;margin-bottom: 10px;" class="group-6">
+                <div style="width: 250px; display:inline-block;"
+                    class="field city">
+                    <label class="label" for="city"><span>City</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="city" id="city" title='City' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['city']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 250px; display:inline-block;" class="field state">
+                    <label class="label" for="state"><span>State</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="state" id="state" title='State' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['state']?>" />
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;margin-bottom: 10px;" class="group-7">
+
+                <div style="width: 250px; display:inline-block;"
+                    class="field postalcode">
+                    <label class="label" for="zip"><span>Zip code</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="zip" id="postalcode" title='Zip Code / Postal Code' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['zip']?>" />
+                    </div>
+                </div>
+                <div style="margin-left: 40px;margin-right: 10px;width: 250px; display:inline-block;" class="field country required">
+                    <label class="label" for="country"><span>Country / Region</span></label>
+                    <div class="control">
+                        <input
+                            style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 20px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                            name="country" id="country" title='Country / Region' class="input-text" type="text"
+                            data-validate="{required:true}" value="<?php echo $form_data['country']?>" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="field email-pref">
+                <div class="control">
+                    <p style="font-weight: bold; font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #150E56;font-size:11px"
+                        class="text3"><?php echo $consenttitle;?></p>
+                    <input style="margin: 2px 5.5px 0 0;position: relative;top: 2px;" type="checkbox" name="consent"
+                        value="1" id="email-pref" title='Lorem' checked="checked" />
+                    <label style="color: #202020;" class="label" for="consent"><span class="check"><?php echo $consenttext;?></span></label>
+                </div>
+            </div>
+            <div style="margin-block: 10px;" class="field signature">
+                <label class="label" for="signature"><span>Signature</span></label>
+                <div class="control">
+                    <input
+                        style="background: #ffffff;background-clip: padding-box;border: 1px solid #e9e9ed;border-radius: 4px;color: #202020;font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 10px;height: 50px;line-height: 1.42857143;padding: 0 5px;vertical-align: baseline;width: 250px; display:inline-block;box-sizing: border-box;"
+                        name="signature" id="signature" title='Signature' class="input-text" type="text"
+                        value="<?php echo $form_data['signature']?>" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <style>
+    label {
+        font-size: 10px;
+        color: #202020;
+        font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    </style>
+</body>
+</html>

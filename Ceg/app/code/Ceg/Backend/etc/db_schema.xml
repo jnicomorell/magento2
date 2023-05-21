@@ -1,0 +1,6 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="admin_user" resource="default" comment="Admin User Table">
+        <column xsi:type="varchar" name="auth0_hash" nullable="true" length="255" comment="Auth0 User Password"/>
+    </table>
+</schema>

@@ -1,0 +1,271 @@
+@font-face {
+    font-family: 'Petrona';
+    font-style: normal;
+    font-weight: 700;
+    src: url('@{baseDir}fonts/Petrona/petrona-700.eot'); /* IE9 Compat Modes */
+}
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('@{baseDir}fonts/NunitoSans/nunito-sans-v6-latin-regular.eot'); /* IE9 Compat Modes */
+}
+body.financialaid-product-access{
+    background-color: #f5f5f5;
+    .col-md-8.col-m-6{
+        padding-inline: 9px;
+    }
+    .breadcrumbs{
+        padding-top: 20px;
+    }
+    h1.page-title{
+        font-family: 'Petrona' !important;
+        color: #150E56;
+        text-align: left;
+        font-size: 40px;
+    }
+    h3.page-subtitle{
+        font-family: 'Petrona';
+        font-size: 20px;
+        color: #150E56;
+        text-align: left;
+    }
+    a{
+        color: #150E56;
+    }
+
+    strong.shipping{
+        color: #150E56;
+    }
+    strong.productrequested{
+        color: #150E56;
+    }
+    p{
+        text-align: left;
+    }
+    p.text1{
+        font-size: 14px !important;
+        color: #202020;
+    }
+    p.text2{
+        font-size: 14px !important;
+        margin-block: 17px;
+        color: #202020;
+    }
+    p.text4{
+        font-size: 14px !important;
+        margin-bottom: 17px;
+        color: #202020;
+    }
+    
+    
+
+    fieldset.fieldset{
+        padding: 11px;
+    }
+    form#trial-request-form{
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0px 1px 8px #00000014;
+        margin-bottom: 40px;
+    }
+    label{
+        font-size: 14px;
+    }
+    .control{
+        input{
+            color: #202020;
+            font-size: 14px;
+        }
+    }
+    input{
+        &:focus {
+            border: 1px solid #e9e9ed;;
+        }
+
+        &:active {
+            border: 1px solid #e9e9ed;;
+        }
+    }
+
+    input[readonly]{
+        background:#E0E0E2;
+    }
+    .product-item-details{
+        margin-block: 15px;
+    }
+   
+    
+    .row.trial-request-form{
+        display: inline;
+        p{
+            color: #202020;
+        }
+        .subtitle{
+            p.subtitle{
+                font-size: 22px;
+                color: #150E56;
+                font-weight: bold;
+            }
+        }
+        p.text3{
+            color: #150E56;
+            font-weight: bold;
+        }
+
+        .group-1{
+            display: flex;
+            margin-bottom: 25px;
+
+            .field.name.required{
+                width: 100%;
+            }
+            .field.first-name.required{
+                padding-left: 10px;
+                width: 100%;
+            }
+        }
+
+        .group-2{
+            display: flex;
+            margin-bottom: 25px;
+
+            .field.email.required{
+                width: 100%;
+            }
+            .field.phone.required{
+                padding-left: 10px;
+                width: 100%;
+            }
+        }
+        
+        .group-3{
+            display: flex;
+            margin-bottom: 40px;
+
+            .field.school.required.reveal-if-educator{
+                width: 100%;
+            }
+            .field.student.required{
+                padding-left: 10px;
+                width: 100%;
+            }
+        }
+
+        .group-4{
+            display: flex;
+            margin-bottom: 25px;
+
+            .field.isbn{
+                width: 100%;
+            }
+            
+            .field.product-name{
+                position: relative;
+                width: 100%;
+            }
+        }
+        .field.product-price{
+            padding-left: 10px;
+            width: 49%;
+            margin-bottom: 40px;
+        }
+        
+        .group-5{
+            display: flex;
+            margin-bottom: 25px;
+
+            .field.address-1{
+                width: 100%;
+            }
+            .field.address-2{
+                padding-left: 10px;
+                width: 100%;
+            }
+        }
+
+        .group-6{
+            display: flex;
+            margin-bottom: 25px;
+
+            .field.country.required{
+                width: 100%;
+            }
+            .field.postalcode{
+                padding-left: 10px;
+                width: 100%;
+            }
+        }
+
+        .field select#state{
+            width: 100%;
+            &:focus{
+                border: 1px solid #e9e9ed;
+            }
+            &:active{
+                border: 1px solid #e9e9ed;
+            }
+        }
+
+        .group-7{
+            display: flex;
+            margin-bottom: 25px;
+
+            .field.city{
+                padding-left: 10px;
+                width: 100%;
+            }
+        }
+        div[class^="group"] {
+            .field {
+                width: 100%;
+                padding-left: 10px;
+            }
+        }
+
+        input#signature{
+            height: 70px;
+        }
+
+        .btn-group{
+            padding: 20px;
+
+            button.btn.medium {
+                background-color: #150e56;
+                color: #ffffff;
+            }
+        }
+        .field.signature {
+            padding-inline: 9px;
+        }
+        .field.email-pref{
+            padding-inline: 9px;
+        }
+
+        .form.trial-request{
+            .control{
+                span.check {
+                    font-size: 16px !important;
+                    display: block;
+                    margin-inline: 20px;
+                    margin-block: -21px;
+                    margin-bottom: 10px;
+                    width: 82%;
+                    letter-spacing: 0.44px;
+                    color: #202020;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 500px){
+        .field.isbn{
+            margin-top: 45px;
+        }
+    }
+}
+input[readonly] {
+    opacity: 0.5;
+    background: #e9e9ed;
+    border: solid 1px #e9e9ed;
+    font-size: 14px;
+}

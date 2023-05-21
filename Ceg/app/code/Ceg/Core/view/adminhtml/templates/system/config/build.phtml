@@ -1,0 +1,15 @@
+<style>
+    .mtools-modules{
+        padding-left: 50px;
+    }
+    .mtools-modules th{
+        text-align: left;
+    }
+</style>
+<div class="mtools-modules">
+    <div>
+        <?php foreach ($block->getBuild() as $line): ?>
+            <div><?= $block->escapeHtml($line) ?></div>
+        <?php endforeach; ?>
+    </div>
+</div>

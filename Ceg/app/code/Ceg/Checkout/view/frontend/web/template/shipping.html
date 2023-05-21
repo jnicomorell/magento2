@@ -1,0 +1,87 @@
+<li id="shipping" class="checkout-shipping-address" data-bind="fadeVisible: visible()">
+<!--    <div class="step-title" translate="'Shipping Address'" data-role="title" />-->
+    <div id="checkout-step-shipping"
+         class="step-content"
+         data-role="content">
+
+        <!-- Address form pop up -->
+        <div class="checkout-shipping-first-address" visible="(isFirstAddress && !isNewAddressAdded())">
+            <div class="first-address-title">
+                <span class="title" translate="'Add your first address'"/>
+            </div>
+            <div class="first-address-comment">
+                <span class="comment" translate="'You must add a shipping address to receive your purchases'"/>
+            </div>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <a class="action continue" href="" click="showFormPopUp">
+                        <span class="title" translate="'Add address'"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="new-address-popup">
+            <if args="!isFirstAddress">
+                <a class="action action-show-popup"
+                   href=""
+                   click="showFormPopUp"
+                   visible="!isNewAddressAdded()">
+                    <span translate="'Add another address'" />
+                </a>
+            </if>
+        </div>
+        <if args="hasInvalidAddress">
+            <div class="invalid-address-info" role="alert">
+                <span class="title" data-bind="i18n: 'Some of your addresses require verifying street and number'"/>
+                <span data-bind="i18n: 'To change your address you can go to'"/>
+                <a class="action" data-bind="attr: { href: customerAddressesUrl }, i18n: 'My Account'"/>
+            </div>
+        </if>
+        <div id="opc-new-shipping-address"
+             visible="isFormPopUpVisible()"
+             render="shippingFormTemplate" />
+
+        <each if="!quoteIsVirtual" args="getRegion('customer-email')" render="" />
+        <each args="getRegion('address-list')" render="" />
+        <each args="getRegion('address-list-additional-addresses')" render="" />
+
+        <each args="getRegion('before-form')" render="" />
+    </div>
+</li>
+
+<!--Shipping method template-->
+<li id="opc-shipping_method"
+    class="checkout-shipping-method"
+    data-bind="fadeVisible: visible(), blockLoader: isLoading"
+    role="presentation">
+    <div class="checkout-shipping-method"
+         visible="(!isFirstAddress || isNewAddressAdded())">
+        <each args="getRegion('before-shipping-method-form')" render="" />
+
+        <div id="checkout-step-shipping_method"
+             class="step-content"
+             data-role="content"
+             role="tabpanel"
+             aria-hidden="false">
+            <form id="co-shipping-method-form"
+                  class="form methods-shipping"
+                  if="rates().length"
+                  submit="setShippingInformation"
+                  novalidate="novalidate">
+
+                <div id="onepage-checkout-shipping-method-additional-load">
+                    <each args="getRegion('shippingAdditional')" render="" />
+                </div>
+
+                <div class="actions-toolbar" id="shipping-method-buttons-container">
+                    <div class="primary">
+                        <button data-role="opc-continue" type="submit" class="button action continue primary shipping-address-add">
+                            <span translate="'Choose billing address'" />
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</li>

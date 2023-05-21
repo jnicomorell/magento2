@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Ceg\BitrixIntegration\Api\IntegrationRepositoryInterface"
+                type="Ceg\BitrixIntegration\Model\IntegrationRepository" />
+
+    <preference for="Ceg\BitrixIntegration\Api\Data\Integration\AbstractElementInterface"
+                type="Ceg\BitrixIntegration\Model\Integration\AbstractElement" />
+
+    <preference for="Ceg\BitrixIntegration\Api\Data\Integration\ResultInterface"
+                type="Ceg\BitrixIntegration\Model\Integration\Result" />
+
+    <preference for="Ceg\BitrixIntegration\Api\QueueRepositoryInterface"
+                type="Ceg\BitrixIntegration\Model\QueueRepository" />
+    <preference for="Ceg\BitrixIntegration\Api\Data\QueueInterface"
+                type="Ceg\BitrixIntegration\Model\Queue" />
+
+    <type name="Ceg\Impo\Model\ImpoRepository">
+        <plugin name="CegBitrixImpoIntegration"
+                type="Ceg\BitrixIntegration\Plugin\Impo" />
+    </type>
+
+    <type name="Ceg\BitrixIntegration\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Ceg\BitrixIntegration\Logger\BitrixIntegrationLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">bitrixIntegrationLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Ceg\BitrixIntegration\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+        <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bitrix_queue_listing_data_source" xsi:type="string">BitrixIntegrationGridDataCollection</item>
+            </argument>
+        </arguments>
+    </type>
+        <virtualType name="BitrixIntegrationGridDataCollection" type="Ceg\BitrixIntegration\Ui\Component\Providers\View\Collection">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ceg_bitrix_queue</argument>
+			<argument name="resourceModel" xsi:type="string">Ceg\BitrixIntegration\Model\ResourceModel\Queue\Collection</argument>
+		</arguments>
+	</virtualType>
+
+</config>

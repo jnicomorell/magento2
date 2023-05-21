@@ -1,0 +1,105 @@
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $escaper \Magento\Framework\Escaper
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+if ($block->isCheckoutAllowed()) {
+    if ($block->getItemsCount() !== '0') {
+        if (!$block->isValidImpo()) {
+            // ImpoDate is expired or not-configured.
+            echo $block->getChildHtml('expired-cart');
+        } else {
+            $hasInvalidImpo = $block->hasInvalidImpo();
+            if ($block->isApproved()) {
+                if ($hasInvalidImpo) {
+                    // Show message will contains invalid impo
+                    echo $block->getChildHtml('finished-impo');
+                } else {
+                    // Show message will accept terms
+                    echo $block->getChildHtml('reopen-cart');
+                }
+            }
+            if ($block->isReopen()) {
+                if ($hasInvalidImpo) {
+                    // Show message will contains invalid impo
+                    echo $block->getChildHtml('with-invalid-impo');
+                }
+                // Show message accept terms
+                echo $block->getChildHtml('reopened-cart-info');
+                echo $block->getChildHtml('with-items');
+            }
+            if ($block->isOpen()) {
+                if ($hasInvalidImpo) {
+                    // Show message will contains invalid impo
+                    echo $block->getChildHtml('with-invalid-impo');
+                }
+                // Normal cart flow
+                echo $block->getChildHtml('with-items');
+            }
+            if ($block->isClosed()) {
+                // Closed cart flow
+                echo $block->getChildHtml('cart-processed');
+            }
+        }
+
+    } else {
+        // Empty cart
+        if ($block->isValidImpo()) {
+            echo $block->getChildHtml('no-items');
+        }
+    }
+} else {
+    echo $block->getChildHtml('not-allowed');
+}?>
+<div class="modal_wrapper hide">
+    <div class="modal_container modal_remove hide">
+        <a class="close-modal"><i class="fas fa-times"></i></a>
+        <h3><?= /* @noEscape */ __("Remove product?");?></h3>
+        <span><?= /* @noEscape */ __("You will remove")?>
+            <span class="product-to-remove"></span> <?= /* @noEscape */ __("from your cart.")?>
+        </span>
+        <div class="modal-actions">
+            <button type="button"
+                    data-role="remove-product"
+                    title="<?= /* @noEscape */ __("Remove");?>"
+                    class="action primary remove-product"
+                    data-remove-product="">
+                <span><?= /* @noEscape */ __("Remove");?></span>
+            </button>
+            <button type="button"
+                    data-role="close-modal"
+                    title="<?= /* @noEscape */ __("Cancel");?>"
+                    class="action secondary">
+                <span><?= /* @noEscape */ __("Cancel");?></span>
+            </button>
+        </div>
+    </div>
+    <div class="modal_container modal_clearcart hide">
+        <a class="close-modal"><i class="fas fa-times"></i></a>
+        <h3><?= /* @noEscape */ __("Do you want to empty your cart?");?></h3>
+        <span><?= /* @noEscape */ __("You are about to remove")?>
+        <span class="product-to-remove"></span> <?= /* @noEscape */ __("from your cart.")?>
+            <?= /* @noEscape */ __("and you are going to empty your cart.")?><br>
+            <?= /* @noEscape */ ($block->getQuote()->getParentOrderId() != 0)
+                ? __("This implies that you are going to cancel your order.") .' Nº '.
+                $block->getQuote()->getParentOrderId() : ""; ?>
+        </span>
+        <div class="modal-actions">
+            <button type="button"
+                    data-role="remove-product"
+                    title="<?= /* @noEscape */ __("Empty cart");?>"
+                    class="action primary clearcart remove-product"
+                    data-remove-product="">
+                <span><?= /* @noEscape */ __("Empty cart");?></span>
+            </button>
+            <button type="button"
+                    data-role="close-modal"
+                    title="<?= /* @noEscape */ __("Cancel");?>"
+                    class="action secondary">
+                <span><?= /* @noEscape */ __("Cancel");?></span>
+            </button>
+        </div>
+    </div>
+</div>

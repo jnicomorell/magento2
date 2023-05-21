@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ceg_ordersintegration>
+            <general>
+                <active>0</active>
+                <cron_schedule>*/15 * * * *</cron_schedule>
+            </general>
+            <app>
+                <active_redirect>0</active_redirect>
+                <url>https://orders.comprandoengrupo.com/</url>
+                <title>Mis Pedidos</title>
+            </app>
+            <api>
+                <enable_send>0</enable_send>
+                <timeout>5</timeout>
+                <create_api_url></create_api_url>
+                <update_api_url></update_api_url>
+                <delete_api_url></delete_api_url>
+                <token>
+                    <client_id>2t6zyq1HCYXo77MJ3TjrRnmuqUYdBkzx</client_id>
+                    <client_secret>4P4npt7A2O9iBs1asSdI4ndeOej3STvoQBKWk78EawRYS38LV1kUli42YEp7rjgf</client_secret>
+                    <audience>https://demo-cegdev.us.auth0.com/api/v2/</audience>
+                    <url>https://demo-cegdev.us.auth0.com/oauth/token</url>
+                </token>
+            </api>
+        </ceg_ordersintegration>
+    </default>
+</config>

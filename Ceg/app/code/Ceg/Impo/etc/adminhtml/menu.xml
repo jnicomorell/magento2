@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ceg_Impo::publications"
+             title="Publicaciones"
+             module="Ceg_Impo"
+             sortOrder="30"
+             parent="Ceg_Core::menu_index"
+             resource="Ceg_Impo::publications" />
+
+        <add id="Ceg_Impo::impo_view"
+             title="Impo"
+             module="Ceg_Impo"
+             sortOrder="10"
+             parent="Ceg_Impo::publications"
+             resource="Ceg_Impo::impo_view"
+             action="impo/publication/index" />
+    </menu>
+</config>

@@ -1,0 +1,11 @@
+<?php
+/** @var $escaper \Magento\Framework\Escaper */
+/** @var $block \Magento\Framework\View\Element\Template */
+$vmOrder = $block->getViewModelOrder();
+?>
+<span class="link">
+    <a id="goorders_link" target="_blank" class="link" style="font-size: 2rem;"
+       href="<?= /* @noEscape */ $vmOrder->getAppGoProductTrackingUrl() ?>" >
+        <span><?= $escaper->escapeHtml(__('Ver seguimiento de productos')) ?> </span>
+    </a>
+</span>

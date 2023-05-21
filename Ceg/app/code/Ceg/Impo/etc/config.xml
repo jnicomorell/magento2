@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <impo>
+            <general>
+                <expired_title>Por el momento no hay importaciones abiertas</expired_title>
+                <expired_message>Puedes ver algunos de nuestros productos del catálogo</expired_message>
+                <cron_schedule>5 * * * *</cron_schedule>
+                <layer_category_id>3</layer_category_id>
+            </general>
+            <button>
+                <add>Agregar al carrito</add>
+                <update>Actualizar carrito</update>
+            </button>
+        </impo>
+    </default>
+</config>

@@ -1,0 +1,108 @@
+<?php
+/** @var $block \Magento\Sales\Block\Order\Recent */
+?>
+<div class="block block-dashboard-orders">
+<?php
+    $orders = $block->getOrders();
+    $count = count($orders);
+    $vmCustomer = $block->getViewModelCustomer();
+    $quotes = $vmCustomer->getCustomerQuotes();
+    $countQuotes = count($quotes);
+?>
+<?php $_colOrder = __('Order #') ?>
+<?php $_colDate = __('Date') ?>
+<?php $_colShip = __('Ship To') ?>
+<?php $_colTotal = __('Order Total') ?>
+<?php $_colAction = __('Actions') ?>
+<?php $_colViewOrder = __('View Order') ?>
+<?php $_colReorder = __('Reorder') ?>
+    <div class="block-title order">
+        <strong><?= $block->escapeHtml(__('Recent Orders')) ?></strong>
+        <?php if ($count > 0): ?>
+            <a class="action view" href="<?= $block->escapeUrl($block->getUrl('sales/order/history')) ?>">
+                <span><?= $block->escapeHtml(__('View All')) ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+    <?= $block->getChildHtml() ?>
+    <?php if ($count > 0 || $countQuotes > 0): ?>
+        <div class="table-wrapper orders-recent">
+            <table class="data table table-order-items recent" id="my-orders-table">
+                <caption class="table-caption"><?= $block->escapeHtml(__('Recent Orders')) ?></caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col id"><?= $block->escapeHtml($_colOrder) ?></th>
+                        <th scope="col" class="col date"><?= $block->escapeHtml($_colDate) ?></th>
+                        <th scope="col" class="col shipping"><?= $block->escapeHtml($_colShip) ?></th>
+                        <th scope="col" class="col total"><?= $block->escapeHtml($_colTotal) ?></th>
+                        <th scope="col" class="col actions"><?= $block->escapeHtml($_colAction) ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($quotes as $_quote): ?>
+                        <?php $viewUrl = $block->escapeHtml($vmCustomer->getViewUrl($_quote)) ?>
+                        <?php $shipping = $block->escapeHtml("&nbsp;") ?>
+                        <?php if ($_quote->getShippingAddress()): ?>
+                            <?php $shipping = $block->escapeHtml($_quote->getShippingAddress()->getName()) ?>
+                        <?php endif ?>
+                        <tr>
+                            <td data-th="<?= $block->escapeHtml($_colOrder) ?>" class="col id">
+                                <?= $block->escapeHtml($_quote->getReservedOrderId()) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colDate) ?>" class="col date">
+                                <?= /* @noEscape */ $block->formatDate($_quote->getUpdatedAt()) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colShip) ?>" class="col shipping">
+                                <?= $block->escapeHtml($shipping) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colTotal) ?>" class="col total">
+                                <?= /* @noEscape */ $vmCustomer->formatPrice($_quote->getGrandTotal()) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colAction) ?>" class="col actions">
+                                <a href="<?= $block->escapeUrl($viewUrl) ?>" class="action view">
+                                    <span><?= $block->escapeHtml($_colViewOrder) ?></span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <?php foreach ($orders as $_order): ?>
+                        <?php $viewUrl = $block->getViewUrl($_order) ?>
+                        <?php $reorderUrl = $vmCustomer->getPostData($block->getReorderUrl($_order)) ?>
+                        <?php $shipping = "&nbsp;" ?>
+                        <?php if ($_order->getShippingAddress()): ?>
+                            <?php $shipping = $_order->getShippingAddress()->getName() ?>
+                        <?php endif ?>
+                        <tr>
+                            <td data-th="<?= $block->escapeHtml($_colOrder) ?>" class="col id">
+                                <?= $block->escapeHtml($_order->getReservedOrderId()) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colDate) ?>" class="col date">
+                                <?= /* @noEscape */ $block->formatDate($_order->getUpdatedAt()) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colShip) ?>" class="col shipping">
+                                <?= $block->escapeHtml($shipping) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colTotal) ?>" class="col total">
+                                <?= /* @noEscape */ $_order->formatPrice($_order->getGrandTotal()) ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml($_colAction) ?>" class="col actions">
+                                <a href="<?= $block->escapeUrl($viewUrl) ?>" class="action view">
+                                    <span><?= $block->escapeHtml($_colViewOrder) ?></span>
+                                </a>
+                                <?php if ($vmCustomer->canReorder($_order->getEntityId())): ?>
+                                    <a href="#" data-post='<?= $block->escapeHtml($reorderUrl) ?>' class="action order">
+                                        <span><?= $block->escapeHtml($_colReorder) ?></span>
+                                    </a>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php else: ?>
+        <div class="message info empty"><span><?= $block->escapeHtml(__('You have placed no orders.')) ?></span></div>
+    <?php endif; ?>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="page_block_html_topmenu_gethtml_before">
+        <observer name="ceg_impo_menu_observer" instance="Ceg\Impo\Observer\Topmenu" />
+    </event>
+    <event name="sales_quote_collect_totals_after">
+        <observer name="ceg_impo_collect_totals_observer" instance="Ceg\Impo\Observer\CollectTotals" />
+    </event>
+</config>

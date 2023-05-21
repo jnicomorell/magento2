@@ -1,0 +1,15 @@
+<?php
+/**
+ * Reopen cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if ($block->getItemsCount() > '0' && $block->isCheckoutAllowed()): ?>
+    <?php if ($block->isReopen() && $block->isValidImpo()): ?>
+        <div class="reopen_info_cart" role="alert">
+            <span><?= $block->escapeHtml(__("These are your products from your order N °%1 in progress.", $block->getQuote()->getParentOrderId()))?></span>
+            <?= $block->escapeHtml(__('Any modification you make in your cart you have to confirm the order.'));?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

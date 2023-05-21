@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">staging_schedule_listing.staging_schedule_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>staging_schedule_columns</spinner>
+		<deps>
+			<dep>staging_schedule_listing.staging_schedule_listing_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="staging_schedule_listing_data_source" component="Magento_Ui/js/grid/provider">
+		<settings>
+			<storageConfig>
+				<param name="indexField" xsi:type="string">staging_id</param>
+			</storageConfig>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Ceg_StagingSchedule::staging_schedule</aclResource>
+		<dataProvider name="staging_schedule_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>staging_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="staging_schedule_columns">
+		<column name="staging_id">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="entity">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Entity</label>
+			</settings>
+		</column>
+		<column name="entity_id">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Entity ID</label>
+			</settings>
+		</column>
+		<column name="action">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Action</label>
+			</settings>
+		</column>
+		<column name="datetime">
+			<settings>
+				<filter>text</filter>
+                <sorting>desc</sorting>
+				<label translate="true">Datetime</label>
+			</settings>
+		</column>
+		<column name="status">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Status</label>
+			</settings>
+		</column>
+		<column name="message">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Message</label>
+			</settings>
+		</column>
+	</columns>
+</listing>

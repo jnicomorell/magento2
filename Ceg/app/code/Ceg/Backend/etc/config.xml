@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ceg_backend>
+            <staff_config>
+                <staff_company_email>comprandoengrupo.net</staff_company_email>
+                <staff_company_role>staff</staff_company_role>
+                <staff_backend_role>148</staff_backend_role>
+            </staff_config>
+        </ceg_backend>
+    </default>
+</config>

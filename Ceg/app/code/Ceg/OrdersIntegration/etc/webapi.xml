@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/orders/integration/setFinalQuantity" method="POST">
+        <service class="Ceg\OrdersIntegration\Api\IntegrationRepositoryInterface" method="setFinalQuantity"/>
+        <resources>
+            <resource ref="Ceg_OrdersIntegration::webapi" />
+        </resources>
+    </route>
+
+    <route url="/V1/orders/integration/setFinalQuantityBulk" method="POST">
+        <service class="Ceg\OrdersIntegration\Api\IntegrationRepositoryInterface" method="setFinalQuantityBulk"/>
+        <resources>
+            <resource ref="Ceg_OrdersIntegration::webapi" />
+        </resources>
+    </route>
+
+</routes>

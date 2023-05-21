@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+
+        <section id="auth0_settings">
+            <group id="backend_settings" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Backend Settings</label>
+                <group id="staff_config" translate="label" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Staff Login Settings</label>
+                    <field id="staff_company_email"
+                           translate="label" type="text" sortOrder="60"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Company Email</label>
+                        <config_path>ceg_backend/staff_config/staff_company_email</config_path>
+                        <comment>Company Email</comment>
+                    </field>
+                    <field id="staff_company_role"
+                           translate="label" type="text" sortOrder="70"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Staff Role</label>
+                        <config_path>ceg_backend/staff_config/staff_company_role</config_path>
+                        <comment>User role in Auth0</comment>
+                    </field>
+                    <field id="staff_backend_role"
+                           translate="label" type="select" sortOrder="80"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Default Role Backend</label>
+                        <config_path>ceg_backend/staff_config/staff_backend_role</config_path>
+                        <source_model>Ceg\Backend\Model\Config\Source\Admin\UserRoles</source_model>
+                        <comment>if the user does not exist it will be created with this default role</comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="impo" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Import Setup</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_Impo::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="expired_title" translate="label comment" type="textarea" sortOrder="01"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Expired Import Title</label>
+                    <comment>Message shown to customer when import date is expired</comment>
+                </field>
+                <field id="expired_message" translate="label" type="textarea" sortOrder="02"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Expired Import Message</label>
+                    <comment>Message shown to customer when import date is expired</comment>
+                </field>
+                <field id="pricedecimals" translate="label" type="select" sortOrder="03"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <source_model>Ceg\Impo\Model\Source\Pricedecimals</source_model>
+                    <label>Price Decimals</label>
+                </field>
+                <field id="cron_schedule" translate="label" type="select" sortOrder="04"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <source_model>Ceg\Core\Model\Config\ScheduleOptions</source_model>
+                    <label>Schedule Check Closed/Opened Imports</label>
+                </field>
+            </group>
+            <group id="sellby" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Sell by</label>
+                <field id="unit_text" translate="label" type="text" sortOrder="01"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Unit</label>
+                </field>
+                <field id="box_text" translate="label" type="text" sortOrder="02"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Box</label>
+                </field>
+            </group>
+            <group id="button" translate="label" type="text" sortOrder="30"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Button</label>
+                <field id="add" translate="label" type="text" sortOrder="01"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Button Add</label>
+                </field>
+                <field id="update" translate="label" type="text" sortOrder="02"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Button Update</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

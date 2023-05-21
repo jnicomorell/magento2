@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="ceg.head.additional.ga" template="Ceg_Analytics::head/ga.phtml" >
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">ga</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="ceg.head.additional.gtag" template="Ceg_Analytics::head/gtag.phtml" >
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">gtag</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="ceg.head.additional.gtm" template="Ceg_Analytics::head/gtm.phtml">
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">gtm</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="ceg.head.additional.hotjar" template="Ceg_Analytics::head/hotjar.phtml">
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">hotjar</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="ceg.head.additional.fb" template="Ceg_Analytics::head/fb.phtml">
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">fb</argument>
+                </arguments>
+            </block>
+
+        </referenceBlock>
+    </body>
+</page>

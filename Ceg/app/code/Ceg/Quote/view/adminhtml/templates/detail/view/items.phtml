@@ -1,0 +1,47 @@
+<?php
+/**
+ * @var \Ceg\Quote\Block\Adminhtml\Detail\View\Items $block
+ */
+$columns = $block->getColumns();
+$lastItemNumber = count($columns);
+$items = $block->getItemsCollection();
+?>
+<div class="admin__table-wrapper">
+    <table class="data-table admin__table-primary edit-order-table">
+        <thead>
+            <tr class="headings">
+                <?php $i = 0; ?>
+                <?php foreach ($columns as $columnName => $column): ?>
+                    <?php $i++; ?>
+                    <?php $columnTitle = $block->getColumnTitle($column); ?>
+                    <?php $positionClass = ($i === $lastItemNumber ? ' last' : ''); ?>
+                    <th class="col-<?= $block->escapeHtmlAttr($columnName) ?><?= /* @noEscape */ $positionClass ?>">
+                        <span><?= $block->escapeHtml($columnTitle) ?></span>
+                    </th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <?php $i = 0; ?>
+        <?php foreach ($items as $item): ?>
+            <?php if ($item->getParentItem()):
+                continue;
+            endif; ?>
+            <?php $i++; ?>
+            <tbody class="<?= /* @noEscape */ $i%2 ? 'even' : 'odd' ?>">
+                <?php $block->setPriceDataObject($item) ?>
+                <tr>
+                    <?php $i = 0;?>
+                    <?php foreach ($columns as $columnName => $column): ?>
+                        <?php $i++; ?>
+                        <?php $columnClass = $block->getColumnClass($column); ?>
+                        <?php $columnFormat = $block->getColumnFormat($column); ?>
+                        <?php $positionClass = ($i === $lastItemNumber ? ' last' : ''); ?>
+                        <td class="<?= /* @noEscape */ ($columnClass . $positionClass) ?>">
+                            <?= $block->getFieldHtml($item, $columnName, $columnFormat) ?>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+</div>

@@ -1,0 +1,16 @@
+<?php
+/**
+ * Quote with invalid impo template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if ($block->getItemsCount() > '0' && $block->isCheckoutAllowed()): ?>
+    <?php if ($block->hasInvalidImpo() && ($block->isReopen() || $block->isOpen())): ?>
+        <div class="messages" role="alert" style="display: none">
+            <div class="message-warning warning message">
+                <span><?= $block->escapeHtml($block->getInvalidImpoMessage()); ?></span>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

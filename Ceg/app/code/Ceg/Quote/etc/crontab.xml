@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="ceg_quote_convert_to_order" instance="Ceg\Quote\Cron\QuoteToOrderCronjob" method="execute" >
+            <config_path>ceg/general/cron_schedule</config_path>
+        </job>
+        <job name="ceg_quote_clean_expired" instance="Ceg\Quote\Cron\CleanExpiredQuotes" method="execute">
+            <schedule>* 1 * * *</schedule>
+        </job>
+    </group>
+</config>

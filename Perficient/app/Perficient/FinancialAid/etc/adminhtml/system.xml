@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="perficient_tab" translate="label" sortOrder="500">
+            <label>Financial Aid</label>
+        </tab>
+        <section id="financial_aid" translate="label" type="text" sortOrder="800" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Financial Aid</label>
+            <tab>vhl_tab</tab>
+            <resource>Perficient_FinancialAid::config</resource>
+            <group id="financial_aid_conf" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Fiancial Aid Config</label>
+                <field id="enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                    <label>Enable Financial Aid Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="financial_aid_emails" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Emails</label>
+                    <comment><![CDATA[Can use emails comma separated]]></comment>
+                </field>
+                <field id="sender" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+                    <label>Email Sender</label>
+                </field>
+            </group>
+            <group id="financial_form" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Form Copies</label>
+                <field id="consent_title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Consent Title</label>
+                </field>
+                <field id="consent_text" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Consent Text</label>
+                </field>
+            </group>
+            <group id="financial_school_validation" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Schools Validation</label>
+                <field id="category_to_select" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select Schools</label>
+                    <source_model>Perficient\FinancialAid\Model\Config\Source\Category\Extended</source_model>
+                    <frontend_model>Perficient\FinancialAid\Block\System\Multiselect</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

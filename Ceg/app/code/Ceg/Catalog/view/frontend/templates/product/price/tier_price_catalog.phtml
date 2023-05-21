@@ -1,0 +1,60 @@
+<?php
+
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $viewModel \Ceg\Catalog\ViewModel\ProductInfo */
+$viewModel = $block->getProductInfo();
+$maxTierPrice = $viewModel->getMaxTierPrice($block->getProduct());
+$lastImpoDate = $viewModel->getLastImpoDate($block->getProduct());
+$showTierText = false;
+//TODO REPLACE WITH $_product->getTierPrice();
+$prduct_tierprice = array_reverse($viewModel->getTierPrice($viewModel->getCurrentProduct()->getId()));
+$count_prices = count($prduct_tierprice);
+$productStockData = $viewModel->getProductStockData($viewModel->getCurrentProduct());
+$qtyIncrements = (int)$productStockData['qty_increments'];
+
+$qtyInBox=($viewModel->getCurrentProduct()->getQtyinbox()?$viewModel->getCurrentProduct()->getQtyinbox():'1');
+$taxPercent = $viewModel->getTax($viewModel->getCurrentProduct()->getTaxClassId());
+if (isset($maxTierPrice) && (!empty($maxTierPrice)) && $maxTierPrice['price_qty'] !=0) {
+    $showTierText = true;
+    $priceQty = round($maxTierPrice['price_qty'], 0);
+}
+?>
+<div class="tier_catalog">
+<?php if ($showTierText): ?>
+    <p><?= $block->escapeHtml(__('Price scale according to last import')); ?></p>
+<?php endif; ?>
+    <div class="product_package">
+        <div class="product_tier_prices">
+            <div class="product_qty_prices">
+                <?php foreach ($prduct_tierprice as $key => $price):?>
+                    <div class="tierprices <?= $key==0?'active':''?>"
+                            data-qty-from="<?= (int)$price['price_qty']?>"
+                            data-qty-to="<?= $key==0?
+                                99999999:
+                                ($key-1<$count_prices
+                                    ? ((int)$prduct_tierprice[$key-1]['price_qty']-$qtyIncrements)
+                                    : (int)$price['price_qty']) ?>">
+                        <span>
+                            <?php
+                                $qtyFrom = (int)$price['price_qty'] * $qtyInBox;
+                                /* @noEscape */ echo $qtyFrom.' ';
+                                if($key == 0) {
+                                    echo /* @noEscape */ __('or more');
+                                } else {
+                                    echo $viewModel->printQtyTo($key, $count_prices, $prduct_tierprice, $qtyInBox, $price, $qtyFrom);
+                                }
+                            ?>
+                        </span>
+                        <?php $priceTax = $price['price']*($taxPercent*0.01) ?>
+                        <span data-price="<?=  $price['price']+($priceTax)?>">
+                        <?= /* @noEscape */ $viewModel->convertAndFormatPrice($escaper->escapeHtml(number_format($price['price'] / ($qtyInBox != 0 ? $qtyInBox : 1), 2)), 2) ?>
+                            <small style="display:none" data-tax="<?= $escaper->escapeHtml($priceTax) ?>">
+                            (<?= $escaper->escapeHtml(number_format($priceTax, 2))?>)(*)
+                            </small>
+                        </span>
+                    </div>
+                <?php endforeach;?>
+            </div>
+        </div>
+    </div>
+</div>

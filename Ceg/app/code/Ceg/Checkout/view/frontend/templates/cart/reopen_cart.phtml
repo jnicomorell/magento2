@@ -1,0 +1,39 @@
+<?php
+/**
+ * Reopened cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if ($block->getItemsCount() > '0' && $block->isCheckoutAllowed()): ?>
+
+    <?php if ($block->isApproved()): ?>
+        <?php if ($block->hasInvalidImpo()): ?>
+            <div class="reopen-cart">
+                <p class="reopen-cart-text">
+                    <?= $block->escapeHtml($block->getCannotReopenMessage()); ?>
+                </p>
+                <p>
+                    <a href="<?= $block->escapeHtml($block->getHomeUrl()); ?>">
+                        <?= $block->escapeHtml($block->getBackButtonText()); ?>
+                    </a>
+                </p>
+            </div>
+        <?php elseif ($block->isValidImpo()): ?>
+            <div class="reopen-cart">
+                <p class="reopen-cart-text">
+                    <?= $block->escapeHtml($block->getReopenMessage()); ?>
+                </p>
+                <p class="reopen-cart-text">
+                    <?= $block->escapeHtml(__('Do you want to reopen cart?')); ?>
+                </p>
+                <form action="<?= $block->escapeHtml($block->getUrl('checkout/cart/add'));?>" method="POST">
+                    <input type="hidden" name="cart_action" value="reopen" />
+                    <button class="action primary">
+                        <?= $block->escapeHtml($block->getReopenButtonMessage()); ?>
+                    </button>
+                </form>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

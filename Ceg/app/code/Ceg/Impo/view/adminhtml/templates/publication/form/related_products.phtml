@@ -1,0 +1,28 @@
+<?php
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+/** @var \Ceg\Impo\Block\Adminhtml\Publication\Edit\RelatedProducts $block */
+/** @var \Ceg\Impo\Block\Adminhtml\Publication\Edit\Tab\RelatedProducts $blockGrid */
+
+$blockGrid = $block->getBlockGrid();
+$productsJson= $block->getProductsJson();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?= $block->getGridHtml() ?>
+<input type="hidden"
+       name="grid_products"
+       id="in_grid_products"
+       data-form-part="impo_publication_form"
+       value="" />
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Ceg_Impo/publication/form/related_products": {
+                "hiddenInputName": "in_grid_products",
+                "selectedProducts": <?= /* @noEscape */ $productsJson ?>,
+                "gridJsObjectName": <?= /* @noEscape */ '"' . $gridJsObjectName . '"' ?: '{}' ?>
+            }
+        }
+    }
+</script>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], "require('mage/apply/main').apply();", false) ?>

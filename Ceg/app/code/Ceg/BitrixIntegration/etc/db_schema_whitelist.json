@@ -1,0 +1,19 @@
+{
+    "ceg_bitrix_queue": {
+        "column": {
+            "entity_id": true,
+            "element_id": true,
+            "type": true,
+            "status": true,
+            "action": true,
+            "message": true,
+            "datetime": true
+        },
+        "index": {
+            "CEG_BITRIX_QUEUE_TYPE_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

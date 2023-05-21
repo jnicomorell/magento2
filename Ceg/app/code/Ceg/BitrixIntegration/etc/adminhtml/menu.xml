@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!-- Config -->             
+		<add id="Ceg_BitrixIntegration::bitrix"
+             title="Bitrix"
+             module="Ceg_BitrixIntegration"
+             sortOrder="40"
+             parent="Ceg_Core::menu_index"
+             resource="Ceg_BitrixIntegration::bitrix" />
+
+		<add id="Ceg_BitrixIntegration::bitrix_queue"
+             title="Bitrix Queue"
+             module="Ceg_BitrixIntegration"
+             sortOrder="10"
+             parent="Ceg_BitrixIntegration::bitrix"
+             resource="Ceg_BitrixIntegration::bitrix_queue"
+             action="bitrixintegration/queue/grid"/>
+
+	</menu>
+</config>

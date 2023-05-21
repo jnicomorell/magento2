@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Customer\Controller\Account\Logout"
+                type="Ceg\Auth0Integration\Controller\Account\Logout" />
+
+    <preference for="Magento\Customer\Controller\Account\CreatePost"
+                type="Ceg\Auth0Integration\Controller\Account\CreatePost" />
+
+    <preference for="Magento\Customer\Controller\Account\Create"
+                type="Ceg\Auth0Integration\Controller\Account\Create" />
+
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="ceg_auth0integration_paymentinformationmanagement"
+                type="Ceg\Auth0Integration\Plugin\PaymentInformationManagement" sortOrder="2"/>
+    </type>
+
+</config>

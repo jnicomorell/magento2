@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="terms-and-conditions">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Términos y Condiciones</argument>
+                    <argument name="path" xsi:type="string">terminos-y-condiciones</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

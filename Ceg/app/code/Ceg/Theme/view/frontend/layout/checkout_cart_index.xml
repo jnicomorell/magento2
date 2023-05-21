@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.top">
+            <referenceBlock name="navigation.sections" >
+                <referenceBlock name="store.menu" remove="true" />
+            </referenceBlock>
+        </referenceContainer>
+        <referenceContainer name="page.wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="store-menu-back" template="Ceg_Theme::html/topmenu_back.phtml" before="main.content"/>
+        </referenceContainer>
+    </body>
+</page>

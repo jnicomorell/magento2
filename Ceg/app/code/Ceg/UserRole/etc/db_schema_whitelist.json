@@ -1,0 +1,12 @@
+{
+    "authorization_additional_roles": {
+        "column": {
+            "entity_id": true,
+            "user_id": true,
+            "role_ids": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

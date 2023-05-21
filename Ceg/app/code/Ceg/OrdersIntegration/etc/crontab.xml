@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="ceg_ordersintegration_resend_to_orders" instance="Ceg\OrdersIntegration\Cron\ResendQuoteToOrders" method="execute" >
+            <config_path>ordersintegration_settings/general/cron_schedule</config_path>
+        </job>
+        <job name="ceg_ordersintegration_clean_quote_queue" instance="Ceg\OrdersIntegration\Cron\CleanQuoteQueue" method="execute" >
+            <schedule>0 0 * * *</schedule>
+        </job>
+    </group>
+</config>

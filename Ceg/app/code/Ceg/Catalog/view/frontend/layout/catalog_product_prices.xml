@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <referenceBlock name="render.product.prices">
+        <arguments>
+            <argument name="product_info" xsi:type="object">Ceg\Catalog\ViewModel\ProductInfo</argument>
+            <argument name="impo_data" xsi:type="object">Ceg\Impo\ViewModel\ImpoData</argument>
+        </arguments>
+    </referenceBlock>
+</layout>

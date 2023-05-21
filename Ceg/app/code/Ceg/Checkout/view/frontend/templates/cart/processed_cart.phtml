@@ -1,0 +1,21 @@
+<?php
+/**
+ * Reopened cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if ($block->getItemsCount() > '0' && $block->isCheckoutAllowed()): ?>
+    <?php if ($block->isClosed() && $block->isValidImpo()): ?>
+        <div class="processed-cart">
+            <p class="processed-cart-text">
+                <?= $block->escapeHtml($block->getClosedMessage()); ?>
+            </p>
+            <p>
+                <a href="<?= $block->escapeHtml($block->getHomeUrl()); ?>">
+                    <?= $block->escapeHtml($block->getBackButtonText()); ?>
+                </a>
+            </p>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

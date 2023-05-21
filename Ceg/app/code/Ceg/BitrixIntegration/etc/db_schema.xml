@@ -1,0 +1,24 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="ceg_bitrix_queue" resource="default" engine="innodb" comment="CEG Bitrix Queue">
+        <column xsi:type="int"       name="entity_id"  nullable="false" comment="Entity ID"  unsigned="true"  identity="true" />
+        <column xsi:type="int"       name="element_id" nullable="false" comment="ID of sended entity" unsigned="true"  identity="false" />
+        <column xsi:type="varchar"   name="type"       nullable="false" comment="Integration Type" length="50" />
+        <column xsi:type="varchar"   name="status"     nullable="false" comment="Status"     length="50" />
+        <column xsi:type="varchar"   name="action"     nullable="false" comment="Action"     length="50" />
+        <column xsi:type="text"      name="message"    nullable="true"  comment="Message" />
+        <column xsi:type="timestamp" name="datetime"   nullable="false" comment="Timestamp" on_update="true" default="CURRENT_TIMESTAMP" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+
+        <index referenceId="CEG_BITRIX_QUEUE_TYPE_STATUS" indexType="btree">
+            <column name="type" />
+            <column name="status" />
+        </index>
+
+    </table>
+
+</schema>

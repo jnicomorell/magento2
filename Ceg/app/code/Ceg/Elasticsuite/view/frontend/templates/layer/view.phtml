@@ -1,0 +1,61 @@
+<?php
+/**
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Smile ElasticSuite to newer
+ * versions in the future.
+ *
+ * @category  Smile
+ * @package   Smile\ElasticsuiteCatalog
+ * @author    Aurelien FOUCRET <aurelien.foucret@smile.fr>
+ * @copyright 2020 Smile
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+
+/**
+ * Template for layer navigation view
+ *
+ * @var $block \Smile\ElasticsuiteCatalog\Block\Navigation
+ */
+?>
+
+<?php if ($block->canShowBlock()): ?>
+    <?php $activeFilters = $block->getActiveFilters(); ?>
+    <div class="block filter" id="layered-filter-block"
+         data-mage-init='{"collapsible":
+            {"openedState": "active", "collapsible": true, "active": false,
+                "collateral":{ "openedState": "force-index", "element": ".page-header" } }}'>
+        <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+        <div class="block-title filter-title" data-count="<?= /* @noEscape */ $filtered ?>">
+            <strong data-role="title"><?= /* @noEscape */ __('Shop By') ?></strong>
+        </div>
+
+        <div class="block-content filter-content">
+            <?= $block->getChildHtml('state') ?>
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?= /* @noEscape */ $block->getClearUrl() ?>" class="action clear filter-clear">
+                        <span><?= /* @noEscape */ __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle">
+                <?= /* @noEscape */ __('Shopping Options') ?></strong>
+            <div class="filter-options" id="narrow-by-list" data-role="content"
+                 data-mage-init='{"accordion":{"openedState": "active", "collapsible": true,
+                    "active": <?= /* @noEscape */ $activeFilters; ?>,
+                    "multipleCollapsible": <?= /* @noEscape */ $block->isInline() ? "false" : "true"; ?>}}'>
+            <?php foreach ($block->getFilters() as $filter): ?>
+                <div data-role="collapsible" class="filter-options-item">
+                        <div data-role="title" class="filter-options-title">
+                            <?= /* @noEscape */ __($filter->getName()) ?></div>
+                        <div data-role="content" class="filter-options-content">
+                            <?php if ($filter->getItemsCount()): ?>
+                                <?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?>
+                            <?php endif; ?>
+                        </div>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

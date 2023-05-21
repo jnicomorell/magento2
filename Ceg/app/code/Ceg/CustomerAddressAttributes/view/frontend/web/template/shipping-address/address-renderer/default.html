@@ -1,0 +1,39 @@
+<div class="shipping-address-item"
+     click="selectAddress"
+     css="'selected-item' : isSelected() , 'not-selected-item':!isSelected()">
+    <span class="item-head">
+        <text args="_.values(address().street).join(', ')"/>&nbsp;
+        <each args="data: address().customAttributes, as: 'element'">
+            <!-- ko if: element.attribute_code == "numero"-->
+            <text args="element.value"/>
+            <!--/ko-->
+        </each>
+    </span>
+    </br>
+    <span class="item-description">
+        <span data-bind="i18n: 'P.C:'"></span>&nbsp;
+        <text args="address().postcode"/>,&nbsp;
+        <each args="data: address().customAttributes, as: 'element'">
+            <!-- ko if: element.attribute_code == "colonia"-->
+            <text args="element.value"/>,&nbsp;
+            <!--/ko-->
+        </each>
+        <text args="address().city "/>,&nbsp;
+        <span text="address().region"/>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <text args="address().firstname"/>&nbsp;
+        <text args="address().lastname"/>&nbsp;-&nbsp;
+        <text args="address().telephone"/>
+    </span>
+
+    <button visible="address().isEditable()" type="button"
+            class="action edit-address-link"
+            click="editAddress">
+        <span translate="'Edit'"></span>
+    </button>
+
+<!--    &lt;!&ndash; ko if: (!isSelected()) &ndash;&gt;-->
+<!--    <button type="button" click="selectAddress" class="action action-select-shipping-item">-->
+<!--        <span translate="'Ship Here'"></span>-->
+<!--    </button>-->
+<!--    &lt;!&ndash; /ko &ndash;&gt;-->
+</div>

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="auth0_settings" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Auth0 Integration</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_Auth0CustomerIntegration::auth0_settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General Configuration</label>
+                <field id="active" translate="label comment" sortOrder="01" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="domain" translate="label" type="text" sortOrder="02" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Domain</label>
+                    <comment>Eg: my-dev.auth0.com</comment>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="03" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client ID</label>
+                </field>
+                <field id="client_secret" translate="label" type="text" sortOrder="04" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client Secret</label>
+                </field>
+                <!--field id="redirect_uri" translate="label" type="text" sortOrder="05" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <todo: remove after complete auth0 changes>
+                    <label>Redirect URI (callback url)</label>
+                </field-->
+                <field id="audience" translate="label" type="text" sortOrder="05" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Audience</label>
+                </field>
+                <field id="scope" translate="label" type="text" sortOrder="05" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Scope</label>
+                    <comment>We always add 'email' but you can add 'openid', 'profile', etc. Check it out to https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims</comment>
+                </field>
+                <field id="persist_id_token" translate="label comment" sortOrder="06" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Persist ID Token</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="persist_access_token" translate="label comment" sortOrder="06" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Persist Access Token</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="persist_refresh_token" translate="label comment" sortOrder="07" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Persist Refresh Token</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="token_algorithm" translate="label comment" sortOrder="08" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Token Algorithm</label>
+                    <comment>JWT decode</comment>
+                    <source_model>Ceg\Auth0Integration\Model\Config\Source\TokenAlgorithm</source_model>
+                </field>
+                <field id="new_customer_group" translate="label" type="select" sortOrder="09" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>New Customer Group</label>
+                    <comment>* Temporal option: Group will be obtained from BITRIX service</comment>
+                    <source_model>Ceg\CatalogPermissions\Model\Config\Source\Customer\Group</source_model>
+                </field>
+            </group>
+            <group id="management_api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Management API Configuration</label>
+                <field id="domain" translate="label" type="text" sortOrder="02" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Domain</label>
+                    <comment>Eg: my-dev.auth0.com</comment>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="03" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client ID</label>
+                </field>
+                <field id="client_secret" translate="label" type="text" sortOrder="04" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client Secret</label>
+                </field>
+                <field id="audience" translate="label" type="text" sortOrder="05" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Audience</label>
+                    <comment>Eg: YOUR-DOMAIN.auth0.com/api/v2</comment>
+                </field>
+                <field id="countries" translate="label" sortOrder="06" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Countries</label>
+                    <frontend_model>Ceg\Auth0Integration\Block\Adminhtml\Form\Field\Countries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="website" translate="label" type="text" sortOrder="15" showInDefault="1">
+                <label>Website Restriction Configuration</label>
+                <field id="restricted" translate="label comment" sortOrder="01" type="select" showInDefault="1">
+                    <label>Enable Restriction</label>
+                    <comment>This configuration closes the website and requires auth0 login to navigate it.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>auth0_settings/general/restricted</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

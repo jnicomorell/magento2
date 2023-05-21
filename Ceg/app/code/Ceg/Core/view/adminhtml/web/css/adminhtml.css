@@ -1,0 +1,46 @@
+.config-nav .ceg-tab .admin__page-nav-title::before {
+    content: '';
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: 0 0;
+    height: 34px;
+    position: absolute;
+    width: 30px;
+    top: 11px;
+}
+
+.config-nav .ceg-tab .admin__page-nav-title strong {
+    margin-left: 40px;
+}
+
+.admin__menu .level-0.parent.item-menu-index > a:before {
+    content: url('../images/adminhtml.png');
+}
+
+#row_ceg_analytics_ga_settings_ga_events_event_debug {
+    display: table-cell;
+}
+
+#row_ceg_analytics_ga_settings_ga_events_event_debug td.label{
+    min-width: 350px;
+}
+
+#row_ceg_analytics_ga_settings_ga_events_events_config > td{
+    display: block;
+}
+
+#row_ceg_analytics_ga_settings_ga_events_events_config td.label{
+    line-height: 50px;
+    min-width: 350px;
+    text-align: center;
+}
+
+#row_ceg_analytics_ga_settings_ga_events_events_config td.label span[data-config-scope]:before{
+    bottom: -1.5em;
+    right: -45px;
+}
+
+#row_ceg_analytics_ga_settings_ga_events_events_config > td.value{
+    width: 61vw !important;
+}

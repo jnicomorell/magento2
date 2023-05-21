@@ -1,0 +1,26 @@
+<?php
+/**
+ * @var $block \Magento\CheckoutAgreements\Block\Agreements
+ */
+?>
+
+<?php if ($block->getAgreements()): ?>
+    <ol class="agreements items">
+        <?php foreach ($block->getAgreements() as $agreement): ?>
+            <li class="item">
+                <h2><?= $block->escapeHtml($agreement->getName()); ?></h2>
+            </li>
+            <li class="item">
+                <?php if ($agreement->getIsHtml()):?>
+                    <?= $agreement->getContent() //phpcs:ignore ?>
+                <?php else:?>
+                    <?= nl2br($agreement->getContent()) //phpcs:ignore ?>
+                <?php endif; ?>
+            </li>
+        <?php endforeach ?>
+    </ol>
+<?php else: ?>
+    <div>
+        <p><?= $block->escapeHtml(__('There are not terms and conditions for this website.')) ?></p>
+    </div>
+<?php endif; ?>

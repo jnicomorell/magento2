@@ -1,0 +1,4 @@
+"1 product","1 producto"
+"<%- count %> products","<%- count %> productos"
+"No products in the selected range.","No hay productos en el rango seleccionado."
+"%1 is the only product matching your '%2' search.","%1 es el único producto que coincide con su búsqueda: '%2'."

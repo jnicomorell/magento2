@@ -1,0 +1,28 @@
+<?php
+/**
+ * Expired cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if (! $block->isValidImpo() && $block->isCheckoutAllowed()): ?>
+<div class="expired-cart">
+    <p class="expired-cart-subtitle">
+        <?= $block->escapeHtml($block->getExpiredImpoTitle()); ?>
+    </p>
+    <p class="expired-cart-text">
+        <?= $block->escapeHtml($block->getExpiredImpoMessage()); ?>
+    </p>
+    <p>
+        <a href="<?= $block->escapeHtml($block->getHomeUrl()); ?>">
+            <?= $block->escapeHtml(__('View Catalog')); ?>
+        </a>
+    </p>
+</div>
+<script>
+    require(['jquery'], function($) {
+        $('.ceg-theme.checkout-cart-index .page-main').css({'background-image':'url()'});
+    });
+</script>
+<?php endif; ?>
+

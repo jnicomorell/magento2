@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Ceg_Core::menu_index" title="Comprando En Grupo" translate="title" sortOrder="10" >
+                    <resource id="Ceg_Core::ceg_quotes" title="Pedidos" translate="title" sortOrder="10" >
+                        <resource id="Ceg_Core::view" title="Ver Pedidos" translate="title"  sortOrder="10" >
+                            <resource id="Ceg_Core::quote_detail" title="Ver detalle" translate="title" sortOrder="10" />
+                            <resource id="Ceg_Core::quote_cancel" title="Cancel Quote" translate="title" sortOrder="20" />
+                        </resource>
+                        <resource id="Ceg_Core::export" title="Exportar Pedidos" translate="title" sortOrder="20" />
+                        <resource id="Ceg_Core::import" title="Importar Pedidos" translate="title" sortOrder="30" />
+                    </resource>
+                    <resource id="Ceg_Core::ceg_config" title="Configuraciones" translate="title" sortOrder="20" >
+                        <resource id="Ceg_Core::ceg" title="General" translate="title" sortOrder="10" />
+                        <resource id="Ceg_Core::auth0" title="Auth0 Integration" translate="title" sortOrder="20" />
+                        <resource id="Ceg_Core::catalog_availability" title="Catalog Availability" translate="title" sortOrder="30" />
+                        <resource id="Ceg_Core::catalog_restrictions" title="Catalog Restrictions" translate="title" sortOrder="40" />
+                        <resource id="Ceg_Core::impo_setup" title="Impo Setup" translate="title" sortOrder="50" />
+                        <resource id="Ceg_Core::ceg_checkout" title="Quote Checkout" translate="title" sortOrder="60"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

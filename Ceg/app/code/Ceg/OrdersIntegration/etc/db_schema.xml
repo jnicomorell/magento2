@@ -1,0 +1,26 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="ceg_quote_queue" resource="default" engine="innodb" comment="CEG Quote Queue">
+        <column xsi:type="int"       name="entity_id"  nullable="false" comment="Entity ID"  unsigned="true"  identity="true" />
+        <column xsi:type="int"       name="quote_id"   nullable="false" comment="Quote ID"   unsigned="true"  identity="false" />
+        <column xsi:type="varchar"   name="status"     nullable="false" comment="Status"     length="50" />
+        <column xsi:type="varchar"   name="action"     nullable="false" comment="Action"     length="50" />
+        <column xsi:type="text"      name="message"    nullable="true"  comment="Message" />
+        <column xsi:type="timestamp" name="datetime"   nullable="false" comment="Timestamp" on_update="true" default="CURRENT_TIMESTAMP" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+
+        <constraint xsi:type="foreign" referenceId="CEG_QUOTE_QUEUE_QUOTE_ID_QUOTE_ENTITY_ID"
+                    table="ceg_quote_queue" column="quote_id"
+                    referenceTable="quote" referenceColumn="entity_id"/>
+
+        <index referenceId="CEG_QUOTE_QUEUE_STATUS" indexType="btree">
+            <column name="status" />
+        </index>
+
+    </table>
+
+</schema>

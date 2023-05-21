@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      label="Import View" design_abstraction="custom">
+    <head>
+        <css src="https://use.fontawesome.com/releases/v5.7.1/css/all.css" src_type="url"/>
+    </head>
+    <body>
+        <attribute name="class" value="ceg-impo"/>
+        <referenceContainer name="header-wrapper">
+            <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                name="checkout.cart.reopened-cart"
+                template="Ceg_Checkout::cart/reopened_cart.phtml" />
+        </referenceContainer>
+        <referenceContainer name="content">
+             <block class="Ceg\Impo\Block\View" name="impo.products.list" as="product_list" template="Ceg_Impo::view.phtml">
+                <arguments>
+                    <argument name="view_model_impo" xsi:type="object">Ceg\Impo\ViewModel\ImpoData</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional" remove="true"/>
+    </body>
+</page>

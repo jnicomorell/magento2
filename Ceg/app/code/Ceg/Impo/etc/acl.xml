@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Ceg_Core::menu_index">
+                    <resource id="Ceg_Impo::publications" title="Publicaciones" translate="title" sortOrder="30">
+                        <resource id="Ceg_Impo::impo_view" title="Impo" translate="title" sortOrder="10">
+                            <resource id="Ceg_Impo::impo_save" title="Save" translate="title" sortOrder="10" />
+                            <resource id="Ceg_Impo::impo_delete" title="Delete" translate="title" sortOrder="20" />
+                            <resource id="Ceg_Impo::impo_webapi" title="Web Api" translate="title" sortOrder="30" />
+                        </resource>
+                    </resource>
+                </resource>
+
+            </resource>
+        </resources>
+    </acl>
+</config>

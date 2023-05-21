@@ -1,0 +1,21 @@
+{
+    "name": "ceg/customer-address-attributes",
+    "description":"Customer Address Attributes",
+    "type": "magento2-module",
+    "license": "ceg",
+    "authors": [
+        {
+            "email": "pablo.garcia@comprandoengrupo.net",
+            "name": "Pablo Garcia"
+        }
+    ],
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ceg\\CustomerAddressAttributes\\": ""
+        }
+    }
+}

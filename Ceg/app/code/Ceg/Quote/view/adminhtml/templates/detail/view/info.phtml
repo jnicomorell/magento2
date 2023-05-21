@@ -1,0 +1,152 @@
+<?php
+/** @var $block \Magento\Backend\Block\Widget */
+/** @var $parentBlock \Ceg\Quote\Block\Adminhtml\Detail\View */
+/** @var $quoteData \Ceg\Quote\ViewModel\QuoteData */
+
+$parentBlock = $block->getLayout()->getBlock('quote_detail_view');
+$quoteData = $parentBlock->getQuoteData();
+$quote = $quoteData->getQuote();
+
+$customerName = $quote->getCustomerFirstname();
+$customerName .= ' ' . $quote->getCustomerMiddlename();
+$customerName .= ' ' . $quote->getCustomerLastname();
+
+$baseCurrencyCode = (string)$quote->getBaseCurrencyCode();
+$globalCurrencyCode = (string)$quote->getGlobalCurrencyCode();
+$quoteCurrencyCode = (string)$quote->getQuoteCurrencyCode();
+$date = ($quote->getData('tos_at') === null) ? $quote->getCreatedAt() : $quote->getData('tos_at');
+$quoteAdminDate = $quoteData->getQuoteAdminDate($date);
+$quoteAdminDate = $block->formatDate($quoteAdminDate, \IntlDateFormatter::MEDIUM, true);
+
+$timeZone = $quoteData->getTimezoneForStore($quote->getStore());
+$quoteStoreDate = ($quote->getData('tos_at') === null) ? $quote->getCreatedAt() : $quote->getData('tos_at');
+$quoteStoreDate = $block->formatDate($quoteStoreDate, \IntlDateFormatter::MEDIUM, true, $timeZone);
+
+$allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub', 'sup', 'ul'];
+$billingAddressVisible = (!empty($quote->getBillingAddress()->getCustomerAddressId()));
+$billingAddress = $quoteData->getFormattedAddress($quote->getBillingAddress());
+
+$shippingAddressVisible = (!empty($quote->getShippingAddress()->getCustomerAddressId()));
+$shippingAddress = $quoteData->getFormattedAddress($quote->getShippingAddress());
+?>
+
+<section class="admin__page-section order-view-account-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Quote & Account Information')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item order-information">
+            <div class="admin__page-section-item-title">
+                <span class="title">
+                    <?= $block->escapeHtml(__('Quote # %1', $quote->getReservedOrderId())) ?>
+                </span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-information-table">
+                <tr>
+                    <th><?= $block->escapeHtml(__('Date')) ?></th>
+                    <td><?= $block->escapeHtml($quoteAdminDate) ?></td>
+                </tr>
+                <?php if ($quoteAdminDate != $quoteStoreDate): ?>
+                    <tr>
+                        <?php $date = $quoteData->getTimezoneForStore($quote->getStore()); ?>
+                        <th><?= $block->escapeHtml(__('Date (%1)', $date)) ?></th>
+                        <td><?= $block->escapeHtml($quoteStoreDate) ?></td>
+                    </tr>
+                <?php endif;?>
+                <tr>
+                    <?php $statusLabel = $quoteData->getStatusLabel($quote->getStatus()); ?>
+                    <th><?= $block->escapeHtml(__('Status')) ?></th>
+                    <td><span id="order_status"><?= $block->escapeHtml($statusLabel) ?></span></td>
+                </tr>
+                <?= $block->getChildHtml() ?>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Purchased From')) ?></th>
+                    <td><?= $block->escapeHtml($quoteData->getQuoteStoreName(), ['br']) ?></td>
+                </tr>
+                <?php if ($globalCurrencyCode !== $baseCurrencyCode): ?>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('%1 / %2 rate:', $globalCurrencyCode, $baseCurrencyCode)) ?></th>
+                        <td><?= $block->escapeHtml($quote->getBaseToGlobalRate()) ?></td>
+                    </tr>
+                <?php endif; ?>
+                <?php if ($baseCurrencyCode !== $quoteCurrencyCode && $globalCurrencyCode !== $quoteCurrencyCode): ?>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('%1 / %2 rate:', $quoteCurrencyCode, $baseCurrencyCode)) ?></th>
+                        <td><?= $block->escapeHtml($quote->getBaseToQuoteRate()) ?></td>
+                    </tr>
+                <?php endif; ?>
+            </table>
+            </div>
+        </div>
+        <div class="admin__page-section-item order-account-information">
+            <?php /* Account Information */ ?>
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Account Information')) ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary order-account-information-table">
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Customer Name')) ?></th>
+                        <td><?= $block->escapeHtml($customerName) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Email')) ?></th>
+                        <td>
+                            <a href="mailto:<?= $block->escapeHtmlAttr($quote->getCustomerEmail()) ?>">
+                                <?= $block->escapeHtml($quote->getCustomerEmail()) ?>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php if ($groupName = $quoteData->getCustomerGroupName()): ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Customer Group')) ?></th>
+                            <td><?= $block->escapeHtml($groupName) ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php if ($taxvat = $quoteData->getCustomerTaxvat()): ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Tax/VAT Number')) ?></th>
+                            <td><?= $block->escapeHtml($taxvat) ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php if ($companyName = $quoteData->getCustomerCompanyName()): ?>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Razón Social')) ?></th>
+                            <td><?= $block->escapeHtml($companyName) ?></td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="admin__page-section order-addresses">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Address Information')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <?php if ($billingAddressVisible): ?>
+        <div class="admin__page-section-item order-billing-address">
+            <?php /* Billing Address */ ?>
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Billing Address')) ?></span>
+            </div>
+            <address class="admin__page-section-item-content">
+                <?= $block->escapeHtml($billingAddress, $allowedAddressHtmlTags); ?>
+            </address>
+        </div>
+        <?php endif; ?>
+        <?php if ($shippingAddressVisible): ?>
+        <div class="admin__page-section-item order-shipping-address">
+            <?php /* Shipping Address */ ?>
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= $block->escapeHtml(__('Shipping Address')) ?></span>
+            </div>
+            <address class="admin__page-section-item-content">
+                <?= $block->escapeHtml($shippingAddress, $allowedAddressHtmlTags); ?>
+            </address>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>

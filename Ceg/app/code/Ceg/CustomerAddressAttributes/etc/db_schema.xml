@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote_address" resource="checkout" comment="Sales Flat Quote Address">
+        <column xsi:type="varchar" name="colonia" comment="Colonia"/>
+        <column xsi:type="varchar" name="numero" comment="Numero"/>
+        <column xsi:type="varchar" name="observaciones" comment="Observaciones"/>
+    </table>
+    <table name="sales_order_address" resource="sales" comment="Sales Flat Order Address">
+        <column xsi:type="varchar" name="colonia" comment="Colonia"/>
+        <column xsi:type="varchar" name="numero" comment="Numero"/>
+        <column xsi:type="varchar" name="observaciones" comment="Observaciones"/>
+    </table>
+</schema>

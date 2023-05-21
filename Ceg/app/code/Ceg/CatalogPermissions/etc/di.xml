@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\Session">
+        <plugin disabled="false" name="set_redirection_url_if_have_quote" sortOrder="1" type="Ceg\CatalogPermissions\Plugin\Cart\LoginRedirect" />
+    </type>
+    <type name="Magento\Catalog\Controller\Category\View">
+        <plugin disabled="false" name="category_view" sortOrder="10" type="Ceg\CatalogPermissions\Plugin\Controller\Category\View"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\Configure">
+        <plugin disabled="false" name="Configure_view" sortOrder="10" type="Ceg\CatalogPermissions\Plugin\Controller\Cart\Configure"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Product\View">
+        <plugin disabled="false" name="product_view" sortOrder="20" type="Ceg\CatalogPermissions\Plugin\Controller\Product\View"/>
+    </type>
+    <preference for="Magento\Checkout\Controller\Cart\Add" type="Ceg\CatalogPermissions\Rewrite\Magento\Checkout\Controller\Cart\Add"/>
+    <preference for="Magento\Checkout\Controller\Cart\UpdatePost" type="Ceg\CatalogPermissions\Rewrite\Magento\Checkout\Controller\Cart\UpdatePost"/>
+    <preference for="Magento\Customer\Block\Account\Dashboard\Info" type="Ceg\CatalogPermissions\Block\Rewrite\Account\Dashboard\Info" />
+
+</config>

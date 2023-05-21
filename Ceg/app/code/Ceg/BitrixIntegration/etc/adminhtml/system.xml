@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ceg_bitrixintegration" translate="label" sortOrder="135"
+                 showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Bitrix Integration</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_BitrixIntegration::bitrixintegration_settings</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="active"
+                       translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="resend_cron_schedule"
+                       translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <source_model>Ceg\Core\Model\Config\ScheduleOptions</source_model>
+                    <label>Schedule to Resend data</label>
+                    <comment>When API connection fails, the data is queued to be sent again through a scheduled Cron</comment>
+                </field>
+                <field id="queue_link"
+                       translate="label comment" type="label" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="0">
+                    <label>Execution history</label>
+                    <frontend_model>Ceg\BitrixIntegration\Block\System\Config\Form\Field\Button</frontend_model>
+                </field>
+            </group>
+
+            <group id="api" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Api Settings</label>
+                <field id="timeout"
+                       translate="label" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Timeout</label>
+                    <comment>Connection Timeout in Seconds</comment>
+                    <validate>validate-zero-or-greater validate-number</validate>
+                </field>
+                <group id="token" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Token Settings</label>
+                    <field id="url"
+                           translate="label" type="text" sortOrder="10"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>URL</label>
+                    </field>
+                    <field id="client_id"
+                           translate="label" type="text" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Client ID</label>
+                    </field>
+                    <field id="client_secret"
+                           translate="label" type="text" sortOrder="30"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Client Secret</label>
+                    </field>
+                    <field id="audience"
+                           translate="label" type="text" sortOrder="40"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Audience</label>
+                    </field>
+                    <field id="auth0_user"
+                           translate="label" type="text" sortOrder="50"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Auth0 User</label>
+                    </field>
+                    <field id="auth0_password"
+                           translate="label" type="obscure" sortOrder="60"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Auth0 Password</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                </group>
+
+                <group id="send" translate="label" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Endpoint Configuration</label>
+                    <field id="use_access_token"
+                           translate="label" type="select" sortOrder="10"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Use access token</label>
+                        <comment>Enable access validation by token</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="enable_impo"
+                           translate="label" type="select" sortOrder="15"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable Send Impo</label>
+                        <comment>When disabled, the data only is queued to be sent when enabled again</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="impo_url"
+                           translate="label" type="text" sortOrder="16"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>API IMPO URL</label>
+                        <comment>Endpoint to send data</comment>
+                    </field>
+
+                    <field id="enable_order"
+                           translate="label" type="select" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable Send Order</label>
+                        <comment>When disabled, the data only is queued to be sent when enabled again</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="order_url"
+                           translate="label" type="text" sortOrder="21"
+                           showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>API ORDER URL</label>
+                        <comment>Endpoint to send orders data</comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ceg\Quote\Block\Adminhtml\Detail\View" name="quote_detail_view">
+                <arguments>
+                    <argument name="quote_data" xsi:type="object">Ceg\Quote\ViewModel\QuoteData</argument>
+                </arguments>
+
+                <block class="Magento\Framework\View\Element\Messages" name="quote_messages"/>
+
+                <block class="Magento\Backend\Block\Widget" name="quote_info" template="Ceg_Quote::detail/view/info.phtml">
+                    <container name="extra_customer_info"/>
+                </block>
+
+                <block class="Ceg\Quote\Block\Adminhtml\Detail\View\Items" name="quote_items" template="Ceg_Quote::detail/view/items.phtml">
+                    <arguments>
+                        <argument name="quote_data" xsi:type="object">Ceg\Quote\ViewModel\QuoteData</argument>
+                        <argument name="columns" xsi:type="array">
+                            <item name="product" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Product</item>
+                                <item name="class" xsi:type="string" translate="false">col-product</item>
+                            </item>
+                            <item name="qtyinbox" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Qty In Box</item>
+                                <item name="class" xsi:type="string" translate="false">col-qty</item>
+                            </item>
+                            <item name="qty" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Qty</item>
+                                <item name="class" xsi:type="string" translate="false">col-ordered-qty</item>
+                            </item>
+                            <item name="fob_unit" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">FOB Unit</item>
+                                <item name="class" xsi:type="string" translate="false">col-price</item>
+                                <item name="format" xsi:type="string" translate="false">price</item>
+                            </item>
+                            <item name="fob_subtotal" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">FOB Subtotal</item>
+                                <item name="class" xsi:type="string" translate="false">col-price</item>
+                                <item name="format" xsi:type="string" translate="false">price</item>
+                            </item>
+                            <item name="base_price" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Price</item>
+                                <item name="class" xsi:type="string" translate="false">col-price</item>
+                                <item name="format" xsi:type="string" translate="false">price</item>
+                            </item>
+                            <item name="row_total" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Subtotal</item>
+                                <item name="class" xsi:type="string" translate="false">col-subtotal</item>
+                                <item name="format" xsi:type="string" translate="false">price</item>
+                            </item>
+                            <item name="tax_amount" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Tax Amount</item>
+                                <item name="class" xsi:type="string" translate="false">col-tax-amount</item>
+                                <item name="format" xsi:type="string" translate="false">price</item>
+                            </item>
+                            <item name="row_total_incl_tax" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">Row Total</item>
+                                <item name="class" xsi:type="string" translate="false">col-total</item>
+                                <item name="format" xsi:type="string" translate="false">price strong</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block class="Ceg\Quote\Block\Adminhtml\Detail\View\Totals" name="quote_totals" template="Ceg_Quote::detail/view/totals.phtml">
+                    <arguments>
+                        <argument name="quote_data" xsi:type="object">Ceg\Quote\ViewModel\QuoteData</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+
+
+</page>
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job instance="Ceg\Auth0Integration\Cron\UpdateCustomerMetadata" method="execute" name="ceg_auth0_update_customer_metadata">
+            <schedule>0 3 * * *</schedule>
+        </job>
+    </group>
+</config>

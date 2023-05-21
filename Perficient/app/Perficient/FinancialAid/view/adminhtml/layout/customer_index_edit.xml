@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Perficient_FinancialAid::js/ajax.js"/>
+    </head>
+    <body>
+           <referenceBlock name="customer_form">
+             <block class="Perficient\FinancialAid\Block\Adminhtml\Edit\Tab\FinancialAid" name="customer_edit_tab">
+              <action method="setTabLabel">
+                  <argument name="label" xsi:type="string">Financial Aid Application</argument>
+              </action>
+            </block>
+          </referenceBlock>
+    </body>
+</page>

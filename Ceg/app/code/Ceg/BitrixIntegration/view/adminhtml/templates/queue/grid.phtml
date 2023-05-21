@@ -1,0 +1,49 @@
+<?php /** @var $block \Ceg\BitrixIntegration\Block\Queue\Grid */ ?>
+<?php /** @var $escaper \Magento\Framework\Escaper */ ?>
+<?php $queues = $block->getQueues(); ?>
+<?php $configLink = $block->getConfgLink(); ?>
+
+<section class="admin__page-section">
+    <div class="page-main-actions">
+        <a class="action-default page-actions-buttons"
+           href ="<?= $escaper->escapeUrl($configLink) ?>">
+            <?= $escaper->escapeHtml(__('Go to configuration')) ?>
+        </a>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__data-grid-wrap">
+            <table class="data-grid">
+                <thead>
+                    <tr>
+                        <th class="data-grid-th">ID</th>
+                        <th class="data-grid-th">Date</th>
+                        <th class="data-grid-th">Entity</th>
+                        <th class="data-grid-th">Action</th>
+                        <th class="data-grid-th">Message</th>
+                        <th class="data-grid-th">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $index = 0; ?>
+                <?php foreach ($queues as $item) { ?>
+                    <?php $index += 1; ?>
+                    <?php $element = $item->getType() .': '. $item->getElementId(); ?>
+                    <?php $isWarning = $block->isWarningStatus($item->getStatus()); ?>
+                    <tr class="data-row <?= $escaper->escapeHtml(($index%2==0 ? "_odd-row" : "")) ?>">
+                        <td><?= $escaper->escapeHtml($item->getEntityId()) ?></td>
+                        <td><?= $escaper->escapeHtml($item->getDatetime()) ?></td>
+                        <td><?= $escaper->escapeHtml($element) ?></td>
+                        <td><?= $escaper->escapeHtml(strtoupper($item->getAction())) ?></td>
+                        <td><?= $escaper->escapeHtml($item->getMessage()) ?></td>
+                        <td>
+                            <span class="grid-severity-<?= $escaper->escapeHtml(($isWarning ? "minor" : "notice")) ?>">
+                                <span><?= $escaper->escapeHtml(strtoupper($item->getStatus())) ?></span>
+                            </span>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

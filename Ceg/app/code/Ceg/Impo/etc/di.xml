@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Ceg\Impo\Api\Data\ImpoInterface"           type="Ceg\Impo\Model\Impo" />
+    <preference for="Ceg\Impo\Api\Data\RelatedProductInterface" type="Ceg\Impo\Model\Impo\RelatedProduct" />
+    <preference for="Ceg\Impo\Api\ImpoRepositoryInterface"      type="Ceg\Impo\Model\ImpoRepository" />
+
+    <preference for="Ceg\Impo\Api\Data\Integration\ImpoInterface"    type="Ceg\Impo\Model\Integration\Impo" />
+    <preference for="Ceg\Impo\Api\Data\Integration\ProductInterface" type="Ceg\Impo\Model\Integration\Product" />
+    <preference for="Ceg\Impo\Api\IntegrationRepositoryInterface"    type="Ceg\Impo\Model\IntegrationRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="impo_publication_listing_data_source" xsi:type="string">ImpoGridDataCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="ImpoGridDataCollection" type="Ceg\Impo\Ui\Component\Providers\View\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ceg_impo_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Ceg\Impo\Model\ResourceModel\Impo\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Ceg\Quote\Rewrite\Magento\Quote\Model\Quote">
+        <plugin name="CegImpoQuote" type="Ceg\Impo\Plugin\Quote" />
+    </type>
+
+    <type name="Magento\Catalog\Ui\DataProvider\CatalogEavValidationRules">
+        <plugin name="ceg_impo_validation_for_extension_product_attribute" type="Ceg\Impo\Plugin\Product\ValidationRules"/>
+    </type>
+</config>

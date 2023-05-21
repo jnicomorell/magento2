@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog_restrict>
+            <customer_group>
+                <enable>1</enable>
+                <hide_for_groups>0,1,2,3,4</hide_for_groups>
+                <category_err_msg>You are not allowed to view this category page.</category_err_msg>
+                <product_err_msg>You are not allowed to view this product page.</product_err_msg>
+                <cart_err_msg>You are not allowed to add this product to cart.</cart_err_msg>
+                <cart_not_allowed_msg>You are not allowed to checkout.</cart_not_allowed_msg>
+            </customer_group>
+        </catalog_restrict>
+        <catalog_permissions>
+            <available>
+                <hide_add_to_cart>1</hide_add_to_cart>
+                <hide_price>1</hide_price>
+                <hide_add_to_cart_groups>0,1,2,3,4</hide_add_to_cart_groups>
+                <hide_price_groups>0,1,2,3,4</hide_price_groups>
+            </available>
+        </catalog_permissions>
+    </default>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order">
+        <column xsi:type="datetime" name="tos_at" nullable="true" comment="TyC date" />
+    </table>
+    <table name="sales_order_grid">
+        <column xsi:type="datetime" name="tos_at" nullable="true" comment="Magenest TyC date" />
+    </table>
+</schema>

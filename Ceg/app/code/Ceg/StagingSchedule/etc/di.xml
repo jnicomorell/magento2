@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+	<preference for="Ceg\StagingSchedule\Api\StagingScheduleRepositoryInterface" type="Ceg\StagingSchedule\Model\StagingScheduleRepository"/>
+	<preference for="Ceg\StagingSchedule\Api\Data\StagingScheduleInterface" type="Ceg\StagingSchedule\Model\Data\StagingSchedule"/>
+    <preference for="Ceg\StagingSchedule\Api\Data\StagingScheduleSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="staging_schedule_listing_data_source" xsi:type="string">StagingScheduleGridDataCollection</item>
+            </argument>
+        </arguments>
+    </type>
+<!--    <virtualType name="StagingScheduleGridDataCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">-->
+    <virtualType name="StagingScheduleGridDataCollection" type="Ceg\StagingSchedule\Ui\Component\Providers\View\Collection">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">staging_schedule</argument>
+			<argument name="resourceModel" xsi:type="string">Ceg\StagingSchedule\Model\ResourceModel\StagingSchedule\Collection</argument>
+		</arguments>
+	</virtualType>
+
+
+    <type name="Ceg\StagingSchedule\Logger\Handler">
+        <arguments>
+            <argument name="filesystem"
+                      xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Ceg\StagingSchedule\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">StagingScheduleLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Ceg\StagingSchedule\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

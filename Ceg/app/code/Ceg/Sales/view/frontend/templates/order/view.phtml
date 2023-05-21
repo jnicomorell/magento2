@@ -1,0 +1,91 @@
+<?php /** @var  $block \Ceg\Sales\Block\Order\View*/?>
+<?php $_quote = $block->getQuote() ?>
+<?php $_colName = __('Product Name') ?>
+<?php $_colModel = __('Model') ?>
+<?php $_colPrice = __('Price') ?>
+<?php $_colExclTax = __('Excl. Tax') ?>
+<?php $_colQty = __('Qty') ?>
+<?php $_colSubtotal = __('Subtotal') ?>
+<div class="order-details-items ordered">
+    <div class="order-title">
+        <strong><?= $block->escapeHtml(__('Items Ordered')) ?></strong>
+    </div>
+    <div class="table-wrapper order-items">
+        <table class="data table table-order-items" id="my-orders-table"
+               summary="<?= $block->escapeHtml(__('Items Ordered')) ?>">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Items Ordered')) ?></caption>
+            <thead>
+            <tr>
+                <th class="col name"><?= $block->escapeHtml($_colName) ?></th>
+                <th class="col model"><?= $block->escapeHtml($_colModel) ?></th>
+                <th class="col price"><?= $block->escapeHtml($_colPrice) ?></th>
+                <th class="col qty"><?= $block->escapeHtml($_colQty) ?></th>
+                <th class="col subtotal"><?= $block->escapeHtml($_colSubtotal) ?></th>
+            </tr>
+            </thead>
+            <?php $_items = $_quote->getAllVisibleItems(); ?>
+            <?php foreach ($_items as $_item): ?><tbody>
+                    <tr id="order-item-row-<?= (int) $_item->getId() ?>">
+                        <td class="col name" data-th="<?= $block->escapeHtml($_colName) ?>">
+                            <strong class="product name product-item-name">
+                                <?= $block->escapeHtml($_item->getName()) ?>
+                            </strong>
+                            <?= $block->escapeHtml($_item->getDescription()) ?>
+                        </td>
+                        <td class="col sku" data-th="<?= $block->escapeHtml($_colModel) ?>">
+                            <?= $block->escapeHtml($block->getModelValue($_item)) ?>
+                        </td>
+                        <td class="col price" data-th="<?= $block->escapeHtml($_colPrice) ?>">
+                            <span class="price-excluding-tax" data-label="<?= $block->escapeHtml($_colExclTax) ?>">
+                                <span class="cart-price">
+                                    <span class="price">
+                                        <?= /* @noEscape */ $block->formatPrice($_item->getPrice()) ?>
+                                    </span>
+                                </span>
+                            </span>
+                        </td>
+                        <td class="col qty" data-th="<?= $block->escapeHtml($_colQty) ?>">
+                            <ul class="items-qty">
+                                <?php if ((float) $_item->getQty() > 0): ?>
+                                    <span class="content">
+                                        <?= $block->escapeHtml($_item->getQty()) ?>
+                                    </span>
+                                <?php endif; ?>
+                            </ul>
+                        </td>
+                        <td class="col subtotal" data-th="<?= $block->escapeHtml($_colSubtotal) ?>">
+                            <span class="price-excluding-tax" data-label="<?= $block->escapeHtml($_colExclTax) ?>">
+                                <span class="cart-price">
+                                    <span class="price">
+                                        <?= /* @noEscape */ $block->formatPrice($_item->getRowTotal()) ?>
+                                    </span>
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            <?php endforeach; ?>
+            <tfoot>
+                <tr class="grand_total">
+                    <th colspan="4" class="mark" scope="row">
+                        <strong>Total</strong>
+                    </th>
+                    <td class="amount" data-th="Total">
+                        <strong>
+                            <span class="price">
+                                <?= /* @noEscape */ $block->formatPrice($_quote->getGrandTotal()) ?>
+                            </span>
+                        </strong>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="actions-toolbar">
+        <div class="secondary">
+            <a class="action back" href="<?= $block->escapeUrl($block->getBackUrl()) ?>">
+                <span><?= $block->escapeHtml($block->getBackTitle()) ?></span>
+            </a>
+        </div>
+    </div>
+</div>

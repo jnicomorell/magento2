@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ceg_ordersintegration" translate="label" sortOrder="135"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Orders Integration</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_OrdersIntegration::ordersintegration_settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="active"
+                       translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_schedule"
+                       translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <source_model>Ceg\Core\Model\Config\ScheduleOptions</source_model>
+                    <label>Schedule Resend Quote to Orders</label>
+                    <comment>When API connection fails, the Quote is queued to be sent again through a scheduled Cron</comment>
+                </field>
+            </group>
+            <group id="app" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>App Details</label>
+                <field id="active_redirect"
+                       translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url"
+                       translate="label" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Orders URL</label>
+                    <validate>required-entry validate-url no-whitespace</validate>
+                </field>
+                <field id="title"
+                       translate="label" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Orders Title</label>
+                </field>
+            </group>
+            <group id="api" translate="label" type="text" sortOrder="30"
+                   showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Api Settings</label>
+                <field id="enable_send"
+                       translate="label" type="select" sortOrder="05"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Send</label>
+                    <comment>When disabled, the Quote only is queued to be sent when enabled again</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="create_api_url"
+                       translate="label" type="text" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Create API URL</label>
+                    <comment>Endpoint to send data to create</comment>
+                </field>
+                <field id="update_api_url"
+                       translate="label" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Update API URL</label>
+                    <comment>Endpoint to send data to update</comment>
+                </field>
+                <field id="delete_api_url"
+                       translate="label" type="text" sortOrder="60"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Delete API URL</label>
+                    <comment>Endpoint to send data to delete</comment>
+                </field>
+                <field id="timeout"
+                       translate="label" type="text" sortOrder="70"
+                       showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Timeout</label>
+                    <comment>Connection Timeout in Seconds</comment>
+                    <validate>validate-zero-or-greater validate-number</validate>
+                </field>
+
+                <group id="token" translate="label" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Token Settings</label>
+                    <field id="url"
+                           translate="label" type="text" sortOrder="10"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>URL</label>
+                    </field>
+                    <field id="client_id"
+                           translate="label" type="text" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Client ID</label>
+                    </field>
+                    <field id="client_secret"
+                           translate="label" type="text" sortOrder="30"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Client Secret</label>
+                    </field>
+                    <field id="audience"
+                           translate="label" type="text" sortOrder="40"
+                           showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Audience</label>
+                    </field>
+                </group>
+
+            </group>
+        </section>
+    </system>
+</config>

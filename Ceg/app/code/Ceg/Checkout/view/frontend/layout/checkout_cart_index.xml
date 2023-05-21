@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="checkout_cart_item_renderers"/>
+    <head>
+        <css src="https://use.fontawesome.com/releases/v5.7.1/css/all.css" src_type="url"/>
+    </head>
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Ceg_Checkout/js/view/default-shipping</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <attribute name="class" value="ceg-impo"/>
+        <referenceContainer name="content">
+            <referenceBlock name="checkout.cart.shipping" remove="true">
+            </referenceBlock>
+            <container name="checkout.cart.not_allowed" as="not-allowed">
+                <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                       name="checkout.cart.not-allowed"
+                       template="Ceg_Checkout::cart/not_allowed.phtml" />
+            </container>
+
+            <container name="checkout.cart.reopen_cart" as="reopen-cart">
+                <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                       name="checkout.cart.reopen-cart"
+                       template="Ceg_Checkout::cart/reopen_cart.phtml" />
+            </container>
+
+            <container name="checkout.cart.reopened_cart_info" as="reopened-cart" before="checkout.cart">
+                <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                       name="checkout.cart.reopened-cart-info"
+                       template="Ceg_Checkout::cart/reopened_cart_info.phtml" />
+            </container>
+
+            <container name="checkout.cart.expired_cart" as="expired-cart" before="checkout.cart">
+                <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                       name="checkout.cart.expired-cart"
+                       template="Ceg_Checkout::cart/expired_cart.phtml" />
+            </container>
+
+            <container name="checkout.cart.cart_processed" as="cart-processed" before="checkout.cart">
+                <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                       name="checkout.cart.cart-processed"
+                       template="Ceg_Checkout::cart/processed_cart.phtml" />
+            </container>
+
+            <container name="checkout.cart.with_invalid_impo" as="with-invalid-impo" before="checkout.cart">
+                <block class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                       name="checkout.cart.with-invalid-impo"
+                       template="Ceg_Checkout::cart/with_invalid_impo.phtml" />
+            </container>
+
+            <referenceBlock name="checkout.cart"
+                            class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                            template="Ceg_Checkout::cart.phtml" />
+
+            <referenceBlock name="checkout.cart.empty"
+                            class="Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart"
+                            template="Ceg_Checkout::cart/noItems.phtml" />
+
+            <block class="Magento\Framework\View\Element\Template"
+                   name="cart.ajax.qty.update"  template="Ceg_Checkout::cart/js.phtml" after="-"/>
+        </referenceContainer>
+        <referenceBlock class="Magento\Checkout\Block\Cart" name="checkout.cart.form">
+            <block class="Magento\Framework\View\Element\RendererList" name="checkout.cart.item.renderers.override" as="renderer.list.custom"/>
+            <arguments>
+                <argument name="view_model_impo" xsi:type="object">Ceg\Impo\ViewModel\ImpoData</argument>
+                <argument name="renderer_list_name" xsi:type="string">checkout.cart.item.renderers.override</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote">
+            <field name="impo_ids">
+                <aspect name="to_order" />
+            </field>
+            <field name="fob_total">
+                <aspect name="to_order" />
+            </field>
+            <field name="tos_at">
+                <aspect name="to_order" targetField="tos_at"/>
+            </field>
+        </fieldset>
+        <fieldset id="quote_convert_item">
+            <field name="impo_id">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="fob_subtotal">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="qtyinbox">
+                <aspect name="to_order_item" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

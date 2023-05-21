@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Checkout\Model\ShippingInformationManagement" type="Ceg\CustomerAddressAttributes\Model\ShippingInformationManagement" />
+    <preference for="Magento\Customer\Controller\Address\FormPost" type="Ceg\CustomerAddressAttributes\Controller\Address\FormPost" />
+
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="ceg_customer_address_attributes_payment_information_management" type="Ceg\CustomerAddressAttributes\Plugin\Model\PaymentInformationManagement" sortOrder="1"/>
+    </type>
+</config>
+

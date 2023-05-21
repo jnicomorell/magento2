@@ -1,0 +1,18 @@
+<?php /** @var  $block \Ceg\Sales\Block\Order\Header*/?>
+<?php
+    $quote = $block->getQuote();
+    $status = $block->escapeHtml($block->getQuoteStatusLabel($quote->getStatus()));
+    $date = ($quote->getData('tos_at' === null)) ? $quote->getCreatedAt() : $quote->getData('tos_at');
+    $createdAt = $block->formatDate($date, \IntlDateFormatter::LONG);
+?>
+<?php /** @var $block \Ceg\Sales\Block\Order\Header */ ?>
+<div class="order-date">
+    <?= $block->escapeHtml(
+        __(
+            '<span class="label">Order Date:</span> %1',
+            '<span>' . $createdAt . '</span>'
+        ),
+        ['span']
+    )?>
+</div>
+

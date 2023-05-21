@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="catalog_restrict" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Catalog Restrictions</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_CatalogPermissions::catalog_restrict</resource>
+            <group id="customer_group" translate="label" sortOrder="990" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Restriction By Customer Group</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable the Catalog Restriction by customer groups.</comment>
+                </field>
+                <field id="hide_for_groups" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide from Groups</label>
+                    <source_model>Ceg\CatalogPermissions\Model\Config\Source\Customer\Group</source_model>
+                </field>
+                <field id="category_err_msg" translate="label" type="textarea" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Error Message</label>
+                    <comment>Error message to be displayed in frontend for category.</comment>
+                </field>
+                <field id="product_err_msg" translate="label" type="textarea" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Error Message</label>
+                    <comment>Error message to be displayed in frontend for product.</comment>
+                </field>
+                <field id="cart_err_msg" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add to cart Error Message</label>
+                    <comment>Error message to be displayed in frontend for when adding the restricted item to cart.</comment>
+                </field>
+                <field id="cart_not_allowed_msg" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cart Not allowed Message</label>
+                    <comment>Error message to be displayed in frontend for when trying to enter into cart view.</comment>
+                </field>
+            </group>
+        </section>
+        <section id="catalog_permissions" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>cegnet</tab>
+            <class>separator-top</class>
+            <label>Catalog Availability</label>
+            <resource>Ceg_CatalogPermissions::catalog</resource>
+            <group id="available" translate="label" type="text" sortOrder="991" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Catalog Availability</label>
+                <field id="hide_add_to_cart" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide Add To Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hide_add_to_cart_groups" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide from Groups</label>
+                    <source_model>Ceg\CatalogPermissions\Model\Config\Source\Customer\Group</source_model>
+                    <depends>
+                        <field id="hide_add_to_cart">1</field>
+                    </depends>
+                </field>
+                <field id="hide_price" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hide_price_groups" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide from Groups</label>
+                    <source_model>Ceg\CatalogPermissions\Model\Config\Source\Customer\Group</source_model>
+                    <depends>
+                        <field id="hide_price">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

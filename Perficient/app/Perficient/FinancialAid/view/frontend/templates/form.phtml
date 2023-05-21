@@ -1,0 +1,299 @@
+<?php
+
+$product = $block->getProductById();
+$customerData = $block->getCustomer();
+$schoolName = $block->getSchoolName();
+$states = $block->getRegionsOfCountry('usa');
+$consentTitle = $block->getConsentTitle();
+$consentText = $block->getConsentText();
+/** @var $spHelper \Vhl\SchoolsPackages\Helper\Data */
+$spHelper = $this->helper(Vhl\SchoolsPackages\Helper\Data::class);
+$isSchool = $spHelper->isSchool();
+$getSchoolName = $spHelper->getSchoolName();
+
+?>
+<div class="row trial-request-form">
+    <div class="col-md-12 col-m-6 page-title-wrapper">
+        <h1 class="page-title">
+            <span class="base" data-ui-id="page-title-wrapper">
+                <?= $block->escapeHtml(__('Lake Tahoe Community College')) ?>
+            </span>
+        </h1>
+        <div class="subtitle">
+            <p class="subtitle"> <?= $block->escapeHtml(__('Request to use my financial aid')) ?>
+        </div>
+        <p class="text1">
+            <?= $block->escapeHtml(__('Use this form to submit a request to use your financial aid funds to purchase the product you selected.')) ?>
+        </p>
+        <p class="text2">
+            <?= $block->escapeHtml(__('By submitting this form, Vista Higher Learning will transmit this information to your Financial Aid Office for review.')) ?>
+        </p>
+        <p class="text1">
+            <?= $block->escapeHtml(__('Based on the review of your eligibility, your request will be approved or denied by your Financial Aid Office. They may reach out to you for more information regarding this request or your financial aid status.')) ?>
+        </p>
+        <p class="text4">
+            <?= $block->escapeHtml(__('This process may take up to 7-10 days. You will be notified by Vista Higher Learning after we’ve received confirmation from your Financial Aid Office. If approved, your digital access will be activated in your account at ')) ?>
+            <a href="https://www.vhlcentral.com/"> VHLcentral</a>
+            <?= $block->escapeHtml(__('and a confirmation email will be sent to you. If your order contains a print item, it will be shipped to the address you provide below. If denied, you will receive a notification from Vista Higher Learning.')) ?>
+        </p>
+        <p class="text1">
+            <?= $block->escapeHtml(__('If you have any questions regarding your eligibility for financial aid or the use of your financial aid funds, please reach out to your Financial Aid Officer. If you have any questions about completing this form, you can contact ')) ?>
+            <a href="https://vistahigherlearning.com/support/customer-service"> VHL Customer Service</a>.
+        </p>
+        <h3 class="page-subtitle">
+            <span class="base" data-ui-id="page-subtitle-wrapper">
+                <?= $block->escapeHtml(__('Complete and submit the form below for review by your Financial Aid Office.')) ?>
+            </span>
+        </h3>
+    </div>
+    <div class="col-md-12 col-m-6">
+        <form 
+            class="form contact trial-request" 
+            action="<?= $block->escapeHtml($block->getUrl("financialaid/index/post")) ?>"
+            id="trial-request-form" method="post"
+            data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+            data-mage-init='{"validation":{}}'>
+            <fieldset class="fieldset">
+                <div class="group-1">
+                    <div class="field first-name required">
+                        <label class="label"
+                            for="fname"><span><?= $block->escapeHtml(__('First name *')) ?></span></label>
+                        <div class="control">
+                            <input name="fname" id="first-name"
+                                title="<?= $block->escapeHtmlAttr(__('First name *')) ?>" class="input-text" type="text"
+                                data-validate="{required:true}" 
+                                value="<?= $block->escapeHtml($customerData->getFirstName())?>" />
+                        </div>
+                    </div>
+                    <div class="field last-name required">
+                        <label class="label"
+                            for="lname"><span><?= $block->escapeHtml(__('Last name *')) ?></span></label>
+                        <div class="control">
+                            <input name="lname" id="last-name" title="<?= $block->escapeHtmlAttr(__('Last name *')) ?>"
+                                class="input-text" type="text" data-validate="{required:true}"
+                                value="<?= $block->escapeHtml($customerData->getLastname())?>" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="group-2">
+                    <div class="field email required">
+                        <label class="label" for="email">
+                            <span><?= $block->escapeHtml(__('Email address *')) ?></span>
+                        </label>
+                        <div class="control">
+                            <input readonly name="email" id="email"
+                                title="<?= $block->escapeHtmlAttr(__('Email address *')) ?>" class="input-text"
+                                type="email" data-validate="{required:true}"
+                                value="<?= $block->escapeHtml($customerData->getEmail())?>" />
+                        </div>
+                    </div>
+                    <div class="field phone required">
+
+                        <label class="label" for="phone">
+                            <span><?= $block->escapeHtml(__('Phone number *')) ?></span></label>
+                        <div class="control">
+                            <input name="phone" id="phone" title="<?= $block->escapeHtmlAttr(__('Phone number *')) ?>"
+                                class="input-text" type="number" data-validate="{required:true}" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="group-3">
+                    <div class="field student required">
+                        <label class="label" for="studentid">
+                            <span><?= $block->escapeHtml(__('School student ID *')) ?></span>
+                        </label>
+                        <div class="control">
+                            <input name="studentid" id="student"
+                                title="<?= $block->escapeHtmlAttr(__('School student ID *')) ?>" class="input-text"
+                                type="text" data-validate="{required:true}" />
+                        </div>
+                    </div>
+
+                    <div class="field school required reveal-if-educator">
+                        <label class="label" for="school" data-role="minisearch-label">
+                            <span><?= $block->escapeHtml(__('School name *')) ?></span>
+                        </label>
+                        <div class="control">
+                            <input id="school" readonly data-mage-init='{"vhlSchoolSearch":{
+                                        "formSelector":"#trial-request-form",
+                                        "url":"<?= $block->escapeHtml(
+                                            $this->helper(
+                                                Vhl\SchoolsPackages\Helper\Data::class
+                                            )->getSchoolsSearchGuessUrl()
+                                        ) ?>",
+                                        "destinationSelector":"#school_autocomplete",
+                                        "minSearchLength": 3}
+                                }' type="text" name="school" title="<?= $block->escapeHtmlAttr(__('School')) ?>"
+                                value="<?= $block->escapeHtml(!empty($schoolName)?$schoolName:'') ?>"
+                                class="input-text require-if-educator" maxlength="128" role="combobox"
+                                aria-haspopup="false" aria-autocomplete="both" autocomplete="on"
+                                data-validate="{required:true}" />
+                            <div id="school_autocomplete" class="search-autocomplete"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8 col-m-6">
+                    <div class="product-item-details">
+                        <strong class="productrequested">
+                            <?= $block->escapeHtml(__('Product details')) ?>
+                        </strong>
+                    </div>
+                </div>
+                <div class="group-4">
+                    <div class="field isbn">
+                        <label class="label" for="isbn"><span><?= $block->escapeHtml(__('ISBN *')) ?></span></label>
+                        <div class="control">
+                            <input readonly name="isbn" id="isbn" title="<?= $block->escapeHtmlAttr(__('ISBN *')) ?>"
+                                class="input-text" type="text" data-validate="{required:true}"
+                                value="<?= $block->escapeHtml(!empty($schoolName)?$product->getSku():'')?>" />
+                        </div>
+                    </div>
+                    <div class="field product-name">
+                        <label class="label" for="description">
+                            <span><?= $block->escapeHtml(__('Description *')) ?></span>
+                        </label>
+                        <div class="control">
+                            <input readonly name="description" id="productname"
+                                title="<?= $block->escapeHtmlAttr(__('Description *')) ?>" class="input-text"
+                                type="text" data-validate="{required:true}"
+                                value="<?= $block->escapeHtml(!empty($schoolName)?$product->getName():'')?>" />
+                        </div>
+                    </div>
+                </div>
+                <?php
+                $price = $product->getPrice();
+                if ($isSchool) {
+                    $schoolPrice = $product->getData('school_package_group_package_price');
+                    if ($schoolPrice && $schoolPrice > 0) {
+                        $price = $schoolPrice;
+                    }
+                }
+                ?>
+
+                <div class="field product-price">
+                    <label class="label"
+                        for="price">
+                        <span><?= $block->escapeHtml(__('Price (Sales tax not included) *')) ?></span>
+                        </label>
+                    <div class="control">
+                        <input readonly name="price" id="price"
+                            title="<?= $block->escapeHtmlAttr(__('Price (Sales tax not included) *')) ?>"
+                            class="input-text" type="text" data-validate="{required:true}"
+                            value="<?= $block->escapeHtml(
+                                !empty($schoolName)?'$'.number_format($product->getPrice(), 2, '.', ''):''
+                            )?>" />
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-m-6">
+                    <div class="product-item-details">
+                        <strong class="shipping"><?= $block->escapeHtml(__('Address information')) ?></strong>
+                        <p class="base" data-ui-id="page-subtitle-wrapper">
+                            <?= $block->escapeHtml(
+                                __('We are asking for this in order to calculate the sales tax. If your order contains a print item, that will be shipped to this address as well. ')
+                            ) ?>
+                        </p>
+                    </div>
+                </div>
+                <div class="group-5">
+                    <div class="field address-1">
+                        <label class="label"
+                            for="address_one"><span><?= $block->escapeHtml(__('Address line 1 *')) ?></span></label>
+                        <div class="control">
+                            <input name="address_one" id="addres-1"
+                                title="<?= $block->escapeHtmlAttr(__('Addres line 1 *')) ?>" class="input-text"
+                                type="text" data-validate="{required:true}" />
+                        </div>
+                    </div>
+                    <div class="field address-2">
+                        <label class="label"
+                            for="address_two">
+                            <span><?= $block->escapeHtml(__('Address line 2 (Optional)')) ?></span>
+                            </label>
+                        <div class="control">
+                            <input name="address_two" id="address-2"
+                                title="<?= $block->escapeHtmlAttr(__('Address line 2 (Optional)')) ?>"
+                                class="input-text" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="group-6">
+                    <div class="field city required">
+                        <label class="label" for="city"><span><?= $block->escapeHtml(__('City *')) ?></span></label>
+                        <div class="control">
+                            <div class="control">
+                                <input name="city" id="city" title="<?= $block->escapeHtmlAttr(__('City *')) ?>"
+                                    class="input-text" type="text" data-validate="{required:true}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field state">
+                        <label class="label" for="state"><span><?= $block->escapeHtml(__('State *')) ?></span></label>
+                        <div class="control">
+                            <select name="state" id="state" title="<?= $block->escapeHtmlAttr(__('State *')) ?>"
+                                class="input-text" type="text" data-validate="{required:true}">
+                                <option></option>
+                                <?php foreach ($states as $state):
+                                    if (isset($state['country_id'])):?>
+                                        <option 
+                                        value="<?=$block->escapeHtml($state['title'])?>" 
+                                        title='<?=$block->escapeHtml($state['title'])?>'>
+                                        <?=$block->escapeHtml($state['label'])?>
+                                        </option>
+                                    <?php endif;
+                                endforeach;?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-7">
+                    <div class="field postalcode">
+                        <label class="label" for="zip"><span><?= $block->escapeHtml(__('Zip code *')) ?></span></label>
+                        <div class="control">
+                            <input name="zip" id="zip" title="<?= $block->escapeHtmlAttr(__('Zip code *')) ?>"
+                                class="input-text" type="text" data-validate="{required:true}" />
+                        </div>
+                    </div>
+                    <div class="field country">
+                        <label class="country"
+                            for="country"><span><?= $block->escapeHtml(__('Country / Region *')) ?></span></label>
+                        <div class="control">
+                            <input readonly name="country" id="country"
+                                title="<?= $block->escapeHtmlAttr(__('Country / Region *')) ?>" class="input-text"
+                                type="text" data-validate="{required:true}"
+                                value="<?= $block->escapeHtml(!empty($schoolName)?'United States':'')?>" />
+                        </div>
+                    </div>
+                </div>
+                <div class="field email-pref">
+                    <div class="control">
+                        <p class="text3"><?= $block->escapeHtml($consentTitle) ?></p>
+                        <input type="checkbox" data-validate="{required:true}" name="consent" value="1" id="email-pref"
+                            title="<?= $block->escapeHtmlAttr(__('Consent '))?>" />
+                        <label class="label" for="consent">
+                        <span class="check"><?= $block->escapeHtml($consentText) ?></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="field signature">
+                    <label class="label" for="signature"><span><?= $block->escapeHtml(__('Signature')) ?></span></label>
+                    <div class="control">
+                        <input placeholder="Type your name here." name="signature" id="signature"
+                            title="<?= $block->escapeHtmlAttr(__('Signature')) ?>" class="input-text" type="text"
+                            data-validate="{required:true}" />
+                    </div>
+                </div>
+            </fieldset>
+            <input type="hidden" name="prid" value="<?= $block->escapeHtml($product->getId())?>" />
+            <div class="btn-group">
+                <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="btn medium">
+                    <?= $block->escapeHtml(__('Submit')) ?>
+                </button>
+            </div>
+    </div>
+    </form>
+</div>
+</div>

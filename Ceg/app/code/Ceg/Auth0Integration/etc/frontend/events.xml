@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch_customer_account_login">
+        <observer name="auth0_customer_login_observer"
+                  instance="Ceg\Auth0Integration\Observer\LoginRedirect" />
+    </event>
+    <event name="controller_action_predispatch_checkout_index_index">
+        <observer name="auth0_customer_checkout_observer"
+                  instance="Ceg\Auth0Integration\Observer\CheckoutRedirect" />
+    </event>
+    <event name="controller_action_postdispatch_customer_account_logout">
+        <observer name="auth0_customer_logout_observer"
+                  instance="Ceg\Auth0Integration\Observer\Auth0Logout" />
+    </event>
+    <event name="controller_action_predispatch">
+        <observer name="auth0_check_login_persistent"
+                  instance="Ceg\Auth0Integration\Observer\CheckLoginPersistent" />
+    </event>
+</config>

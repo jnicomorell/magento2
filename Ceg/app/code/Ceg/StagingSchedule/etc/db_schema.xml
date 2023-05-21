@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+	<table name="staging_schedule" resource="default" engine="innodb" comment="staging_schedule Table">
+		<column name="staging_id" nullable="false" xsi:type="int" comment="Staging ID" identity="true" unsigned="true"/>
+		<column name="entity" nullable="false" xsi:type="varchar" comment="Entity code" length="50"/>
+		<column name="entity_id" nullable="false" xsi:type="int" comment="Entity ID" identity="false"/>
+		<column name="action" nullable="false" xsi:type="varchar" comment="Action code" length="50"/>
+		<column name="datetime" nullable="false" xsi:type="timestamp" comment="Schedule execution time"/>
+		<column name="params" nullable="true" xsi:type="varchar" comment="Options Json" length="1024"/>
+		<column name="instance" nullable="false" xsi:type="varchar" comment="Class instance name" length="255"/>
+		<column name="status" nullable="false" xsi:type="varchar" comment="Execution Status " length="50"/>
+		<column name="message" nullable="true" xsi:type="varchar" comment="Execution Message" length="500"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="staging_id"/>
+        </constraint>
+        <index referenceId="STAGING_SCHEDULE_STAGING_ID" indexType="btree">
+            <column name="staging_id"/>
+        </index>
+        <index referenceId="STAGING_SCHEDULE_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+	</table>
+</schema>

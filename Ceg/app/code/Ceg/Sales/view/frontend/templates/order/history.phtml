@@ -1,0 +1,88 @@
+<?php
+/** @var \Magento\Sales\Block\Order\History $block */
+?>
+<?php $orders = $block->getOrders(); ?>
+<?php $vmCustomer = $block->getViewModelCustomer(); ?>
+<?php $quotes = $vmCustomer->getCustomerQuotes(); ?>
+<?php $_colOrder = __('Order #') ?>
+<?php $_colDate = __('Date') ?>
+<?php $_colTotal = __('Order Total') ?>
+<?php $_colAction = __('Actions') ?>
+<?php $_colViewOrder = __('View Order') ?>
+<?php $_colReorder = __('Reorder') ?>
+
+<?= $block->getChildHtml('info') ?>
+<?php if (($orders && count($orders)) || ($quotes && count($quotes))): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Orders')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?= $block->escapeHtml($_colOrder) ?></th>
+                    <th scope="col" class="col date"><?= $block->escapeHtml($_colDate) ?></th>
+                    <?= $block->getChildHtml('extra.column.header') ?>
+                    <th scope="col" class="col total"><?= $block->escapeHtml($_colTotal) ?></th>
+                    <th scope="col" class="col actions"><?= $block->escapeHtml($_colAction) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($quotes as $_quote): ?>
+                    <?php $viewUrl = $vmCustomer->getViewUrl($_quote) ?>
+                    <?php $quoteDate = ($_quote->getData('tos_at' === null)) ? $_quote->getUpdatedAt() : $_quote->getData('tos_at') ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtml($_colOrder) ?>" class="col id">
+                            <?= $block->escapeHtml($_quote->getReservedOrderId()) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml($_colDate) ?>" class="col date">
+                            <?= $block->escapeHtml($block->formatDate($quoteDate)) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml($_colTotal) ?>" class="col total">
+                            <?= /* @noEscape */ $vmCustomer->formatPrice($_quote->getGrandTotal()) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml($_colAction) ?>" class="col actions">
+                            <a href="<?= $block->escapeUrl($viewUrl) ?>" class="action view">
+                                <span><?= $block->escapeHtml($_colViewOrder) ?></span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                <?php foreach ($orders as $_order): ?>
+                    <?php $viewUrl = $block->getViewUrl($_order) ?>
+                    <?php $orderDate = ($_order->getData('tos_at' === null)) ? $_order->getCreatedAt() : $_order->getData('tos_at') ?>
+                    <?php $reorderUrl = $vmCustomer->getPostData($block->getReorderUrl($_order)) ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtml($_colOrder) ?>" class="col id">
+                            <?= $block->escapeHtml($_order->getRealOrderId()) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml($_colDate) ?>" class="col date">
+                            <?= /* @noEscape */ $block->formatDate($orderDate) ?>
+                        </td>
+                        <?php $extra = $block->getChildBlock('extra.container'); ?>
+                        <?php if ($extra): ?>
+                            <?php $extra->setOrder($_order); ?>
+                            <?= $extra->getChildHtml() ?>
+                        <?php endif; ?>
+                        <td data-th="<?= $block->escapeHtml($_colTotal) ?>" class="col total">
+                            <?= /* @noEscape */ $_order->formatPrice($_order->getGrandTotal()) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml($_colAction) ?>" class="col actions">
+                            <a href="<?= $block->escapeUrl($viewUrl) ?>" class="action view">
+                                <span><?= $block->escapeHtml($_colViewOrder) ?></span>
+                            </a>
+                            <?php if ($vmCustomer->canReorder($_order->getEntityId())): ?>
+                                <a href="#" data-post='<?= /* @noEscape */ $reorderUrl ?>' class="action order">
+                                    <span><?= $block->escapeHtml($_colReorder) ?></span>
+                                </a>
+                            <?php endif ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?= $block->escapeHtml($block->getEmptyOrdersMessage()) ?></span></div>
+<?php endif ?>

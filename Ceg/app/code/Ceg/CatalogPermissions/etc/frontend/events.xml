@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- event catalog_product_is_salable_after -->
+    <event name="catalog_product_is_salable_after">
+        <observer name="ceg_product_available" instance="Ceg\CatalogPermissions\Observer\SalableObserver" />
+    </event>
+
+    <!-- event sales_quote_product_add_after -->
+    <event name="sales_quote_product_add_after">
+        <observer name="ceg_product_available" instance="Ceg\CatalogPermissions\Observer\QuoteObserver" />
+    </event>
+
+    <!-- event catalog_product_collection_load_after -->
+    <event name="catalog_product_collection_load_after">
+        <observer name="ceg_product_available" instance="Ceg\CatalogPermissions\Observer\CollectionObserver" />
+    </event>
+
+    <!-- event catalog_product_load_after -->
+    <event name="catalog_product_load_after">
+        <observer name="ceg_product_available" instance="Ceg\CatalogPermissions\Observer\ProductObserver" />
+    </event>
+
+</config>

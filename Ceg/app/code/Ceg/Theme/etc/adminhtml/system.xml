@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ceg" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General</label>
+            <tab>cegnet</tab>
+            <resource>Ceg_Theme::general</resource>
+            <group id="apps" translate="label" type="text" sortOrder="20" showInDefault="1">
+                <label>Apps Details</label>
+                <field id="billing_url" translate="label" type="text" sortOrder="1" showInDefault="1">
+                    <label>Billing URL</label>
+                    <validate>required-entry validate-url no-whitespace</validate>
+                </field>
+                <field id="billing_title" translate="label" type="text" sortOrder="2" showInDefault="1">
+                    <label>Billing Title</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,30 @@
+<?php
+/** @var $block \Ceg\Quote\Block\Adminhtml\Detail\View\Form */
+$layout = $block->getLayout();
+
+/** @var $quoteData \Ceg\Quote\ViewModel\QuoteData */
+$quoteData = $layout->getBlock('quote_detail_view')->getQuoteData();
+?>
+<div class="entry-edit quote-view" id="ceg_quote_view">
+    <div id="quote-messages">
+        <?= $layout->getBlock('quote_messages')->toHtml() ?>
+    </div>
+    <?= $layout->getBlock('quote_info')->toHtml() ?>
+    <input type="hidden" name="quote_id" value="<?= (int) $quoteData->getQuote()->getId() ?>"/>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Items Ordered')) ?></span>
+        </div>
+        <?= $layout->getBlock('quote_items')->toHtml() ?>
+    </section>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Order Total')) ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item quote-totals">
+                <?= $layout->getBlock('quote_totals')->toHtml() ?>
+            </div>
+        </div>
+    </section>
+</div>

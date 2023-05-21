@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="product.info.main">
+        <block class="Magento\Framework\View\Element\Template" name="tier_price" template="Ceg_Catalog::product/price/tier_price_catalog.phtml" after="product.info.price">
+            <arguments>
+                <argument name="product_info" xsi:type="object">Ceg\Catalog\ViewModel\ProductInfo</argument>
+            </arguments>
+        </block>
+    </referenceContainer>
+    <referenceBlock name="product.info.details">
+        <arguments>
+            <argument name="product_info" xsi:type="object">Ceg\Catalog\ViewModel\ProductInfo</argument>
+        </arguments>
+    </referenceBlock>
+</page>

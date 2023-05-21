@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/publication/impo/getImpo/:cegId" method="GET">
+        <service class="Ceg\Impo\Api\IntegrationRepositoryInterface" method="getImpo"/>
+        <resources>
+            <resource ref="Ceg_Impo::impo_webapi" />
+        </resources>
+    </route>
+
+    <route url="/V1/publication/impo/saveImpo" method="POST">
+        <service class="Ceg\Impo\Api\IntegrationRepositoryInterface" method="saveImpo"/>
+        <resources>
+            <resource ref="Ceg_Impo::impo_webapi" />
+        </resources>
+    </route>
+
+</routes>

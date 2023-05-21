@@ -1,0 +1,6 @@
+"There is\'nt any quote in range date selected.","No hay ningún pedido en el rango de fechas seleccionado."
+"You need to select a file!","Debes seleccionar un archivo!"
+"File is empty.","Al parecer el archivo está vacio"
+"Wrong field delimiter. You need to use a semicolon as delimiter.","Ha utilizado un delimitador incorrecto. Debe separar los campos con un punto y coma (;)"
+"The number of columns received in row %1 does not match with columns expected.","El número de columnas recibidas en la fila %1 no coincide con las columnas esperadas."
+'%1 orders have been processed and marked as "closed".','%1 pedidos han sido procesados y marcados como "Cerrado".'

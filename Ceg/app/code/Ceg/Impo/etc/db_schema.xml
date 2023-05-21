@@ -1,0 +1,71 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="ceg_impo_entity" resource="default" engine="innodb" comment="CEG Impo">
+        <column xsi:type="int"       name="entity_id"     nullable="false" comment="Entity ID"  unsigned="true"  identity="true" />
+        <column xsi:type="smallint"  name="is_active"     nullable="false" comment="Is Active"  unsigned="false" identity="false" default="0" />
+        <column xsi:type="varchar"   name="status"        nullable="false" comment="Status"     length="255" />
+        <column xsi:type="smallint"  name="store_id"      nullable="true"  comment="Store ID"   unsigned="true"  identity="false" disabled="true" />
+        <column xsi:type="smallint"  name="website_id"    nullable="true"  comment="Website ID" unsigned="true"  identity="false" />
+        <column xsi:type="varchar"   name="ceg_id"        nullable="false" comment="CEG ID"     length="255" />
+        <column xsi:type="varchar"   name="title"         nullable="true"  comment="Title"      length="255" />
+        <column xsi:type="decimal"   name="free_on_board" nullable="true"  comment="FOB"        unsigned="false" scale="4" precision="20" />
+        <column xsi:type="timestamp" name="start_at"      nullable="false" comment="Start At"   on_update="false"/>
+        <column xsi:type="timestamp" name="finish_at"     nullable="false" comment="Finish At"  on_update="false"/>
+        <column xsi:type="timestamp" name="created_at"    nullable="false" comment="Created At" on_update="false" default="CURRENT_TIMESTAMP" />
+        <column xsi:type="timestamp" name="updated_at"    nullable="false" comment="Updated At" on_update="true"  default="CURRENT_TIMESTAMP" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="CEG_IMPO_ENTITY_STORE_ID_STORE_STORE_ID"
+                    table="ceg_impo_entity" column="store_id" referenceTable="store" referenceColumn="store_id"
+                    onDelete="SET NULL"  disabled="true"/>
+        <constraint xsi:type="foreign" referenceId="CEG_IMPO_ENTITY_WEBTITE_ID_STORE_WEBTITE_WEBTITE_ID"
+                    table="ceg_impo_entity" column="website_id" referenceTable="store_website" referenceColumn="website_id"
+                    onDelete="SET NULL" />
+        <index referenceId="CEG_IMPO_ENTITY_WEBSITE_ID" indexType="btree">
+            <column name="website_id" />
+        </index>
+    </table>
+
+    <table name="ceg_impo_product" resource="default" engine="innodb" comment="CEG Impo Product">
+        <column xsi:type="int" name="entity_id"  nullable="false" comment="Entity ID"   unsigned="true" identity="true"/>
+        <column xsi:type="int" name="impo_id"    nullable="false" comment="CEG Impo ID" unsigned="true" identity="false"/>
+        <column xsi:type="int" name="product_id" nullable="true"  comment="Product ID"  unsigned="true" identity="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="CEG_IMPO_PRODUCT_IMPO_ID_CEG_IMPO_ENTITY_ENTITY_ID"
+                    table="ceg_impo_product" column="impo_id" referenceTable="ceg_impo_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="CEG_IMPO_PRODUCT_IMPO_ID" indexType="btree">
+            <column name="impo_id"/>
+        </index>
+    </table>
+
+    <table name="quote" resource="checkout" comment="Sales Flat Quote">
+        <column xsi:type="varchar" name="ceg_ids" nullable="false" comment="CEG IDs" length="500" disabled="true" />
+        <column xsi:type="varchar" name="impo_ids" nullable="false" comment="CEG Impo IDs" length="500" onCreate="migrateDataFrom(ceg_ids)" />
+        <column xsi:type="decimal" name="fob_total" nullable="true" comment="FOB" unsigned="false" scale="4" precision="20" />
+    </table>
+    <table name="quote_item" resource="checkout" comment="Sales Flat Quote Item">
+        <column xsi:type="varchar" name="ceg_id" nullable="false" comment="CEG ID" length="255" disabled="true" />
+        <column xsi:type="varchar" name="impo_id" nullable="false" comment="Impo ID" length="255" onCreate="migrateDataFrom(ceg_id)" />
+        <column xsi:type="decimal" name="fob_unit" nullable="true" comment="FOB UNIT" unsigned="false" scale="4" precision="20" />
+        <column xsi:type="decimal" name="fob_subtotal" nullable="true" comment="FOB SUBTOTAL" unsigned="false" scale="4" precision="20" />
+        <column xsi:type="int" name="qtyinbox" comment="Qty in box" nullable="false" unsigned="false" identity="false" default="1" />
+    </table>
+
+    <table name="sales_order" resource="sales" comment="Sales Flat Order">
+        <column xsi:type="varchar" name="ceg_ids" nullable="false" comment="CEG IDs" length="500" disabled="true" />
+        <column xsi:type="varchar" name="impo_ids" nullable="false" comment="CEG Impo IDs" length="500" onCreate="migrateDataFrom(ceg_ids)" />
+        <column xsi:type="decimal" name="fob_total" nullable="true" comment="FOB" unsigned="false" scale="4" precision="20" />
+    </table>
+    <table name="sales_order_item" resource="sales" comment="Sales Flat Order Item">
+        <column xsi:type="varchar" name="ceg_id" nullable="false" comment="CEG ID" length="255" disabled="true" />
+        <column xsi:type="varchar" name="impo_id" nullable="false" comment="Impo ID" length="255" onCreate="migrateDataFrom(ceg_id)" />
+        <column xsi:type="decimal" name="fob_unit" nullable="true" comment="FOB UNIT" unsigned="false" scale="4" precision="20" />
+        <column xsi:type="decimal" name="fob_subtotal" nullable="true" comment="FOB SUBTOTAL" unsigned="false" scale="4" precision="20" />
+        <column xsi:type="int" name="qtyinbox" comment="Qty in box" nullable="false" unsigned="false" identity="false" default="1" />
+    </table>
+</schema>

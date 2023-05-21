@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <referenceContainer name="sidebar.main" remove="true"/>
+    <referenceContainer name="div.sidebar.additional" remove="true"/>
+
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="sales.order.history">
+            <arguments>
+                <argument name="view_model_customer" xsi:type="object">Ceg\Sales\ViewModel\Customer</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Ceg_Sales::order/history.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

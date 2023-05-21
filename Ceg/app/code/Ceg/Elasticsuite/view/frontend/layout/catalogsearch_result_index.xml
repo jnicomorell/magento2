@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="catalogsearch.leftnav" >
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Ceg_Elasticsuite::layer/view.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="search_result_list">
+            <block class="Magento\Framework\View\Element\Template" name="tier_price" template="Ceg_Catalog::product/price/tier_price.phtml" before="product.info.price">
+                <arguments>
+                    <argument name="product_info" xsi:type="object">Ceg\Catalog\ViewModel\ProductInfo</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

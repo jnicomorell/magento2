@@ -1,0 +1,17 @@
+<?php
+/**
+ * Expired cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if (! $block->isCheckoutAllowed()): ?>
+    <div class="messages" role="alert">
+        <div class="message-error error message">
+            <span><?= /* @noEscape */ __($block->getCheckoutNotAllowedMessage()); ?></span>
+        </div>
+        <a class="action primary" href="<?= /* @noEscape */ $block->getHomeUrl(); ?>">
+            <?= /* @noEscape */ $block->getBackButtonText(); ?>
+        </a>
+    </div>
+<?php endif; ?>

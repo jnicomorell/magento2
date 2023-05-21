@@ -1,0 +1,23 @@
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Ceg\Analytics\ViewModel\AnalyticsData $viewModel
+ */
+$viewModel = $block->getAnalyticsViewModel();
+$code = $viewModel->getConfigSuccess();
+if (!empty($code)): ?>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe
+        title="google_tag_manager"
+        src="https://www.googletagmanager.com/ns.html?id=<?=/* @noEscape */$code?>"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+    >
+    </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+<?php endif; ?>
+<!-- Tag manager section -->

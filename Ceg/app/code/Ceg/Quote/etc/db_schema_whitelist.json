@@ -1,0 +1,9 @@
+{
+    "quote": {
+        "column": {
+            "parent_quote_id": true,
+            "status": true,
+            "parent_order_id": true
+        }
+    }
+}

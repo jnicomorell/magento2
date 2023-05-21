@@ -1,0 +1,16 @@
+<?php
+/**
+ * Reopen cart template
+ *
+ * @var $block Ceg\Checkout\Rewrite\Magento\Checkout\Block\Cart
+ */
+?>
+<?php if ($block->getItemsCount() > '0' && $block->isCheckoutAllowed()): ?>
+    <?php if ($block->isReopen() && $block->isValidImpo()): ?>
+        <div class="messages" role="alert">
+            <div class="message-warning warning message">
+                <span><?= $block->escapeHtml($block->getReopenedMessage()); ?></span>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

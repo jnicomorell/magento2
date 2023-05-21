@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
+        <attribute code="company_id" type="string"/>
+        <attribute code="company_name" type="string"/>
+        <attribute code="rfc" type="string"/>
+        <attribute code="checkout_disabled" type="integer"/>
+        <attribute code="contact_id" type="integer"/>
+    </extension_attributes>
+</config>

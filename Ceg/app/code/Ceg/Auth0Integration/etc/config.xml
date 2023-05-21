@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <auth0_settings>
+            <general>
+                <redirect_uri>auth0/callback</redirect_uri>
+                <scope>openid profile email</scope>
+                <persist_id_token>1</persist_id_token>
+                <persist_access_token>1</persist_access_token>
+                <persist_refresh_token>1</persist_refresh_token>
+                <token_algorithm>HS256</token_algorithm>
+                <new_customer_group>5</new_customer_group>
+                <restricted>1</restricted>
+            </general>
+            <website>
+                <restricted>1</restricted>
+            </website>
+            <management_api>
+                <countries>{"_1622486911315_315":{"website_code":"mexico","auth0_code":"MX"}}</countries>
+                <pagination>20</pagination>
+            </management_api>
+        </auth0_settings>
+    </default>
+</config>

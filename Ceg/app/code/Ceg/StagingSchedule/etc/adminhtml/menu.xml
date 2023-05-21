@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+
+	<menu>
+		<add id="Ceg_StagingSchedule::staging_schedule"
+             title="Staging Schedule"
+             module="Ceg_StagingSchedule"
+             sortOrder="40"
+             parent="Ceg_Core::menu_index"
+             resource="Ceg_StagingSchedule::staging_schedule" />
+
+		<add id="Ceg_StagingSchedule::staging_schedule_view"
+             title="View Schedules"
+             module="Ceg_StagingSchedule"
+             sortOrder="10"
+             parent="Ceg_StagingSchedule::staging_schedule"
+             resource="Ceg_StagingSchedule::staging_schedule_view"
+             action="stagingschedule/schedule/index"/>
+
+	</menu>
+</config>

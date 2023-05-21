@@ -1,0 +1,55 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\AbstractBlock $block
+ * @var \Ceg\Backend\ViewModel\BackendData $viewModel
+ */
+$viewModel = $block->getBackendViewModel();
+$inDevMode = $viewModel->inDevMode();
+$usernameLabel = ($inDevMode) ? __('Magento Username or Auth0 Email') : __('Auth0 Email');
+$passwordLabel = ($inDevMode) ? __('Magento Password or Auth0 Password') : __('Auth0 Password');
+?>
+<form method="post" action="" id="login-form" data-mage-init='{"form": {}, "validation": {}}' autocomplete="off">
+    <fieldset class="admin__fieldset">
+        <legend class="admin__legend">
+            <span><?= $block->escapeHtml(__('Welcome, please sign in')) ?></span>
+        </legend><br/>
+        <input name="form_key" type="hidden" value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>" />
+        <div class="admin__field _required field-username">
+            <label for="username" class="admin__field-label">
+                <span><?= $block->escapeHtml($usernameLabel) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input id="username"
+                       class="admin__control-text"
+                       type="text"
+                       name="login[username]"
+                       autofocus
+                       value=""
+                       data-validate="{required:true}"
+                       placeholder="<?= $block->escapeHtmlAttr($usernameLabel) ?>"
+                       autocomplete="off"
+                />
+            </div>
+        </div>
+        <div class="admin__field _required field-password">
+            <label for="login" class="admin__field-label">
+                <span><?= $block->escapeHtml($passwordLabel) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input id="login"
+                       class="admin__control-text"
+                       type="password"
+                       name="login[password]"
+                       data-validate="{required:true}"
+                       value=""
+                       placeholder="<?= $block->escapeHtmlAttr($passwordLabel) ?>"
+                       autocomplete="off"
+                />
+            </div>
+        </div>
+        <?= $block->getChildHtml('form.additional.info') ?>
+        <div class="form-actions">
+             <?= $block->getChildHtml('form.buttons')  ?>
+        </div>
+    </fieldset>
+</form>

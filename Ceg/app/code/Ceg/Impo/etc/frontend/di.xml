@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Block\Product\ListProduct"    type="Ceg\Impo\Block\ListProduct" />
+    <type name="Magento\Catalog\Model\Layer">
+        <plugin name="ceg_impo_catalog_layer" type="Ceg\Impo\Plugin\CatalogLayer" sortOrder="1" />
+    </type>
+    <type name="Smile\ElasticsuiteCore\Search\Request\Builder">
+        <plugin name="ceg_impo_elasticsuite_query_builder" type="Ceg\Impo\Plugin\QueryBuilder" sortOrder="1" />
+    </type>
+</config>

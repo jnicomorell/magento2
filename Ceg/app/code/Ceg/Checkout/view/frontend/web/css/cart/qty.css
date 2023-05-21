@@ -1,0 +1,75 @@
+.control-qty > div {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 10px;
+}
+.control-qty a {
+    display: block;
+    width: 22%;
+    text-align: center;
+    cursor: pointer;
+    padding: 3px 0 0px;
+    box-sizing: border-box;
+}
+.control-qty a span {
+    border: 2px solid #cccccc;
+    display: inline-block;
+    width: 20px;
+    border-radius: 10px;
+    line-height: 1.1em;
+    height: 20px;
+    box-sizing: border-box;
+}
+.control-qty .input-text {
+    background: none;
+    text-align: center;
+    border: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height:30px;
+    color: #757575;
+    margin-top: 0px;
+    font-size: 14px;
+}
+.control-qty input {
+    background: none !important;
+    border: none !important;
+}
+.control-qty input:focus{
+    outline: none;
+    box-shadow: none;
+}
+.control-qty .change-action:before {
+    height: 2px;
+    background-color: #cccccc;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+}
+.control-qty .update-action {
+    display: none;
+}
+.control-qty .update-action > button:before {
+    margin: 0;
+    vertical-align: top;
+    display: inline-block;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+}
+.control-qty .update-action > button {
+    width: 100%;
+    border: none;
+    background: #31ab6f;
+    color: #FFF;
+}
+@media screen and (max-width: 1280px) {
+    .control-qty {
+        width: revert;
+    }
+}

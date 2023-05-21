@@ -1,0 +1,21 @@
+<?php
+$menuItemBackLabel = __("Return");
+?>
+<div class="menu-comeback" data-action="navigation">
+    <a class="menu-link-back" href="javascript:history.back()" >
+        <i class="fas fa-arrow-left"><span class="menu-comeback-text"><?= /* @noEscape */ $menuItemBackLabel; ?></span></i>
+    </a>
+</div>
+
+<style>
+.page-main > .menu-comeback{
+    display:none;
+}
+</style>
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        $(document).ready( function() {
+            $('.menu-comeback').insertBefore('.page-title span');
+        });
+    });
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="ceg.head.additional.gtm.success" template="Ceg_Analytics::gtm/success.phtml">
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">gtm</argument>
+                </arguments>
+            </block>
+            <block class="Ceg\Checkout\Block\Success" name="ceg.head.additional.fb.success" template="Ceg_Analytics::fb/success.phtml">
+                <arguments>
+                    <argument name="analytics_view_model" xsi:type="object">Ceg\Analytics\ViewModel\AnalyticsData</argument>
+                    <argument name="config" xsi:type="string">fb</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
